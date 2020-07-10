@@ -19,6 +19,10 @@ class CreateOrdersTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->enum('enable_tax',['0','1'])->default('0');
             $table->string('tax')->nullable();
+            $table->string('delivery_price')->nullable();
+            $table->enum('discount',['none','money','persentage'])->default('none');
+            $table->string('price_persentage_discount')->nullable();
+            $table->string('price_money_discount')->nullable();
             $table->string('sub_total')->nullable();
             $table->string('total')->nullable();
             $table->string('status')->nullable();
@@ -26,7 +30,6 @@ class CreateOrdersTable extends Migration
             $table->string('time')->nullable();
             $table->string('cancel_status')->nullable();
             $table->string('payment_type')->nullable();
-            
             $table->timestamps();
         });
     }

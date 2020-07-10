@@ -32,7 +32,8 @@ class UserController extends Controller
     public function index()
     {
         //
-        return view($this->page.'index');
+        $data = $this->model->getAll();
+        return view($this->page.'index',compact('data'));
 
     }
 
@@ -52,7 +53,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
         $this->model->create($request->validated());
         return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>'Data added messages']);
@@ -89,7 +90,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, $id)
     {
         $this->model->update($id,$request->validated());
         return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>'Data added messages']);

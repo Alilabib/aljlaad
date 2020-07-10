@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\SubCategory\SubCategoryRequest;
 use App\Repositories\SubCategory\SubCategoryRepository;
+use App\Repositories\Category\CategoryRepository;
+
 class SubCategoryController extends Controller
 {
     private $model;
@@ -13,14 +15,15 @@ class SubCategoryController extends Controller
     private $url;
     private $data;
     private $route;
-
-    public function __construct(SubCategoryRepository $subcategory)
+    private $category;
+    public function __construct(SubCategoryRepository $subcategory,CategoryRepository $category )
     {
         $this->model = $subcategory;
         $this->page  = 'dashboard.cruds.subcategories.';
         $this->url   = '/subcategories';
         $this->route = 'subcategories.index';
         $this->data  = [];
+        $this->category = $category;
     }
 
 
@@ -32,7 +35,8 @@ class SubCategoryController extends Controller
     public function index()
     {
         //
-        return view($this->page.'index');
+        $data = $this->model->getAll();
+        return view($this->page.'index',compact('data'));
 
     }
 
@@ -43,7 +47,8 @@ class SubCategoryController extends Controller
      */
     public function create()
     {
-        return view($this->page.'create');
+        $categories = $this->category->getAll();
+        return view($this->page.'create',compact('categories'));
     }
 
     /**
@@ -52,7 +57,7 @@ class SubCategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SubCategoryRequest $request)
     {
         $this->model->create($request->validated());
         return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>'Data added messages']);
@@ -79,7 +84,8 @@ class SubCategoryController extends Controller
     public function edit($id)
     {
         $data = $this->model->getByID($id);
-        return view($this->page.'edit',compact('data'));
+        $categories = $this->category->getAll();
+        return view($this->page.'edit',compact('data','categories'));
     }
 
     /**
@@ -89,7 +95,7 @@ class SubCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(SubCategoryRequest $request, $id)
     {
         $this->model->update($id,$request->validated());
         return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>'Data added messages']);

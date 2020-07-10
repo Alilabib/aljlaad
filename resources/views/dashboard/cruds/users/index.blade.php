@@ -1,9 +1,19 @@
 @extends('dashboard.layout.layout')
 @section('content')
  <!-- Dynamic Table with Export Buttons -->
+ @if(session('message'))
+ @if(session('message')['type'] == 'success')
+    <div class="col-xl-12 alert alert-dismissible alert-success fade show" role="alert">
+        {{ session('message')['content']  }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+ @endif
+ @endif
  <div class="block">
     <div class="block-header">
-        <h3 class="block-title">المديرين<small></small></h3>
+        <h3 class="block-title">الآعضاء<small></small></h3>
     </div>
     <div class="block-content block-content-full">
         <!-- DataTables init on table by adding .js-dataTable-buttons class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _es6/pages/be_tables_datatables.js -->

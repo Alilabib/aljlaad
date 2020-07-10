@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Order\OrderRequest;
 use App\Repositories\Order\OrderRepository;
+use App\Repositories\User\UserRepository;
+use App\Repositories\Product\ProductRepository;
+
 class OrderController extends Controller
 {
 
@@ -14,13 +17,17 @@ class OrderController extends Controller
     private $url;
     private $data;
     private $route;
-    public function __construct(OrderRepository $order)
+    private $user;
+    private $product;
+    public function __construct(OrderRepository $order,UserRepository $user,ProductRepository $product)
     {
         $this->model = $order;
         $this->page  = 'dashboard.cruds.orders.';
         $this->url   = '/orders';
         $this->route = 'orders.index';
         $this->data  = [];
+        $this->product = $product;
+        $this->user = $user;
     }
 
     /**
@@ -31,7 +38,8 @@ class OrderController extends Controller
     public function index()
     {
         //
-        return view($this->page.'index');
+        $data = $this->model->getAll();
+        return view($this->page.'index',compact('data'));
 
     }
 
@@ -42,7 +50,9 @@ class OrderController extends Controller
      */
     public function create()
     {
-        return view($this->page.'create');
+        $users = $this->user->getAll();
+        $products = $this->product->getAll();
+        return view($this->page.'create',compact('users','products'));
     }
 
     /**
@@ -51,7 +61,7 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(OrderRequest $request)
     {
         $this->model->create($request->validated());
         return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>'Data added messages']);
@@ -88,7 +98,7 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(OrderRequest $request, $id)
     {
         $this->model->update($id,$request->validated());
         return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>'Data added messages']);

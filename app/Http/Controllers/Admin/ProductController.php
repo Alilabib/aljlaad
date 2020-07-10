@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Product\ProductRequest;
 use App\Repositories\Product\ProductRepository;
+use App\Repositories\Category\CategoryRepository;
+
 class ProductController extends Controller
 {
     private $model;
@@ -13,13 +15,15 @@ class ProductController extends Controller
     private $url;
     private $data;
     private $route;
-    public function __construct(ProductRepository $product)
+    private $category;
+    public function __construct(ProductRepository $product,CategoryRepository $category )
     {
         $this->model = $product;
         $this->page  = 'dashboard.cruds.products.';
         $this->url   = '/products';
         $this->route = 'products.index';
         $this->data  = [];
+        $this->category = $category;
     }
 
     /**
@@ -30,7 +34,8 @@ class ProductController extends Controller
     public function index()
     {
         //
-        return view($this->page.'index');
+        $data = $this->model->getAll();
+        return view($this->page.'index',compact('data'));
 
     }
 
@@ -41,7 +46,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view($this->page.'create');
+        $categories = $this->category->getAll();
+        return view($this->page.'create',compact('categories'));
     }
 
     /**
@@ -50,7 +56,7 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
         $this->model->create($request->validated());
         return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>'Data added messages']);
@@ -77,7 +83,8 @@ class ProductController extends Controller
     public function edit($id)
     {
         $data = $this->model->getByID($id);
-        return view($this->page.'edit',compact('data'));
+        $categories = $this->category->getAll();
+        return view($this->page.'edit',compact('categories','data'));
     }
 
     /**
@@ -87,7 +94,7 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductRequest $request, $id)
     {
         $this->model->update($id,$request->validated());
         return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>'Data added messages']);

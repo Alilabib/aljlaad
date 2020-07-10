@@ -1,7 +1,16 @@
+@if($errors)
+@foreach ($errors->all() as $error)
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">{{ $error }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
 
+@endforeach
+@endif
     <div class="block">
         <div class="block-header">
-            <h3 class="block-title">المديرين</h3>
+            <h3 class="block-title">الإعدادت</h3>
         </div>
         <div class="block-content block-content-full">
             <!-- Regular -->
@@ -145,7 +154,7 @@
             <!-- Submit -->
             <div class="row items-push">
                 <div class="col-lg-7 offset-lg-4">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">حفظ</button>
                 </div>
             </div>
             <!-- END Submit -->

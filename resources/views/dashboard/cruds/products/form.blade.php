@@ -1,7 +1,16 @@
+@if($errors)
+@foreach ($errors->all() as $error)
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">{{ $error }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
 
+@endforeach
+@endif
     <div class="block">
         <div class="block-header">
-            <h3 class="block-title">المديرين</h3>
+            <h3 class="block-title">المنتجات</h3>
         </div>
         <div class="block-content block-content-full">
             <!-- Regular -->
@@ -15,16 +24,35 @@
                 <div class="col-lg-8 col-xl-5">
                     <div class="form-group">
                         <label for="val-username">الإسم <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="val-username" name="val-username" placeholder="الإسم">
+                        <input type="text" class="form-control" id="val-username" name="name_ar" placeholder="الإسم">
                     </div>
                     <div class="form-group">
-                        <label for="val-email">البريد الإلكتروني <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="val-email" name="val-email" placeholder="البريد الآلكتروني ">
+                        <label for="val-email"> الوصف <span class="text-danger">*</span></label>
+                        <textarea class="form-control" id="val-suggestions" name="desc_ar" rows="5" placeholder="وصف القسم"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="val-password">الرقم السري <span class="text-danger">*</span></label>
-                        <input type="password" class="form-control" id="val-password" name="val-password" placeholder="الرقم السري">
+                        <label for="val-skill">القسم <span class="text-danger">*</span></label>
+                        <select class="form-control" id="val-skill" name="category_id">
+                            <option value=""> من فضلك إختر</option>
+                            @forelse ($categories as $item)
+                        <option value="{{$item->id}}">{{$item->name_ar}}</option>
+                            @empty
+                                
+                            @endforelse
+                        </select>
                     </div>
+
+                    <div class="form-group">
+                        <label for="val-password"> السعر <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="val-password" name="price" placeholder=" السعر">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="val-password"> الصورة <span class="text-danger">*</span></label>
+                        <input type="file" class="form-control" id="val-password" name="image" placeholder="الصورة">
+                    </div>
+
+
 
                 </div>
             </div>
@@ -145,7 +173,7 @@
             <!-- Submit -->
             <div class="row items-push">
                 <div class="col-lg-7 offset-lg-4">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">حفظ</button>
                 </div>
             </div>
             <!-- END Submit -->

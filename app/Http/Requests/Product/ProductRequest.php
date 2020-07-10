@@ -26,9 +26,9 @@ class ProductRequest extends FormRequest
         return [
             'name_ar'=>'required',
             'desc_ar'=>'required',
-            'img'    =>'required',
+            'category_id'=>'required',
+            'image'    =>'required',
             'price'  =>'required',
-            'discount'=>'required'
         ];
     }
 }

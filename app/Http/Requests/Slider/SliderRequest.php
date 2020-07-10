@@ -25,8 +25,8 @@ class SliderRequest extends FormRequest
     {
         return [
             'name_ar'=>'required',
-            'desc_ar'=>'required',
-            'img'=>'required'
+            'desc_ar'=>'nullable',
+            'image'=>'required'
         ];
     }
 }

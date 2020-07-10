@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 
-Route::group(['namespace' => 'Admin'], function () {
+Route::group(['prefix'=>'admin','namespace' => 'Admin'], function () {
     Route::get('/','Auth\LoginController@login')->name('login'); 
     Route::post('/','Auth\LoginController@Auth')->name('login.auth'); 
     
@@ -36,8 +36,7 @@ Route::group(['namespace' => 'Admin'], function () {
         Route::resource('sliders'      , 'SliderController'     );
         Route::resource('subcategories', 'SubCategoryController');
         Route::resource('users'        , 'UserController'       );
-        Route::resource('providers'    , 'UserController'       );
-
+        Route::resource('providers'    , 'ProviderController'   );
     });
 });
 

@@ -11,17 +11,19 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 
 Route::group(['prefix'=>'admin','namespace' => 'Admin'], function () {
-    Route::get('/','Auth\LoginController@login')->name('login'); 
-    Route::post('/','Auth\LoginController@Auth')->name('login.auth'); 
+    Route::get('login', 'Auth\LoginController@login')->name('admin.login'); 
+    Route::post('login','Auth\LoginController@Auth')->name('admin.auth'); 
     
-    Route::group(['middleware' => ['web']], function () {
+    Route::group(['middleware' => ['admin.auth']], function () {
         Route::get('/'                 , 'Home\HomeController@index' )->name('admin.index'); 
+        Route::get('/logout'          , 'Auth\LoginController@logout' )->name('admin.logout'); 
+        
         Route::resource('admins'       , 'AdminController'      );
         Route::resource('areas'        , 'AreaController'       );
         Route::resource('brands'       , 'BrandController'      );

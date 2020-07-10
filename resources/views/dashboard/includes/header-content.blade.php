@@ -78,13 +78,13 @@
                         <i class="si si-settings"></i>
                     </a>
                     <div role="separator" class="dropdown-divider"></div>
-                    <h5 class="dropdown-header text-uppercase">Actions</h5>
-                    <a class="dropdown-item d-flex align-items-center justify-content-between" href="op_auth_lock.html">
+                    <h5 class="dropdown-header text-uppercase"></h5>
+                    {{-- <a class="dropdown-item d-flex align-items-center justify-content-between" href="op_auth_lock.html">
                         <span>Lock Account</span>
                         <i class="si si-lock ml-1"></i>
-                    </a>
-                    <a class="dropdown-item d-flex align-items-center justify-content-between" href="op_auth_signin.html">
-                        <span>Log Out</span>
+                    </a> --}}
+                <a class="dropdown-item d-flex align-items-center justify-content-between" href="{{route('admin.logout')}}">
+                        <span>تسجيل الخروج</span>
                         <i class="si si-logout ml-1"></i>
                     </a>
                 </div>

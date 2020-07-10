@@ -12,6 +12,6 @@ class User extends Authenticatable
     use Notifiable;
     protected $guarded = ['id'];
     public function setPasswordAttribute($value){
-        $this->attributes['password'] = Hash::make($value);
+        $this->attributes['password'] = bcrypt($value);
     }
 }

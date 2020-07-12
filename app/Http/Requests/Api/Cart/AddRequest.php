@@ -25,7 +25,8 @@ class AddRequest extends FormRequest
     {
         return [
             //
-            'product_id'=>'required'
+            'product_id'=>'required',
+            'quantity'=>'required'
         ];
     }
 }

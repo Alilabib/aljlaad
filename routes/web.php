@@ -17,8 +17,10 @@
 
 
 Route::group(['prefix'=>'admin','namespace' => 'Admin'], function () {
+    
     Route::get('login', 'Auth\LoginController@login')->name('admin.login'); 
     Route::post('login','Auth\LoginController@Auth')->name('admin.auth'); 
+    
     
     Route::group(['middleware' => ['admin.auth']], function () {
         Route::get('/'                 , 'Home\HomeController@index' )->name('admin.index'); 

@@ -7,10 +7,11 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Slider;
+use App\Models\City;
 use App\Http\Resources\CategoriesResource;
 use App\Http\Resources\SlidersResource;
 use App\Http\Resources\ProductsResource;
-
+use App\Http\Resources\CityResource;
 use App\Http\Requests\Api\Product\ProductRequest;
 use App\Http\Requests\Api\Product\ProductsRequest;
 
@@ -60,6 +61,17 @@ class HomeController extends Controller
         try{
             $products =  Product::find($request->product_id);
             $this->data = new ProductsResource($products);
+         return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
+        }catch (Exception $e){
+            return response()->json(['data'=>$this->data, 'message'=>$this->failMessage . $e,'status'=>$this->serverErrorCode]);
+        }
+    }
+
+    public function cities()
+    {
+        try{
+            $cities =  City::all();
+            $this->data = CityResource::collection($cities);
          return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
         }catch (Exception $e){
             return response()->json(['data'=>$this->data, 'message'=>$this->failMessage . $e,'status'=>$this->serverErrorCode]);

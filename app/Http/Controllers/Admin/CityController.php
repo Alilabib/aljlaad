@@ -19,7 +19,7 @@ class CityController extends Controller
         $this->page  = 'dashboard.cruds.cities.';
         $this->url   = '/cities';
         $this->data  = [];
-        $this->route = 'citites.index';
+        $this->route = 'cities.index';
 
     }
 
@@ -31,7 +31,8 @@ class CityController extends Controller
     public function index()
     {
         //
-        return view($this->page.'index');
+        $data = $this->model->getAll();
+        return view($this->page.'index',compact('data'));
 
     }
 
@@ -51,7 +52,7 @@ class CityController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CityRequest $request)
     {
         $this->model->create($request->validated());
         return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>'Data added messages']);

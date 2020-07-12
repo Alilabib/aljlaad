@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Api\Auth;
+namespace App\Http\Requests\Api\Cart;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProviderRegisterRequest extends FormRequest
+class DeleteProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,13 +24,8 @@ class ProviderRegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required',
-            'email'=>'required|unique:users,email',
-            'phone'=>'required|unique:users,phone',
-            'city'=>'city_id',
-            'password'=>'required|confirmed|min:4',
-            'residence_img'=>'required',
-            'license_img'=>'required'
+            //
+            'product_id'=>'required'
         ];
     }
 }

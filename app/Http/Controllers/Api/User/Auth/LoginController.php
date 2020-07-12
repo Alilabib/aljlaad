@@ -38,7 +38,7 @@ class LoginController extends Controller
         $request_data = $request->except(['image', 'password_confirmation','device_type','fcm_token','city']);
         $request_data['mobile_code'] = random_int(1111, 9999);
         $request_data['type'] = 'user';
-        $request_data['address'] = $request->city;
+        
         if ($request->image) {
             $image_name = time(). $attributes['image']->getClientOriginalName();
             $attributes['image']->move(storage_path('app/public/uploads/users/'),$image_name);

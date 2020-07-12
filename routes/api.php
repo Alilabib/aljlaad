@@ -36,11 +36,12 @@ Route::group(['namespace' => 'Api'], function () {
         Route::group(['middleware' => 'auth.jwt'], function () {
             Route::post('logout', 'ApiController@logout');
             Route::get('categories','CategoryController@getAll');
-
             Route::post('add/to/cart','CartController@add');
             Route::get('cart/products/count','CartController@cartproudctsCount');
             Route::get('get/cart','CartController@viewCart');
             Route::post('delete/form/cart','CartController@delete');
+            Route::post('add/address'     ,'OrderController@addAddress');
+            Route::get('continue/shopping','OrderController@continueShopping');
         });
     });
     

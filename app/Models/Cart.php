@@ -8,4 +8,9 @@ class Cart extends Model
 {
     //
     protected $guarded = ['id'];
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'cart_products', 'cart_id', 'product_id')->withPivote('quantity');
+    }
 }

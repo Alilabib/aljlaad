@@ -29,12 +29,16 @@ Route::group(['namespace' => 'Api'], function () {
         Route::post('send/code'      ,'Auth\LoginController@sendCode' );
 
         Route::group(['middleware' => 'auth.jwt'], function () {
-            Route::get('logout', 'ApiController@logout');
+            Route::post('logout', 'ApiController@logout');
             Route::get('categories','CategoryController@getAll');
+            Route::get('home','HomeController@index');
+            Route::post('products','HomeController@products');
+            Route::post('product','HomeController@product');
+            Route::post('add/to/cart','CartController@add');
         });
     });
     
-    Route::group(['namespace' => 'Driver','prefix'=>'driver'], function() {
+    Route::group(['namespace' => 'provider','prefix'=>'driver'], function() {
         Route::post('login', 'Auth\LoginController@login');
         Route::post('register', 'Auth\LoginController@register');
         Route::post('active', 'Auth\LoginController@register');

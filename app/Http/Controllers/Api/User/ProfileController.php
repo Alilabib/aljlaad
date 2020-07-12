@@ -8,4 +8,14 @@ use Illuminate\Http\Request;
 class ProfileController extends Controller
 {
     //
+
+    public function allAddresses()
+    {
+        # code...
+    }
+
+    public function newAddress()
+    {
+        # code...
+    }
 }

@@ -62,7 +62,7 @@ class OrderController extends Controller
         }
     }
 
-    public function newOrder(Type $var = null)
+    public function newOrder()
     {
 
     }

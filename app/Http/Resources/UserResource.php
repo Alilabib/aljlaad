@@ -20,7 +20,9 @@ class UserResource extends JsonResource
             'email'=>$this->email,
             'token'=> $this->token ?  $this->token->jwt : $this->token,
             'phone'=>$this->phone,
-            'image'=>$this->ImageUrl
+            'image'=>$this->ImageUrl,
+            'city_id'=>$this->city_id,
+            'city_name'=>$this->city_id ? $this->city->name_ar : $this->city_id
         ];
     }
 }

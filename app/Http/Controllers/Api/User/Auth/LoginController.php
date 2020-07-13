@@ -73,8 +73,8 @@ class LoginController extends Controller
     {
         $perms['phone'] = $request->mobile;
         $perms['password'] = $request->password;
-        $perms['email']  = $request->mobile;
-        if (!$token = JWTAuth::attempt(['phone'=>$request->mobile,'password'=>$request->password]) && !$token = JWTAuth::attempt(['email'=>$request->mobile,'password'=>$request->password] )) {
+        //$perms['email']  = $request->mobile;
+        if (!$token = JWTAuth::attempt($perms) ) {
             $this->data['data'] = "";
             $this->data['status'] = "fails";
             $this->data['message'] = trans('auth.failed');
@@ -100,7 +100,7 @@ class LoginController extends Controller
             $logged_user_token->ip =$request->ip() ;
         }
         $logged_user_token->update();
-        $this->data['data'] = new UserResource($logged_user);
+        $this->data = new UserResource($logged_user);
         return response()->json(['data'=>$this->data, 'message'=>$this->successMessage,'status'=>$this->successCode]);
 
     }

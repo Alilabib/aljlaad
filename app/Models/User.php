@@ -48,6 +48,11 @@ class User extends Authenticatable implements JWTSubject
         return ($this->img != null) ? asset('storage/uploads/users/' . $this->img) : asset('media/avatars/avatar10.jpg');
     }
 
+    public function city()
+    {
+        return $this->belongsTo(City::class, 'city_id', 'id');
+    }
+
     public function cart()
     {
         return $this->hasOne(Cart::class);

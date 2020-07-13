@@ -24,6 +24,7 @@ class ActiveRequest extends FormRequest
     public function rules()
     {
         return [
+            'phone'=>'required',
             'code'=>'required'
         ];
     }

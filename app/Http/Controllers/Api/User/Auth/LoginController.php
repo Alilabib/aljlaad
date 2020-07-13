@@ -73,7 +73,8 @@ class LoginController extends Controller
     {
         $perms['phone'] = $request->mobile;
         $perms['password'] = $request->password;
-        if (!$token = JWTAuth::attempt($perms)) {
+        $perms['email']  = $request->mobile;
+        if (!$token = JWTAuth::attempt(['phone'=>$request->mobile,'password'=>$request->password]) && !$token = JWTAuth::attempt(['email'=>$request->mobile,'password'=>$request->password] )) {
             $this->data['data'] = "";
             $this->data['status'] = "fails";
             $this->data['message'] = trans('auth.failed');
@@ -108,7 +109,13 @@ class LoginController extends Controller
     {
         try{
             $code = $request->code;
-            $user = User::where('mobile_code',$code)->first();
+            $user = User::where(['phone'=>$request->phone,'mobile_code'=>$code])->first();
+            if(!$user){
+                $this->data['data'] = "";
+                $this->data['status'] = "fails";
+                $this->data['message'] = trans('auth.failed');
+                return response()->json($this->data, 401);
+            }
             $user->mobile_code = '';
             $user->active = '1';
             $user->save();

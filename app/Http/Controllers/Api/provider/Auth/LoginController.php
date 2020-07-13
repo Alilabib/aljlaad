@@ -120,7 +120,7 @@ class LoginController extends Controller
     {
         try{
             $code = $request->code;
-            $user = User::where('mobile_code',$code)->first();
+            $user = User::where(['phone'=>$request->phone,'mobile_code'=>$code])->first();
             $user->mobile_code = '';
             $user->active = '1';
             $user->save();

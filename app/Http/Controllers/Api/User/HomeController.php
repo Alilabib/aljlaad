@@ -77,4 +77,41 @@ class HomeController extends Controller
             return response()->json(['data'=>$this->data, 'message'=>$this->failMessage . $e,'status'=>$this->serverErrorCode]);
         }
     }
+
+    public function contact()
+    {
+        try{
+          $this->data['phone']    =  SETTING_VALUE('MOBILE');
+          $this->data['whatsapp'] =  SETTING_VALUE('ABOUT_AR');
+          $this->data['email']    =  SETTING_VALUE('FORMAL_EMAIL');
+          $this->data['facebook'] =  SETTING_VALUE('FACEBOOK_URL');
+          $this->data['twitter']  =  SETTING_VALUE('TWITTER_URL');
+          $this->data['instgram'] =  SETTING_VALUE('INSTAGRAM_URL');
+         return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
+        }catch (Exception $e){
+            return response()->json(['data'=>$this->data, 'message'=>$this->failMessage . $e,'status'=>$this->serverErrorCode]);
+        }   
+    }
+
+    public function about()
+    {
+        try{
+          $this->data    =   SETTING_VALUE('ABOUT_AR');
+
+         return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
+        }catch (Exception $e){
+            return response()->json(['data'=>$this->data, 'message'=>$this->failMessage . $e,'status'=>$this->serverErrorCode]);
+        }   
+    }
+
+    public function policy()
+    {
+        try{
+          $this->data    =  SETTING_VALUE('PRIVACY_POLICY_AR');
+
+         return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
+        }catch (Exception $e){
+            return response()->json(['data'=>$this->data, 'message'=>$this->failMessage . $e,'status'=>$this->serverErrorCode]);
+        }   
+    }
 }

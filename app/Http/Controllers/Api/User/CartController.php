@@ -49,7 +49,11 @@ class CartController extends Controller
                 return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
 
             }else{
-                $cart->total  += $product->price * $request->quantity;
+                if($cart->total != '' && $cart->total != null){
+                    $cart->total  += $product->price * $request->quantity;
+                }else{
+                    $cart->total  = $product->price * $request->quantity;
+                }
                 $cart->save();
                 $newCartProduct          = new CartProduct();
                 $newCartProduct->cart_id    = $cart->id;

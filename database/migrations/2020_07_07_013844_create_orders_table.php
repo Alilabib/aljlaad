@@ -17,6 +17,11 @@ class CreateOrdersTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id')->nullable();	
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('address_id')->nullable();
+            $table->foreign('address_id')->references('id')->on('addresses')->onDelete('set null');
+            $table->unsignedBigInteger('driver_id')->nullable();
+            $table->foreign('driver_id')->references('id')->on('users')->onDelete('cascade');
+            
             $table->enum('enable_tax',['0','1'])->default('0');
             $table->string('tax')->nullable();
             $table->string('delivery_price')->nullable();

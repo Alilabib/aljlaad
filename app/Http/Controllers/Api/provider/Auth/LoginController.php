@@ -12,7 +12,7 @@ use App\Http\Requests\Api\Auth\ActiveRequest;
 use App\Http\Requests\Api\Auth\LoginRequest;
 use App\Http\Requests\Api\Auth\ForgetRequest;
 use App\Http\Requests\Api\Auth\UpdatePasswordRequest;
-
+use App\Http\Requests\Api\Auth\ProviderRegisterRequest;
 use App\Models\User;
 use App\Models\Token;
 
@@ -33,9 +33,9 @@ class LoginController extends Controller
         $this->failMessage    = 'server Error With Details => ';
     }
 
-    public function register(RegisterRequest $request)
+    public function register(ProviderRegisterRequest $request)
     {
-        $request_data = $request->except(['image', 'password_confirmation','device_type','fcm_token','city']);
+        $request_data = $request->except(['image','residence_img' ,'license_img','password_confirmation','device_type','fcm_token','city']);
         $request_data['mobile_code'] = random_int(1111, 9999);
         $request_data['type'] = 'provider';
         $request_data['address'] = $request->city;
@@ -187,6 +187,7 @@ class LoginController extends Controller
         $this->data['message'] = "";
         return response()->json($this->data, 200);
     }
+
 
 
 

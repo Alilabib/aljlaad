@@ -32,7 +32,10 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('home','HomeController@index');
         Route::post('products','HomeController@products');
         Route::post('product','HomeController@product');
-
+        Route::get('contact','HomeController@contact');
+        Route::get('about','HomeController@about');
+        Route::get('policy','HomeController@policy');
+        
         Route::group(['middleware' => 'auth.jwt'], function () {
             Route::post('logout', 'ApiController@logout');
             Route::get('categories','CategoryController@getAll');
@@ -42,18 +45,32 @@ Route::group(['namespace' => 'Api'], function () {
             Route::post('delete/form/cart','CartController@delete');
             Route::post('add/address'     ,'OrderController@addAddress');
             Route::get('continue/shopping','OrderController@continueShopping');
+            Route::post('create/order','OrderController@newOrder');
+            Route::get('orders/pending','OrderController@pendingOrders');
+            Route::post('order/details','OrderController@order');
+            Route::post('order/cancel','OrderController@cacncelOrder');
+            Route::get('orders/delivered','OrderController@deliveredOrders');
+            Route::get('get/addresses','OrderController@getAddresses');
+            Route::post('update/address','OrderController@updateAddress');
+            Route::post('delete/address','OrderController@deleteAddress');
         });
     });
     
     Route::group(['namespace' => 'provider','prefix'=>'driver'], function() {
         Route::post('login', 'Auth\LoginController@login');
         Route::post('register', 'Auth\LoginController@register');
-        Route::post('active', 'Auth\LoginController@register');
-        Route::post('forget/password','Auth\LoginController@forget');
-        Route::post('reset/password','Auth\LoginController@reset');
+        Route::post('active'         ,'Auth\LoginController@active'   );
+        Route::post('forget/password','Auth\LoginController@forget'   );
+        Route::post('reset/password' ,'Auth\LoginController@updatePassword');
+        Route::post('send/code'      ,'Auth\LoginController@sendCode' );
         Route::group(['middleware' => 'auth.jwt'], function () {
             Route::get('logout', 'ApiController@logout');
             Route::get('categories','CategoryController@getAll');
+            Route::get('pending/orders','OrderController@pending');
+            Route::post('order/details','OrderController@details');
+            Route::post('accept/order','OrderController@acceptOrder');
+            Route::post('deliver/order','OrderController@DeliverOrder');
+            Route::get('compelete/orders','OrderController@compeleted');
         });
     });
 });

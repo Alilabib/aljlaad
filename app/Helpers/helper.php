@@ -30,3 +30,9 @@ function checkExistsCartProductCount($cart_id,$product_id)
 }
 
 
+function getSetting($setting_name) { return \App\Models\Setting::whereStatus(1)->where('key', $setting_name)->first()->value ?? null; }
+
+function SETTING_VALUE($key = false)
+{
+    return \App\Models\Setting::where('key', $key)->first()->value;
+}

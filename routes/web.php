@@ -36,7 +36,8 @@ Route::group(['prefix'=>'admin','namespace' => 'Admin'], function () {
         Route::resource('orders'       , 'OrderController'      );
         Route::resource('products'     , 'ProductController'    );
         Route::resource('reviews'      , 'ReviewController'     );
-        Route::resource('settigs'      , 'SettingController'    );
+        Route::post('setting_update','SettingController@updateSetting')->name('setting_update');
+        Route::resource('settings'      , 'SettingController'    );
         Route::resource('sliders'      , 'SliderController'     );
         Route::resource('subcategories', 'SubCategoryController');
         Route::resource('users'        , 'UserController'       );

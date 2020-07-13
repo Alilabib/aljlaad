@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class MiniOrderResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,11 +16,10 @@ class UserResource extends JsonResource
     {
         return [
             'id'=>$this->id,
-            'name' =>$this->name,
-            'email'=>$this->email,
-            'token'=> $this->token ?  $this->token->jwt : $this->token,
-            'phone'=>$this->phone,
-            'image'=>$this->ImageUrl
+            'created_at'=>$this->created_at->format('Y/m/d'),
+            'date'=>$this->date->format('Y/m/d'),
+            'total'=>$this->total,
+            'product_count'=>$this->products->count()
         ];
     }
 }

@@ -74,7 +74,7 @@ class LoginController extends Controller
         $perms['phone'] = $request->mobile;
         $perms['password'] = $request->password;
         //$perms['email']  = $request->mobile;
-        if (!$token = JWTAuth::attempt($perms) && ! $token = JWTAuth::attempt(['email'=>$request->mobile,'password'=>$request->password])) {
+        if (!$token = JWTAuth::attempt($perms)) {
             $this->data['data'] = "";
             $this->data['status'] = "fails";
             $this->data['message'] = trans('auth.failed');

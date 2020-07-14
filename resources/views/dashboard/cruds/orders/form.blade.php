@@ -14,7 +14,7 @@
         </div>
         <div class="block-content block-content-full">
             <!-- Regular -->
-            <h2 class="content-heading border-bottom mb-4 pb-2">إضافة</h2>
+            <h2 class="content-heading border-bottom mb-4 pb-2"></h2>
             <div class="row items-push">
                 <div class="col-lg-4">
                     <p class="font-size-sm text-muted">

@@ -89,7 +89,7 @@ class CityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CityRequest $request, $id)
     {
         $this->model->update($id,$request->validated());
         return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>'Data added messages']);

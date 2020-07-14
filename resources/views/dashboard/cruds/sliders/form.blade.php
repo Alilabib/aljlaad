@@ -24,11 +24,15 @@
                 <div class="col-lg-8 col-xl-5">
                     <div class="form-group">
                         <label for="val-username">الإسم <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="val-username" name="name_ar" placeholder="الإسم">
+                        <input type="text" class="form-control" id="val-username" name="name_ar" placeholder="الإسم" @isset($data)
+                        value="{{$data->name_ar}}"
+                            @endisset>
                     </div>
                     <div class="form-group">
                         <label for="val-email"> المحتوي <span class="text-danger">*</span></label>
-                        <textarea class="form-control" id="val-suggestions" name="desc_ar" rows="5" placeholder="المحتوي"></textarea>
+                        <textarea class="form-control" id="val-suggestions" name="desc_ar" rows="5" placeholder="المحتوي">@isset($data)
+                            {{$data->desc_ar}}
+                                @endisset</textarea>
                     </div>
 
                     <div class="form-group">

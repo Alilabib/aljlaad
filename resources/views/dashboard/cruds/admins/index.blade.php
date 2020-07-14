@@ -24,6 +24,7 @@
                     <th>الإسم</th>
                     <th class="d-none d-sm-table-cell" style="width: 30%;">البريد الآلكتروني</th>
                     <th style="width: 15%;"> تاريخ التسجيل </th>
+                    <th style="width: 15%;">   </th>
                 </tr>
             </thead>
             <tbody>
@@ -38,6 +39,23 @@
                     </td>
                     <td>
                         <em class="text-muted font-size-sm">{{$item->created_at->diffForHumans()}}</em>
+                    </td>
+
+                    <td class="text-center">
+                        <div class="btn-group">
+                            
+                            <a href="{{route('admins.edit',$item->id)}}" class="btn btn-sm btn-primary"  title="Edit">
+                                <i class="fa fa-fw fa-pencil-alt"></i>
+                            </a>
+                            <form action="{{route('admins.destroy',$item->id)}}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-primary"  title="Delete">
+                                    <i class="fa fa-fw fa-times"></i>
+                                </button>
+                            </form>
+
+                        </div>
                     </td>
                 </tr>
 

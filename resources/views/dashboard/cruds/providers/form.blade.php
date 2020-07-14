@@ -14,7 +14,7 @@
         </div>
         <div class="block-content block-content-full">
             <!-- Regular -->
-            <h2 class="content-heading border-bottom mb-4 pb-2">إضافة</h2>
+            <h2 class="content-heading border-bottom mb-4 pb-2"></h2>
             <div class="row items-push">
                 <div class="col-lg-4">
                     <p class="font-size-sm text-muted">
@@ -24,15 +24,21 @@
                 <div class="col-lg-8 col-xl-5">
                     <div class="form-group">
                         <label for="val-username">الإسم <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="val-username" name="name" placeholder="الإسم">
+                        <input type="text" class="form-control" id="val-username" name="name" placeholder="الإسم" @isset($data)
+                        value="{{$data->name}}"
+                            @endisset>
                     </div>
                     <div class="form-group">
                         <label for="val-username">رقم الهاتف <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="val-username" name="phone" placeholder="رقم الهاتف">
+                        <input type="text" class="form-control" id="val-username" name="phone" placeholder="رقم الهاتف" @isset($data)
+                        value="{{$data->phone}}"
+                            @endisset>
                     </div>
                     <div class="form-group">
                         <label for="val-email">البريد الإلكتروني <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="val-email" name="email" placeholder="البريد الآلكتروني ">
+                        <input type="text" class="form-control" id="val-email" name="email" placeholder="البريد الآلكتروني " @isset($data)
+                        value="{{$data->email}}"
+                            @endisset>
                     </div>
                     <div class="form-group">
                         <label for="val-password">الرقم السري <span class="text-danger">*</span></label>
@@ -40,7 +46,9 @@
                     </div>
                     <div class="form-group">
                         <label for="val-username"> العنوان <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="val-username" name="address" placeholder="آلعنوان">
+                        <input type="text" class="form-control" id="val-username" name="address" placeholder="آلعنوان" @isset($data)
+                        value="{{$data->address}}"
+                            @endisset>
                     </div>
                 </div>
             </div>

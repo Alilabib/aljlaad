@@ -15,7 +15,7 @@
         </div>
         <div class="block-content block-content-full">
             <!-- Regular -->
-            <h2 class="content-heading border-bottom mb-4 pb-2">إضافة</h2>
+            <h2 class="content-heading border-bottom mb-4 pb-2"></h2>
             <div class="row items-push">
                 <div class="col-lg-4">
                     <p class="font-size-sm text-muted">
@@ -25,7 +25,9 @@
                 <div class="col-lg-8 col-xl-5">
                     <div class="form-group">
                         <label for="val-username">الإسم <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="name_ar" id="val-username" name="val-username" placeholder="الإسم">
+                        <input type="text" class="form-control" name="name_ar" id="val-username" name="val-username" placeholder="الإسم" @isset($data)
+                        value="{{$data->name_ar}}"
+                            @endisset>
                     </div>
 
                 </div>

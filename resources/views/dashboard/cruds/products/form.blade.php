@@ -14,7 +14,7 @@
         </div>
         <div class="block-content block-content-full">
             <!-- Regular -->
-            <h2 class="content-heading border-bottom mb-4 pb-2">إضافة</h2>
+            <h2 class="content-heading border-bottom mb-4 pb-2"></h2>
             <div class="row items-push">
                 <div class="col-lg-4">
                     <p class="font-size-sm text-muted">
@@ -24,18 +24,27 @@
                 <div class="col-lg-8 col-xl-5">
                     <div class="form-group">
                         <label for="val-username">الإسم <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="val-username" name="name_ar" placeholder="الإسم">
+                        <input type="text" class="form-control" id="val-username" name="name_ar" placeholder="الإسم"@isset($data)
+                        value="{{$data->name_ar}}"
+                            @endisset>
                     </div>
                     <div class="form-group">
                         <label for="val-email"> الوصف <span class="text-danger">*</span></label>
-                        <textarea class="form-control" id="val-suggestions" name="desc_ar" rows="5" placeholder="وصف القسم"></textarea>
+                        <textarea class="form-control" id="val-suggestions" name="desc_ar" rows="5" placeholder="وصف القسم">@isset($data)
+                            {{$data->desc_ar}}
+                                @endisset</textarea>
                     </div>
                     <div class="form-group">
                         <label for="val-skill">القسم <span class="text-danger">*</span></label>
                         <select class="form-control" id="val-skill" name="category_id">
                             <option value=""> من فضلك إختر</option>
                             @forelse ($categories as $item)
-                        <option value="{{$item->id}}">{{$item->name_ar}}</option>
+                        <option value="{{$item->id}}" @isset($data)
+                                @if($item->id == $data->category_id)
+                                    selected
+                                @endif
+                                @endisset
+                                >{{$item->name_ar}}</option>
                             @empty
                                 
                             @endforelse
@@ -44,7 +53,9 @@
 
                     <div class="form-group">
                         <label for="val-password"> السعر <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="val-password" name="price" placeholder=" السعر">
+                        <input type="text" class="form-control" id="val-password" name="price" placeholder=" السعر" @isset($data)
+                        value="{{$data->price}}"
+                            @endisset>
                     </div>
 
                     <div class="form-group">

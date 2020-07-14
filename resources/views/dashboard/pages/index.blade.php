@@ -5,11 +5,11 @@
                         <div class="col-6 col-lg-3">
                             <a class="block block-link-shadow text-center" href="be_pages_ecom_orders.html">
                                 <div class="block-content block-content-full">
-                                    <div class="font-size-h2 text-primary">35</div>
+                                    <div class="font-size-h2 text-primary">{{ \App\Models\Order::where('status','pending')->orWhere('status','inprogress')->count() }}</div>
                                 </div>
                                 <div class="block-content py-2 bg-body-light">
                                     <p class="font-w600 font-size-sm text-muted mb-0">
-                                        Pending Orders
+                                        طلبات قيد الانتظار
                                     </p>
                                 </div>
                             </a>
@@ -17,11 +17,11 @@
                         <div class="col-6 col-lg-3">
                             <a class="block block-link-shadow text-center" href="javascript:void(0)">
                                 <div class="block-content block-content-full">
-                                    <div class="font-size-h2 text-success">33%</div>
+                                    <div class="font-size-h2 text-success">{{ \App\Models\Order::where('status','delevired')->count() }}</div>
                                 </div>
                                 <div class="block-content py-2 bg-body-light">
                                     <p class="font-w600 font-size-sm text-muted mb-0">
-                                        Profit
+                                        طلبات منتهيه
                                     </p>
                                 </div>
                             </a>
@@ -29,11 +29,11 @@
                         <div class="col-6 col-lg-3">
                             <a class="block block-link-shadow text-center" href="javascript:void(0)">
                                 <div class="block-content block-content-full">
-                                    <div class="font-size-h2 text-dark">109</div>
+                                    <div class="font-size-h2 text-dark">{{ \App\Models\Order::whereDate('created_at',\Carbon\Carbon::today())->count() }}</div>
                                 </div>
                                 <div class="block-content py-2 bg-body-light">
                                     <p class="font-w600 font-size-sm text-muted mb-0">
-                                        Orders Today
+                                        طلبات اليوم
                                     </p>
                                 </div>
                             </a>
@@ -41,11 +41,11 @@
                         <div class="col-6 col-lg-3">
                             <a class="block block-link-shadow text-center" href="javascript:void(0)">
                                 <div class="block-content block-content-full">
-                                    <div class="font-size-h2 text-dark">$8920</div>
+                                    <div class="font-size-h2 text-dark">{{ \App\Models\Order::where('status','delevired')->get()->sum('total') }}</div>
                                 </div>
                                 <div class="block-content py-2 bg-body-light">
                                     <p class="font-w600 font-size-sm text-muted mb-0">
-                                        Earnings Today
+                                        إجمالي التحصيل من الطلبات  
                                     </p>
                                 </div>
                             </a>
@@ -56,7 +56,7 @@
                     <!-- Orders Overview -->
                     <div class="block">
                         <div class="block-header block-header-default">
-                            <h3 class="block-title">Orders Overview</h3>
+                            <h3 class="block-title">تقرير الطلبات</h3>
                             <div class="block-options">
                                 <button type="button" class="btn-block-option" data-toggle="block-option" data-action="state_toggle" data-action-mode="demo">
                                     <i class="si si-refresh"></i>
@@ -66,7 +66,7 @@
                         <div class="block-content block-content-full">
                             <!-- Chart.js is initialized in js/pages/be_pages_ecom_dashboard.min.js which was auto compiled from _es6/pages/be_pages_ecom_dashboard.js) -->
                             <!-- For more info and examples you can check out http://www.chartjs.org/docs/ -->
-                            <div style="height: 400px;"><canvas class="js-chartjs-overview"></canvas></div>
+                            <div style="height: 400px;"><canvas class="week-orders-chart"></canvas></div>
                         </div>
                     </div>
                     <!-- END Orders Overview -->
@@ -77,7 +77,7 @@
                             <!-- Top Products -->
                             <div class="block">
                                 <div class="block-header block-header-default">
-                                    <h3 class="block-title">Top Products</h3>
+                                    <h3 class="block-title">آخر الطلبات  </h3>
                                     <div class="block-options">
                                         <button type="button" class="btn-block-option" data-toggle="block-option" data-action="state_toggle" data-action-mode="demo">
                                             <i class="si si-refresh"></i>
@@ -87,176 +87,29 @@
                                 <div class="block-content">
                                     <table class="table table-borderless table-striped table-vcenter font-size-sm">
                                         <tbody>
+                                            @php
+                                             $Deliveredorders =  \App\Models\Order::where('status','pending')->get()
+                                            @endphp
+                                            @forelse ($Deliveredorders as $order)
                                             <tr>
-                                                <td class="text-center" style="width: 100px;">
-                                                    <a class="font-w600" href="be_pages_ecom_product_edit.html">PID.965</a>
+                                                <td class="font-w600 text-center" style="width: 100px;">
+                                                    <a href="{{route('orders.show',$order->id)}}">{{$order->id}}</a>
+                                                </td>
+                                                <td class="d-none d-sm-table-cell">
+                                                <a href="{{route('users.show',$order->user_id)}}">{{$order->user->name}}</a>
                                                 </td>
                                                 <td>
-                                                    <a href="be_pages_ecom_product_edit.html">Diablo III</a>
+                                                    <span class="badge badge-success">{{$order->total}}</span>
                                                 </td>
-                                                <td class="d-none d-sm-table-cell text-center">
-                                                    <div class="text-warning">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                    </div>
-                                                </td>
+                                                @php
+                                                    $date = $order->created_at->diffForHumans();
+                                                @endphp
+                                                <td class="font-w600 text-right">{{$date }}</td>
                                             </tr>
-                                            <tr>
-                                                <td class="text-center" style="width: 100px;">
-                                                    <a class="font-w600" href="be_pages_ecom_product_edit.html">PID.154</a>
-                                                </td>
-                                                <td>
-                                                    <a href="be_pages_ecom_product_edit.html">Control</a>
-                                                </td>
-                                                <td class="d-none d-sm-table-cell text-center">
-                                                    <div class="text-warning">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center" style="width: 100px;">
-                                                    <a class="font-w600" href="be_pages_ecom_product_edit.html">PID.523</a>
-                                                </td>
-                                                <td>
-                                                    <a href="be_pages_ecom_product_edit.html">Minecraft</a>
-                                                </td>
-                                                <td class="d-none d-sm-table-cell text-center">
-                                                    <div class="text-warning">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center" style="width: 100px;">
-                                                    <a class="font-w600" href="be_pages_ecom_product_edit.html">PID.423</a>
-                                                </td>
-                                                <td>
-                                                    <a href="be_pages_ecom_product_edit.html">Hollow Knight</a>
-                                                </td>
-                                                <td class="d-none d-sm-table-cell text-center">
-                                                    <div class="text-warning">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center" style="width: 100px;">
-                                                    <a class="font-w600" href="be_pages_ecom_product_edit.html">PID.391</a>
-                                                </td>
-                                                <td>
-                                                    <a href="be_pages_ecom_product_edit.html">Sekiro: Shadows Die Twice</a>
-                                                </td>
-                                                <td class="d-none d-sm-table-cell text-center">
-                                                    <div class="text-warning">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center" style="width: 100px;">
-                                                    <a class="font-w600" href="be_pages_ecom_product_edit.html">PID.218</a>
-                                                </td>
-                                                <td>
-                                                    <a href="be_pages_ecom_product_edit.html">NBA 2K20</a>
-                                                </td>
-                                                <td class="d-none d-sm-table-cell text-center">
-                                                    <div class="text-warning">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center" style="width: 100px;">
-                                                    <a class="font-w600" href="be_pages_ecom_product_edit.html">PID.995</a>
-                                                </td>
-                                                <td>
-                                                    <a href="be_pages_ecom_product_edit.html">Forza Motorsport 7</a>
-                                                </td>
-                                                <td class="d-none d-sm-table-cell text-center">
-                                                    <div class="text-warning">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center" style="width: 100px;">
-                                                    <a class="font-w600" href="be_pages_ecom_product_edit.html">PID.761</a>
-                                                </td>
-                                                <td>
-                                                    <a href="be_pages_ecom_product_edit.html">Minecraft</a>
-                                                </td>
-                                                <td class="d-none d-sm-table-cell text-center">
-                                                    <div class="text-warning">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center" style="width: 100px;">
-                                                    <a class="font-w600" href="be_pages_ecom_product_edit.html">PID.860</a>
-                                                </td>
-                                                <td>
-                                                    <a href="be_pages_ecom_product_edit.html">Dark Souls III</a>
-                                                </td>
-                                                <td class="d-none d-sm-table-cell text-center">
-                                                    <div class="text-warning">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center" style="width: 100px;">
-                                                    <a class="font-w600" href="be_pages_ecom_product_edit.html">PID.952</a>
-                                                </td>
-                                                <td>
-                                                    <a href="be_pages_ecom_product_edit.html">Age of Mythology</a>
-                                                </td>
-                                                <td class="d-none d-sm-table-cell text-center">
-                                                    <div class="text-warning">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                    </div>
-                                                </td>
-                                            </tr>
+ 
+                                            @empty
+                                                <td colspan="4" class="alert alert-info"> لايوجد طلبات قيد الانتظار  الان </td>
+                                            @endforelse
                                         </tbody>
                                     </table>
                                 </div>
@@ -267,7 +120,7 @@
                             <!-- Latest Orders -->
                             <div class="block">
                                 <div class="block-header block-header-default">
-                                    <h3 class="block-title">Latest Orders</h3>
+                                    <h3 class="block-title"> آخر الطلبات المنتهية </h3>
                                     <div class="block-options">
                                         <button type="button" class="btn-block-option" data-toggle="block-option" data-action="state_toggle" data-action-mode="demo">
                                             <i class="si si-refresh"></i>
@@ -277,126 +130,30 @@
                                 <div class="block-content">
                                     <table class="table table-borderless table-striped table-vcenter font-size-sm">
                                         <tbody>
+                                            @php
+                                             $Deliveredorders =  \App\Models\Order::where('status','delevired')->get()
+                                            @endphp
+                                            @forelse ($Deliveredorders as $order)
                                             <tr>
                                                 <td class="font-w600 text-center" style="width: 100px;">
-                                                    <a href="be_pages_ecom_order.html">ORD.7116</a>
+                                                    <a href="{{route('orders.show',$order->id)}}">{{$order->id}}</a>
                                                 </td>
                                                 <td class="d-none d-sm-table-cell">
-                                                    <a href="be_pages_ecom_customer.html">Susan Day</a>
+                                                <a href="{{route('users.show',$order->user_id)}}">{{$order->user->name}}</a>
                                                 </td>
                                                 <td>
-                                                    <span class="badge badge-success">Delivered</span>
+                                                    <span class="badge badge-success">{{$order->total}}</span>
                                                 </td>
-                                                <td class="font-w600 text-right">$657,00</td>
+                                                @php
+                                                    $date = $order->created_at->diffForHumans();
+                                                @endphp
+                                                <td class="font-w600 text-right">{{$date }}</td>
                                             </tr>
-                                            <tr>
-                                                <td class="font-w600 text-center">
-                                                    <a href="be_pages_ecom_order.html">ORD.7115</a>
-                                                </td>
-                                                <td class="d-none d-sm-table-cell">
-                                                    <a href="be_pages_ecom_customer.html">Justin Hunt</a>
-                                                </td>
-                                                <td>
-                                                    <span class="badge badge-danger">Canceled</span>
-                                                </td>
-                                                <td class="font-w600 text-right">$158,00</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="font-w600 text-center">
-                                                    <a href="be_pages_ecom_order.html">ORD.7114</a>
-                                                </td>
-                                                <td class="d-none d-sm-table-cell">
-                                                    <a href="be_pages_ecom_customer.html">Megan Fuller</a>
-                                                </td>
-                                                <td>
-                                                    <span class="badge badge-success">Delivered</span>
-                                                </td>
-                                                <td class="font-w600 text-right">$952,00</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="font-w600 text-center">
-                                                    <a href="be_pages_ecom_order.html">ORD.7113</a>
-                                                </td>
-                                                <td class="d-none d-sm-table-cell">
-                                                    <a href="be_pages_ecom_customer.html">Amanda Powell</a>
-                                                </td>
-                                                <td>
-                                                    <span class="badge badge-warning">Processing</span>
-                                                </td>
-                                                <td class="font-w600 text-right">$898,00</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="font-w600 text-center">
-                                                    <a href="be_pages_ecom_order.html">ORD.7112</a>
-                                                </td>
-                                                <td class="d-none d-sm-table-cell">
-                                                    <a href="be_pages_ecom_customer.html">Betty Kelley</a>
-                                                </td>
-                                                <td>
-                                                    <span class="badge badge-success">Delivered</span>
-                                                </td>
-                                                <td class="font-w600 text-right">$782,00</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="font-w600 text-center">
-                                                    <a href="be_pages_ecom_order.html">ORD.7111</a>
-                                                </td>
-                                                <td class="d-none d-sm-table-cell">
-                                                    <a href="be_pages_ecom_customer.html">Thomas Riley</a>
-                                                </td>
-                                                <td>
-                                                    <span class="badge badge-warning">Processing</span>
-                                                </td>
-                                                <td class="font-w600 text-right">$529,00</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="font-w600 text-center">
-                                                    <a href="be_pages_ecom_order.html">ORD.7110</a>
-                                                </td>
-                                                <td class="d-none d-sm-table-cell">
-                                                    <a href="be_pages_ecom_customer.html">Jesse Fisher</a>
-                                                </td>
-                                                <td>
-                                                    <span class="badge badge-success">Delivered</span>
-                                                </td>
-                                                <td class="font-w600 text-right">$892,00</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="font-w600 text-center">
-                                                    <a href="be_pages_ecom_order.html">ORD.7109</a>
-                                                </td>
-                                                <td class="d-none d-sm-table-cell">
-                                                    <a href="be_pages_ecom_customer.html">Albert Ray</a>
-                                                </td>
-                                                <td>
-                                                    <span class="badge badge-warning">Processing</span>
-                                                </td>
-                                                <td class="font-w600 text-right">$226,00</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="font-w600 text-center">
-                                                    <a href="be_pages_ecom_order.html">ORD.7108</a>
-                                                </td>
-                                                <td class="d-none d-sm-table-cell">
-                                                    <a href="be_pages_ecom_customer.html">Lori Moore</a>
-                                                </td>
-                                                <td>
-                                                    <span class="badge badge-success">Delivered</span>
-                                                </td>
-                                                <td class="font-w600 text-right">$677,00</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="font-w600 text-center">
-                                                    <a href="be_pages_ecom_order.html">ORD.7107</a>
-                                                </td>
-                                                <td class="d-none d-sm-table-cell">
-                                                    <a href="be_pages_ecom_customer.html">Lori Grant</a>
-                                                </td>
-                                                <td>
-                                                    <span class="badge badge-danger">Canceled</span>
-                                                </td>
-                                                <td class="font-w600 text-right">$691,00</td>
-                                            </tr>
+ 
+                                            @empty
+                                                <td colspan="4" class="alert alert-info"> لايوجد طلبات منتهيه حتي الان </td>
+                                            @endforelse
+ 
                                         </tbody>
                                     </table>
                                 </div>
@@ -405,4 +162,47 @@
                         </div>
                     </div>
                     <!-- END Top Products and Latest Orders -->
+@endsection
+
+@section('js')
+    <script>
+        $(document).ready(function(){
+            let chartOverviewCon  = jQuery('.week-orders-chart');
+            let chartOverview, chartOverviewOptions, chartOverviewData;
+            chartOverviewData = {
+            labels: ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'],
+            datasets: [
+                {
+                    label: 'هذا الإسبوع',
+                    fill: true,
+                    backgroundColor: 'rgba(132, 94, 247, .3)',
+                    borderColor: 'transparent',
+                    pointBackgroundColor: 'rgba(132, 94, 247, 1)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(132, 94, 247, 1)',
+                    data: [390, 290, 410, 290, 450, 180, 360]
+                },
+                {
+                    label: 'الإسبوع الماضي',
+                    fill: true,
+                    backgroundColor: 'rgba(233, 236, 239, 1)',
+                    borderColor: 'transparent',
+                    pointBackgroundColor: 'rgba(233, 236, 239, 1)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(233, 236, 239, 1)',
+                    data: [180, 360, 236, 320, 210, 295, 260]
+                }
+            ]
+            };
+
+            if (chartOverviewCon.length) {
+                chartOverview = new Chart(chartOverviewCon, {
+                    type: 'line',
+                    data: chartOverviewData,
+                });
+             }
+        });
+    </script>
 @endsection

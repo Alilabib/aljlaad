@@ -18,7 +18,7 @@ class UserResource extends JsonResource
             'id'=>$this->id,
             'name' =>$this->name,
             'email'=>$this->email,
-            'token'=> $this->token ? dd($this->token->jwt)  : $this->token,
+            'token'=> $this->token ? $this->token->jwt  : $this->token,
             'phone'=>$this->phone,
             'image'=>$this->ImageUrl,
             'city_id'=>$this->city_id,

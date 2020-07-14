@@ -17,8 +17,8 @@ class CartProductsResource extends JsonResource
         return [
             'id'=>$this->product_id,
             'quantity'=>$this->quantity,
-            'image'=> $this->ImageUrl,
-            'price'=>$this->price,
+            'image'=> \App\Models\Product::find($this->product_id)->ImageUrl,
+            'price'=> \App\Models\Product::find($this->product_id)->price,
         ];
     }
 }

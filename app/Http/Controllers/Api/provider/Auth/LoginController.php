@@ -176,17 +176,8 @@ class LoginController extends Controller
         }   
     }
 
-    public function Logout()
-    {
-        $user_token = $this->user->token;
-        $user_token->is_logged_in = 'false';
-        $user_token->fcm = '';
-        $user_token->update();
-        $this->data['data'] = null;
-        $this->data['status'] = "ok";
-        $this->data['message'] = "";
-        return response()->json($this->data, 200);
-    }
+
+
 
 
 

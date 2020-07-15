@@ -53,24 +53,28 @@ Route::group(['namespace' => 'Api'], function () {
             Route::get('get/addresses','OrderController@getAddresses');
             Route::post('update/address','OrderController@updateAddress');
             Route::post('delete/address','OrderController@deleteAddress');
+            Route::post('update/profile','ProfileController@updateProfile');
+
         });
     });
     
     Route::group(['namespace' => 'provider','prefix'=>'driver'], function() {
-        Route::post('login', 'Auth\LoginController@login');
+        Route::post('login', 'ProfileController@login');
         Route::post('register', 'Auth\LoginController@register');
         Route::post('active'         ,'Auth\LoginController@active'   );
         Route::post('forget/password','Auth\LoginController@forget'   );
         Route::post('reset/password' ,'Auth\LoginController@updatePassword');
         Route::post('send/code'      ,'Auth\LoginController@sendCode' );
         Route::group(['middleware' => 'auth.jwt'], function () {
-            Route::get('logout', 'ApiController@logout');
+            Route::post('logout', 'ApiController@logout');
             Route::get('categories','CategoryController@getAll');
             Route::get('pending/orders','OrderController@pending');
             Route::post('order/details','OrderController@details');
             Route::post('accept/order','OrderController@acceptOrder');
             Route::post('deliver/order','OrderController@DeliverOrder');
             Route::get('compelete/orders','OrderController@compeleted');
+            Route::post('update/profile','ProfileController@updateProfile');
+
         });
     });
 });

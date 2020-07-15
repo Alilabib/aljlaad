@@ -13,4 +13,15 @@ class Category extends Model
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
+
+    public function getImageUrlAttribute()
+    {
+        return ($this->img != null) ? asset('storage/uploads/categories/' . $this->img) : asset('media/avatars/avatar10.jpg');
+    }
+
+    public function getBackImageUrlAttribute()
+    {
+        return ($this->img != null) ? asset('storage/uploads/categories/' . $this->img) : asset('media/avatars/avatar10.jpg');
+    }
+
 }

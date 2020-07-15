@@ -27,6 +27,8 @@ class CategoryRequest extends FormRequest
             //
             'name_ar'=>'required',
             'desc_ar'=>'required',
+            'image'   =>'required',
+            'back_image'=>'required',
         ];
     }
 }

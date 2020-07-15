@@ -5,6 +5,7 @@ namespace App\Repositories\Category;
 
 
 use App\Models\Category;
+use Illuminate\Support\Arr;
 
 class CategoryRepository implements CategoryInterface
 {
@@ -16,7 +17,7 @@ class CategoryRepository implements CategoryInterface
     public function getAll()
     {
         // TODO: Implement getAll() method.
-        return $this->model->all();
+        return $this->model->where('category_id',null)->get();
     }
 
     public function getByID($id)
@@ -28,14 +29,30 @@ class CategoryRepository implements CategoryInterface
     public function create(array $attributes)
     {
         // TODO: Implement create() method.
-        return $this->model->create($attributes);
+        $image_name = time() . $attributes['image']->getClientOriginalName();
+        $attributes['image']->move(storage_path('app/public/uploads/categories/'),$image_name);
+        $attributes['img'] = $image_name;
+
+        $back_image_name = time() . $attributes['back_image']->getClientOriginalName();
+        $attributes['back_image']->move(storage_path('app/public/uploads/categories/'),$image_name);
+        $attributes['back_img'] = $back_image_name;
+       
+        return $this->model->create(Arr::except($attributes,['image','back_image']));
     }
 
     public function update($id, array $attributes)
     {
         // TODO: Implement update() method.
+        $image_name = time() . $attributes['image']->getClientOriginalName();
+        $attributes['image']->move(storage_path('app/public/uploads/categories/'),$image_name);
+        $attributes['img'] = $image_name;
+
+        $back_image_name = time() . $attributes['back_image']->getClientOriginalName();
+        $attributes['back_image']->move(storage_path('app/public/uploads/categories/'),$image_name);
+        $attributes['back_img'] = $back_image_name;
+
         $module = $this->model->findOrFail($id);
-        $module->update($attributes);
+        $module->update(Arr::except($attributes,['image','back_image']));
         $module->save();
         return $module;
     }

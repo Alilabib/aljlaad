@@ -1,6 +1,6 @@
 <div class="content-header bg-white-5">
     <!-- Logo -->
-    <a class="font-w600 text-dual" href="index.html">
+<a class="font-w600 text-dual" href="{{route('admin.index')}}">
         <i class="fa fa-circle-notch text-primary"></i>
         <span class="smini-hide">
             <span class="font-w700 font-size-h5">A</span>

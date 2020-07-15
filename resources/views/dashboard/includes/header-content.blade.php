@@ -59,7 +59,7 @@
                 </div>
                 <div class="p-2">
                     <h5 class="dropdown-header text-uppercase">User Options</h5>
-                    <a class="dropdown-item d-flex align-items-center justify-content-between" href="be_pages_generic_inbox.html">
+                    {{-- <a class="dropdown-item d-flex align-items-center justify-content-between" href="be_pages_generic_inbox.html">
                         <span>Inbox</span>
                         <span>
                             <span class="badge badge-pill badge-primary">3</span>
@@ -76,7 +76,7 @@
                     <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
                         <span>Settings</span>
                         <i class="si si-settings"></i>
-                    </a>
+                    </a> --}}
                     <div role="separator" class="dropdown-divider"></div>
                     <h5 class="dropdown-header text-uppercase"></h5>
                     {{-- <a class="dropdown-item d-flex align-items-center justify-content-between" href="op_auth_lock.html">
@@ -94,7 +94,7 @@
 
         <!-- Notifications Dropdown -->
         <div class="dropdown d-inline-block ml-2">
-            <button type="button" class="btn btn-sm btn-dual" id="page-header-notifications-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{-- <button type="button" class="btn btn-sm btn-dual" id="page-header-notifications-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="si si-bell"></i>
                 <span class="badge badge-primary badge-pill">6</span>
             </button>
@@ -175,7 +175,7 @@
                         <i class="fa fa-fw fa-arrow-down mr-1"></i> Load More..
                     </a>
                 </div>
-            </div>
+            </div> --}}
         </div>
         <!-- END Notifications Dropdown -->
 

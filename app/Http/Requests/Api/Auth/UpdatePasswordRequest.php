@@ -24,6 +24,7 @@ class UpdatePasswordRequest extends FormRequest
     public function rules()
     {
         return [
+            'mobile'=>'required',
             'code'=>'required',
             'password'=>'required|confirmed|min:4'
         ];

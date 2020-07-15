@@ -145,8 +145,8 @@ class LoginController extends Controller
     public function sendCode(ForgetRequest $request)
     {
         try{
-            $code = $request->mobile;
-            $user = User::where('phone',$code)->first();
+            $phone = $request->mobile;
+            $user = User::where('phone',$phone)->first();
             $user->mobile_code = random_int(1111, 9999);
             $user->save();
             $this->data = $user->mobile_code;
@@ -159,7 +159,7 @@ class LoginController extends Controller
     public function updatePassword(UpdatePasswordRequest $request){
         try{
             $code = $request->code;
-            $user = User::where('mobile_code',$code)->first();
+            $user = User::where(['phone'=>$request->mobile,'mobile_code'=>$code])->first();
             $user->password = $request->password;
             $user->mobile_code = '';
             $user->active = '1';

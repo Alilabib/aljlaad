@@ -29,7 +29,12 @@
                         value="{{$data->name_ar}}"
                             @endisset>
                     </div>
-
+                    <div class="form-group">
+                        <label for="val-username">  الإسم بالإنجليزية <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="name_en" id="val-username" name="val-username" placeholder="الإسم بالإنجليزية" @isset($data)
+                        value="{{$data->name_en}}"
+                            @endisset>
+                    </div>
                 </div>
             </div>
             <!-- END Regular -->

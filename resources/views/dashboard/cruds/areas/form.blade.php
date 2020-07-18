@@ -31,12 +31,19 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="val-username">  الإسم بالإنجليزية <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="name_en" id="val-username" name="val-username" placeholder="الإسم بالإنجليزية" @isset($data)
+                        value="{{$data->name_en}}"
+                            @endisset>
+                    </div>
+
+                    <div class="form-group">
                         <label for="val-skill">المدن <span class="text-danger">*</span></label>
                         <select class="form-control js-select2" id="val-skill" name="category_id">
                             <option value=""> من فضلك إختر</option>
                             @forelse ($citie as $item)
                              <option value="{{$item->id}}" @isset($data)
-                                @if($item->id == $data->city)
+                                @if($item->id == $data->city_id)
                                     selected
                                 @endif
                                 @endisset

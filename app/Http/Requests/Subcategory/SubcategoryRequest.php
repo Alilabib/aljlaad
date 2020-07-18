@@ -25,8 +25,12 @@ class SubcategoryRequest extends FormRequest
     {
         return [
             'name_ar'=>'required',
+            'name_en'=>'required',
+
             'desc_ar'=>'required',
-            'category_id'=>'required'
+            'desc_en'=>'required',
+
+            'category_id'=>'required|exists:categories,id'
         ];
     }
 }

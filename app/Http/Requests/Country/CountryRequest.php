@@ -13,7 +13,7 @@ class CountryRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,6 +25,8 @@ class CountryRequest extends FormRequest
     {
         return [
             //
+            'name_ar'=>'required',
+            'name_en'=>'required'
         ];
     }
 }

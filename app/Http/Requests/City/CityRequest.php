@@ -26,6 +26,8 @@ class CityRequest extends FormRequest
         return [
             //
             'name_ar'=>'required',
+            'name_en'=>'required',
+
         ];
     }
 }

@@ -15,7 +15,7 @@ class Adminseeder extends Seeder
         \App\Models\Admin::create([
             'name'=>'Admin',
             'email'=>'admin@site.com',
-            'password'=>'123456789'
+            'password'=>'123456'
         ]);
     }
 }

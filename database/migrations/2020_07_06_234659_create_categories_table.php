@@ -22,7 +22,6 @@ class CreateCategoriesTable extends Migration
             $table->string('type')->nullable();
             $table->string('img')->nullable();
             $table->string('back_img')->nullable();
-
             $table->enum('express_delivery',['0','1'])->default('0');
             $table->string('quantity_limit')->nullable();
             $table->unsignedBigInteger('country_id')->nullable();	

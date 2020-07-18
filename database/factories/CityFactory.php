@@ -10,8 +10,9 @@ $factory->define(City::class, function (Faker $faker) {
         //
         'name_ar'=>$faker->city,
         'name_en'=>$faker->city,
-        'desc_ar'=>$faker->description,
-        'desc_en'=>$faker->description,
+        'desc_ar'=>$faker->text,
+        
+        'desc_en'=>$faker->text,
         'active'=>1
     ];
 });

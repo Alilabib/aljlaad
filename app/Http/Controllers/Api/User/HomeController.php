@@ -8,13 +8,16 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Slider;
 use App\Models\City;
+use App\Models\Area;
 use App\Http\Resources\CategoriesResource;
 use App\Http\Resources\SlidersResource;
 use App\Http\Resources\ProductsResource;
 use App\Http\Resources\CityResource;
+use App\Http\Resources\AreaResource;
+
 use App\Http\Requests\Api\Product\ProductRequest;
 use App\Http\Requests\Api\Product\ProductsRequest;
-
+use App\Http\Requests\Api\Auth\GetAreaRequest;
 class HomeController extends Controller
 {
     private $user;
@@ -77,6 +80,19 @@ class HomeController extends Controller
             return response()->json(['data'=>$this->data, 'message'=>$this->failMessage . $e,'status'=>$this->serverErrorCode]);
         }
     }
+
+    public function areas(GetAreaRequest $request)
+    {
+        try{
+            $areas =  Area::where('city_id',$request->city_id)->get();
+            $this->data = AreaResource::collection($areas);
+         return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
+        }catch (Exception $e){
+            return response()->json(['data'=>$this->data, 'message'=>$this->failMessage . $e,'status'=>$this->serverErrorCode]);
+        }
+    }
+
+
 
     public function contact()
     {

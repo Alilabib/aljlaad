@@ -23,6 +23,7 @@ Route::group(['namespace' => 'Api'], function () {
 
     Route::group(['namespace' => 'User','prefix'=>'user'], function() {
         Route::get('cities'          ,'HomeController@cities');
+        Route::post('areas'           ,'HomeController@areas');
         Route::post('login'          ,'Auth\LoginController@login'    );
         Route::post('register'       ,'Auth\LoginController@register' );
         Route::post('active'         ,'Auth\LoginController@active'   );

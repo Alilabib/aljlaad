@@ -13,8 +13,9 @@
  @endif
  <div class="block">
     <div class="block-header">
-        <h3 class="block-title">  الشركات <small></small></h3>
+        <h3 class="block-title">الآقسام<small></small></h3>
     </div>
+    
     <div class="block-content block-content-full">
         <!-- DataTables init on table by adding .js-dataTable-buttons class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _es6/pages/be_tables_datatables.js -->
         <table class="table table-bordered table-striped table-vcenter js-dataTable-buttons">
@@ -22,9 +23,6 @@
                 <tr>
                     <th class="text-center" style="width: 80px;"></th>
                     <th>الإسم</th>
-                    <th class="d-none d-sm-table-cell" style="width: 30%;"> الوصف</th>
-                    <th class="d-none d-sm-table-cell" style="width: 30%;"> القسم الرئيسي</th>
-
                     <th style="width: 15%;"> تاريخ التسجيل </th>
                     <th style="width: 15%;">   </th>
                 </tr>
@@ -36,22 +34,17 @@
                     <td class="font-w600 font-size-sm">
                     <a href="{{route('admins.show',$item->id)}}">{{$item->name_ar}}</a>
                     </td>
-                    <td class="d-none d-sm-table-cell font-size-sm">
-                        {{$item->desc_ar}}
-                    </td>
-                    <td class="d-none d-sm-table-cell font-size-sm">
-                        {{$item->maincategory->name_ar}}
-                    </td>
+ 
                     <td>
                         <em class="text-muted font-size-sm">{{$item->created_at->diffForHumans()}}</em>
                     </td>
                     <td class="text-center">
                         <div class="btn-group">
                             
-                            <a href="{{route('subcategories.edit',$item->id)}}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Edit">
+                            <a href="{{route('cities.edit',$item->id)}}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Edit">
                                 <i class="fa fa-fw fa-pencil-alt"></i>
                             </a>
-                            <form action="{{route('subcategories.destroy',$item->id)}}" method="POST">
+                            <form action="{{route('cities.destroy',$item->id)}}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-primary"  title="Delete">

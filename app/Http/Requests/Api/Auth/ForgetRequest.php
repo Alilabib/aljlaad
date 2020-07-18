@@ -25,7 +25,7 @@ class ForgetRequest extends FormRequest
     {
         return [
             //
-            'mobile'=>'required'
+            'mobile'=>'required|exists:users,phone'
         ];
     }
 }

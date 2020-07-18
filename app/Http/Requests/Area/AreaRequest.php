@@ -24,8 +24,10 @@ class AreaRequest extends FormRequest
     public function rules()
     {
         return [
-            'lat'=>'required',
-            'long'=>'required',
+            'name_ar'=>'required',
+            'name_en'=>'required',
+            'city_id'=>'required|exists:cities,id',
+            
         ];
     }
 }

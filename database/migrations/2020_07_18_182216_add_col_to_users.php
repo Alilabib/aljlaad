@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColToCategoriesTable extends Migration
+class AddColToUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class AddColToCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::table('categories', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             //
-            $table->string('back_img')->nullable();
+            $table->unsignedBigInteger('area_id')->nullable();	
+            $table->foreign('area_id')->references('id')->on('areas')->onDelete('set null');
         });
     }
 
@@ -26,9 +27,10 @@ class AddColToCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::table('categories', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             //
-            $table->dropColumn('back_img');
+            $table->dropForeign('area_id');
+            $table->dropColumn('area_id');
         });
     }
 }

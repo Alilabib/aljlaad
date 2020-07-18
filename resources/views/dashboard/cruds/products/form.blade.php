@@ -29,9 +29,21 @@
                             @endisset>
                     </div>
                     <div class="form-group">
+                        <label for="val-username">  الإسم بالإنجليزية <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="name_en" id="val-username" name="val-username" placeholder="الإسم بالإنجليزية" @isset($data)
+                        value="{{$data->name_en}}"
+                            @endisset>
+                    </div>
+                    <div class="form-group">
                         <label for="val-email"> الوصف <span class="text-danger">*</span></label>
                         <textarea class="form-control" id="val-suggestions" name="desc_ar" rows="5" placeholder="وصف القسم">@isset($data)
                             {{$data->desc_ar}}
+                                @endisset</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="val-suggestions"> الوصف بالإنجليزية <span class="text-danger">*</span></label>
+                        <textarea class="form-control" id="val-suggestions" name="desc_en" rows="5" placeholder="وصف  بالإنجليزية">@isset($data)
+                            {{$data->desc_en}}
                                 @endisset</textarea>
                     </div>
                     <div class="form-group">

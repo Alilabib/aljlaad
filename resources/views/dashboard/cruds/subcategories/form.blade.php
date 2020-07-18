@@ -10,7 +10,7 @@
 @endif
     <div class="block">
         <div class="block-header">
-            <h3 class="block-title"> الآقسام الفرعية</h3>
+            <h3 class="block-title">  الشركات</h3>
         </div>
         <div class="block-content block-content-full">
             <!-- Regular -->
@@ -29,9 +29,15 @@
                             @endisset>
                     </div>
                     <div class="form-group">
-                        <label for="val-skill">Category <span class="text-danger">*</span></label>
+                        <label for="val-username">  الإسم بالإنجليزية <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="name_en" id="val-username" name="val-username" placeholder="الإسم بالإنجليزية" @isset($data)
+                        value="{{$data->name_en}}"
+                            @endisset>
+                    </div>
+                    <div class="form-group">
+                        <label for="val-skill">القسم <span class="text-danger">*</span></label>
                         <select class="form-control" id="val-skill" name="category_id">
-                            <option value="">Please select</option>
+                            <option value=""> إختر القسم </option>
                             @forelse ($categories as $item)
                         <option value="{{$item->id}}" @isset($data)
                             @if($data->id == $item->id)
@@ -44,9 +50,32 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label for="val-skill">المدن <span class="text-danger">*</span></label>
+                        <select class="form-control js-select2" id="val-skill" name="category_id">
+                            <option value=""> من فضلك إختر</option>
+                            @forelse ($citie as $item)
+                             <option value="{{$item->id}}" @isset($data)
+                                @if($item->id == $data->city_id)
+                                    selected
+                                @endif
+                                @endisset
+                                >{{$item->name_ar}}</option>
+                            @empty
+                                
+                            @endforelse
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="val-suggestions">الوصف <span class="text-danger">*</span></label>
-                        <textarea class="form-control" id="val-suggestions" name="desc_ar" rows="5" placeholder="وصف القسم">@isset($data)
+                        <textarea class="form-control" id="val-suggestions" name="desc_ar" rows="5" placeholder="وصف الشركة">@isset($data)
                             {{$data->desc_ar}}
+                                @endisset</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="val-suggestions">الوصف بالإنجليزية <span class="text-danger">*</span></label>
+                        <textarea class="form-control" id="val-suggestions" name="desc_ar" rows="5" placeholder="وصف الشركة بالانجليزية">@isset($data)
+                            {{$data->desc_en}}
                                 @endisset</textarea>
                     </div>
 

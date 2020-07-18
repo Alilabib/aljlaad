@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSlidersTable extends Migration
+class CreateOffersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,18 @@ class CreateSlidersTable extends Migration
      */
     public function up()
     {
-        Schema::create('sliders', function (Blueprint $table) {
+        Schema::create('offers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name_ar')->nullable();
             $table->string('name_en')->nullable();
             $table->string('desc_ar')->nullable();
             $table->string('desc_en')->nullable();
             $table->string('type')->nullable();
+            $table->string('price')->nullable();
+            $table->string('presentage')->nullable();
             $table->string('img')->nullable();
+            $table->string('back_img')->nullable();
+
             $table->enum('active',['0','1'])->nullable();
             
             $table->string('link')->nullable();
@@ -34,8 +38,6 @@ class CreateSlidersTable extends Migration
             $table->unsignedBigInteger('category_id')->nullable();	
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
 
-
-
             $table->timestamps();
         });
     }
@@ -47,6 +49,6 @@ class CreateSlidersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sliders');
+        Schema::dropIfExists('offers');
     }
 }

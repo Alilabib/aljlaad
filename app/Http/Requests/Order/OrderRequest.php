@@ -34,7 +34,7 @@ class OrderRequest extends FormRequest
             'date'=>'required|date',
             'time'=>'required',
             'items'=>'required|array',
-            'items.*'=>'required',
+            'items.*'=>'required|exists:products,id',
             'quantity'=>'required|array',
             'quantity.*'=>'required',
         ];

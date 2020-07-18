@@ -1,3 +1,4 @@
+
 @if($errors)
 @foreach ($errors->all() as $error)
     <div class="alert alert-danger alert-dismissible fade show" role="alert">{{ $error }}
@@ -10,51 +11,52 @@
 @endif
     <div class="block">
         <div class="block-header">
-            <h3 class="block-title">البنرات</h3>
+            <h3 class="block-title">المناطق</h3>
         </div>
         <div class="block-content block-content-full">
             <!-- Regular -->
-            <h2 class="content-heading border-bottom mb-4 pb-2">إضافة</h2>
+            <h2 class="content-heading border-bottom mb-4 pb-2"></h2>
             <div class="row items-push">
                 <div class="col-lg-4">
                     <p class="font-size-sm text-muted">
-                       
+                        
                     </p>
                 </div>
                 <div class="col-lg-8 col-xl-5">
                     <div class="form-group">
                         <label for="val-username">الإسم <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="val-username" name="name_ar" placeholder="الإسم" @isset($data)
+                        <input type="text" class="form-control" name="name_ar" id="val-username" name="val-username" placeholder="الإسم" @isset($data)
                         value="{{$data->name_ar}}"
                             @endisset>
                     </div>
+
                     <div class="form-group">
                         <label for="val-username">  الإسم بالإنجليزية <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" name="name_en" id="val-username" name="val-username" placeholder="الإسم بالإنجليزية" @isset($data)
                         value="{{$data->name_en}}"
                             @endisset>
                     </div>
-                    <div class="form-group">
-                        <label for="val-email"> المحتوي <span class="text-danger">*</span></label>
-                        <textarea class="form-control" id="val-suggestions" name="desc_ar" rows="5" placeholder="المحتوي">@isset($data)
-                            {{$data->desc_ar}}
-                                @endisset</textarea>
-                    </div>
 
                     <div class="form-group">
-                        <label for="val-suggestions"> المحتوي بالإنجليزية <span class="text-danger">*</span></label>
-                        <textarea class="form-control" id="val-suggestions" name="desc_en" rows="5" placeholder="المحتوي  بالإنجليزية">@isset($data)
-                            {{$data->desc_en}}
-                                @endisset</textarea>
+                        <label for="val-skill">المدن <span class="text-danger">*</span></label>
+                        <select class="form-control js-select2" id="val-skill" name="category_id">
+                            <option value=""> من فضلك إختر</option>
+                            @forelse ($citie as $item)
+                             <option value="{{$item->id}}" @isset($data)
+                                @if($item->id == $data->city_id)
+                                    selected
+                                @endif
+                                @endisset
+                                >{{$item->name_ar}}</option>
+                            @empty
+                                
+                            @endforelse
+                        </select>
                     </div>
-
-                    <div class="form-group">
-                        <label for="val-password"> الصورة <span class="text-danger">*</span></label>
-                        <input type="file" class="form-control" id="val-password" name="image" placeholder="الصورة">
-                    </div>
-
+    
                 </div>
-            </div>
+
+
             <!-- END Regular -->
 
             {{-- <!-- Advanced -->

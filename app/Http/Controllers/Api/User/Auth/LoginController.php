@@ -51,6 +51,7 @@ class LoginController extends Controller
        if ($request->long) {
            $request_data['long']  = $request->long;
        }
+       $request_data['address'] = $request->address; 
 
         $user = User::create($request_data);
 

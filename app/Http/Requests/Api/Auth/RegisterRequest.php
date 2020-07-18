@@ -29,7 +29,9 @@ class RegisterRequest extends FormRequest
             'phone'=>'required|unique:users,phone',
             'city_id'=>'required|exists:cities,id',
             'area_id'=>'required|exists:areas,id',
-
+            'lat'=>'required',
+            'long'=>'required',
+            'address'=>'required',
             'password'=>'required|confirmed|min:4'
         ];
     }

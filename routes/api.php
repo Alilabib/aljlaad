@@ -31,6 +31,7 @@ Route::group(['namespace' => 'Api'], function () {
         Route::post('reset/password' ,'Auth\LoginController@updatePassword');
         Route::post('send/code'      ,'Auth\LoginController@sendCode' );
         Route::get('home','HomeController@index');
+        Route::get('companies','HomeController@companies');
         Route::post('products','HomeController@products');
         Route::post('product','HomeController@product');
         Route::get('contact','HomeController@contact');

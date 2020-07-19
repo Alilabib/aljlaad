@@ -48,10 +48,21 @@ class HomeController extends Controller
         }
     }
 
+    public function companies(Request $request)
+    {
+        try{
+            $products =  Category::where('category_id',$request->category_id)->get();
+            $this->data =  CategoriesResource::collection($products);
+         return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
+        }catch (Exception $e){
+            return response()->json(['data'=>$this->data, 'message'=>$this->failMessage . $e,'status'=>$this->serverErrorCode]);
+        }
+    }
+
     public function products(ProductsRequest $request)
     {
         try{
-            $products =  Product::where('category_id',$request->category_id)->get();
+            $products =  Product::where('category_id',$request->company_id)->get();
             $this->data =  ProductsResource::collection($products);
          return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
      }catch (Exception $e){

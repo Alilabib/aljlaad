@@ -26,11 +26,12 @@ class SliderRequest extends FormRequest
         return [
             'name_ar'=>'required',
             'name_en'=>'required',
-
             'desc_ar'=>'nullable',
             'desc_en'=>'nullable',
-
-            'image'=>'required'
+            'image'=>'required',
+            'type'=>'required',
+            'link'=>'requiredIf:type,link',
+            'category_id'=>'requiredIf:type,company'
         ];
     }
 }

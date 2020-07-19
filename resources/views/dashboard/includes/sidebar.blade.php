@@ -34,6 +34,26 @@
                 </ul>
             </li>
 
+            <li class="nav-main-item">
+                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                    <i class="nav-main-link-icon si si-energy"></i>
+                    <span class="nav-main-link-name">المناطق</span>
+                </a>
+                <ul class="nav-main-submenu">
+                    <li class="nav-main-item">
+                    <a class="nav-main-link" href="{{route('areas.index')}}">
+                            <span class="nav-main-link-name">الرئيسية</span>
+                        </a>
+                    </li>
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="{{route('areas.create')}}">
+                            <span class="nav-main-link-name">إنشاء</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+
             <li class="nav-main-heading"> المستخدمين </li>
             <li class="nav-main-item">
                 <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
@@ -108,6 +128,26 @@
                     </li>
                     <li class="nav-main-item">
                         <a class="nav-main-link" href="{{route('categories.create')}}">
+                            <span class="nav-main-link-name">إنشاء</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+
+            <li class="nav-main-item">
+                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                    <i class="nav-main-link-icon si si-energy"></i>
+                    <span class="nav-main-link-name"> الشركات</span>
+                </a>
+                <ul class="nav-main-submenu">
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="{{route('subcategories.index')}}">
+                            <span class="nav-main-link-name">الرئيسية</span>
+                        </a>
+                    </li>
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="{{route('subcategories.create')}}">
                             <span class="nav-main-link-name">إنشاء</span>
                         </a>
                     </li>

@@ -24,6 +24,7 @@
                     <th>الإسم</th>
                     <th class="d-none d-sm-table-cell" style="width: 30%;"> الوصف</th>
                     <th class="d-none d-sm-table-cell" style="width: 30%;"> القسم الرئيسي</th>
+                    <th class="d-none d-sm-table-cell" style="width: 30%;">  المدينة</th>
 
                     <th style="width: 15%;"> تاريخ التسجيل </th>
                     <th style="width: 15%;">   </th>
@@ -42,6 +43,11 @@
                     <td class="d-none d-sm-table-cell font-size-sm">
                         {{$item->maincategory->name_ar}}
                     </td>
+                    <td class="d-none d-sm-table-cell font-size-sm">
+                        {{$item->city->name_ar}}
+                    </td>
+                    
+
                     <td>
                         <em class="text-muted font-size-sm">{{$item->created_at->diffForHumans()}}</em>
                     </td>

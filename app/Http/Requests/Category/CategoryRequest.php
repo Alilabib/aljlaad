@@ -31,8 +31,8 @@ class CategoryRequest extends FormRequest
             'desc_ar'=>'required',
             'desc_en'=>'required',
 
-            'image'   =>'required',
-            'back_image'=>'required',
+            // 'image'   =>'required',
+            // 'back_image'=>'required',
         ];
     }
 }

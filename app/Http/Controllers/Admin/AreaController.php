@@ -6,17 +6,21 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Area\AreaRequest;
 use App\Repositories\Area\AreaRepository;
+use App\Repositories\City\CityRepository;
+
 class AreaController extends Controller
 {
 
     private $model;
+    private $city;
     private $page;
     private $url;
     private $data;
     private $route;
-    public function __construct(AreaRepository $area)
+    public function __construct(AreaRepository $area, CityRepository $city)
     {
         $this->model = $area;
+        $this->city = $city;
         $this->page  = 'dashboard.cruds.areas.';
         $this->url   = '/areas';
         $this->data  = [];
@@ -32,7 +36,8 @@ class AreaController extends Controller
     public function index()
     {
         //
-        return view($this->page.'index');
+        $data = $this->model->getAll();
+        return view($this->page.'index',compact('data'));
 
     }
 
@@ -43,7 +48,8 @@ class AreaController extends Controller
      */
     public function create()
     {
-        return view($this->page.'create');
+        $cities = $this->city->getAll();
+        return view($this->page.'create',compact('cities'));
     }
 
     /**
@@ -79,7 +85,8 @@ class AreaController extends Controller
     public function edit($id)
     {
         $data = $this->model->getByID($id);
-        return view($this->page.'edit',compact('data'));
+        $cities = $this->city->getAll();
+        return view($this->page.'edit',compact('data','cities'));
     }
 
     /**

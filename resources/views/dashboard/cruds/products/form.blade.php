@@ -47,7 +47,7 @@
                                 @endisset</textarea>
                     </div>
                     <div class="form-group">
-                        <label for="val-skill">القسم <span class="text-danger">*</span></label>
+                        <label for="val-skill">الشركة <span class="text-danger">*</span></label>
                         <select class="form-control" id="val-skill" name="category_id">
                             <option value=""> من فضلك إختر</option>
                             @forelse ($categories as $item)

@@ -13,7 +13,7 @@
  @endif
  <div class="block">
     <div class="block-header">
-        <h3 class="block-title">الآقسام<small></small></h3>
+        <h3 class="block-title"> المناطق <small></small></h3>
     </div>
     
     <div class="block-content block-content-full">
@@ -32,7 +32,7 @@
                 <tr>
                 <td class="text-center font-size-sm">{{$loop->iteration}}</td>
                     <td class="font-w600 font-size-sm">
-                    <a href="{{route('admins.show',$item->id)}}">{{$item->name_ar}}</a>
+                    <a href="{{route('areas.show',$item->id)}}">{{$item->name_ar}}</a>
                     </td>
  
                     <td>
@@ -41,10 +41,10 @@
                     <td class="text-center">
                         <div class="btn-group">
                             
-                            <a href="{{route('cities.edit',$item->id)}}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Edit">
+                            <a href="{{route('areas.edit',$item->id)}}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Edit">
                                 <i class="fa fa-fw fa-pencil-alt"></i>
                             </a>
-                            <form action="{{route('cities.destroy',$item->id)}}" method="POST">
+                            <form action="{{route('areas.destroy',$item->id)}}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-primary"  title="Delete">

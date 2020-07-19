@@ -34,6 +34,17 @@
                         value="{{$data->name_en}}"
                             @endisset>
                     </div>
+
+                    <div class="form-group">
+                        <label for="val-skill">يدعم التوصيل السريع  <span class="text-danger">*</span></label>
+                        <select class="form-control" id="val-skill" name="express_delivery">
+                            <option value=""> إختر  </option>
+                            <option value="0">لا يدعم  </option>
+
+                            <option value="1"> يدعم  </option>                 
+                        </select>
+                    </div>
+
                     <div class="form-group">
                         <label for="val-skill">القسم <span class="text-danger">*</span></label>
                         <select class="form-control" id="val-skill" name="category_id">
@@ -51,9 +62,9 @@
                     </div>
                     <div class="form-group">
                         <label for="val-skill">المدن <span class="text-danger">*</span></label>
-                        <select class="form-control js-select2" id="val-skill" name="category_id">
+                        <select class="form-control js-select2" id="val-skill" name="city_id">
                             <option value=""> من فضلك إختر</option>
-                            @forelse ($citie as $item)
+                            @forelse ($cities as $item)
                              <option value="{{$item->id}}" @isset($data)
                                 @if($item->id == $data->city_id)
                                     selected
@@ -74,7 +85,7 @@
 
                     <div class="form-group">
                         <label for="val-suggestions">الوصف بالإنجليزية <span class="text-danger">*</span></label>
-                        <textarea class="form-control" id="val-suggestions" name="desc_ar" rows="5" placeholder="وصف الشركة بالانجليزية">@isset($data)
+                        <textarea class="form-control" id="val-suggestions" name="desc_en" rows="5" placeholder="وصف الشركة بالانجليزية">@isset($data)
                             {{$data->desc_en}}
                                 @endisset</textarea>
                     </div>

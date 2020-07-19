@@ -26,6 +26,8 @@ class AreaRequest extends FormRequest
         return [
             'name_ar'=>'required',
             'name_en'=>'required',
+            'desc_ar'=>'nullable',
+            'desc_en'=>'nullable',
             'city_id'=>'required|exists:cities,id',
             
         ];

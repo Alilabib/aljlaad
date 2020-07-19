@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Slider\SliderRequest;
 use App\Repositories\Slider\SliderRepository;
+use App\Repositories\SubCategory\SubCategoryRepository;
+
 class SliderController extends Controller
 {
 
@@ -14,13 +16,15 @@ class SliderController extends Controller
     private $url;
     private $route;
     private $data;
-    public function __construct(SliderRepository $Slider)
+    private $category;
+    public function __construct(SliderRepository $Slider,SubCategoryRepository $category)
     {
         $this->model = $Slider;
         $this->page  = 'dashboard.cruds.sliders.';
         $this->url   = '/sliders';
         $this->route = 'sliders.index';
         $this->data  = [];
+        $this->category = $category;
     }
     /**
      * Display a listing of the resource.
@@ -42,7 +46,8 @@ class SliderController extends Controller
      */
     public function create()
     {
-        return view($this->page.'create');
+        $categories = $this->category->getAll();
+        return view($this->page.'create',compact('categories'));
     }
 
     /**
@@ -78,7 +83,8 @@ class SliderController extends Controller
     public function edit($id)
     {
         $data = $this->model->getByID($id);
-        return view($this->page.'edit',compact('data'));
+        $categories = $this->category->getAll();
+        return view($this->page.'edit',compact('data','categories'));
     }
 
     /**

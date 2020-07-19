@@ -29,13 +29,13 @@ class CategoryRepository implements CategoryInterface
     public function create(array $attributes)
     {
         // TODO: Implement create() method.
-        $image_name = time() . $attributes['image']->getClientOriginalName();
-        $attributes['image']->move(storage_path('app/public/uploads/categories/'),$image_name);
-        $attributes['img'] = $image_name;
+        // $image_name = time() . $attributes['image']->getClientOriginalName();
+        // $attributes['image']->move(storage_path('app/public/uploads/categories/'),$image_name);
+        // $attributes['img'] = $image_name;
 
-        $back_image_name = time() . $attributes['back_image']->getClientOriginalName();
-        $attributes['back_image']->move(storage_path('app/public/uploads/categories/'),$image_name);
-        $attributes['back_img'] = $back_image_name;
+        // $back_image_name = time() . $attributes['back_image']->getClientOriginalName();
+        // $attributes['back_image']->move(storage_path('app/public/uploads/categories/'),$image_name);
+        // $attributes['back_img'] = $back_image_name;
        
         return $this->model->create(Arr::except($attributes,['image','back_image']));
     }
@@ -43,13 +43,13 @@ class CategoryRepository implements CategoryInterface
     public function update($id, array $attributes)
     {
         // TODO: Implement update() method.
-        $image_name = time() . $attributes['image']->getClientOriginalName();
-        $attributes['image']->move(storage_path('app/public/uploads/categories/'),$image_name);
-        $attributes['img'] = $image_name;
+        // $image_name = time() . $attributes['image']->getClientOriginalName();
+        // $attributes['image']->move(storage_path('app/public/uploads/categories/'),$image_name);
+        // $attributes['img'] = $image_name;
 
-        $back_image_name = time() . $attributes['back_image']->getClientOriginalName();
-        $attributes['back_image']->move(storage_path('app/public/uploads/categories/'),$image_name);
-        $attributes['back_img'] = $back_image_name;
+        // $back_image_name = time() . $attributes['back_image']->getClientOriginalName();
+        // $attributes['back_image']->move(storage_path('app/public/uploads/categories/'),$image_name);
+        // $attributes['back_img'] = $back_image_name;
 
         $module = $this->model->findOrFail($id);
         $module->update(Arr::except($attributes,['image','back_image']));

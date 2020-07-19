@@ -4,19 +4,21 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\SubCategory\SubCategoryRequest;
+use App\Http\Requests\Subcategory\SubcategoryRequest;
 use App\Repositories\SubCategory\SubCategoryRepository;
 use App\Repositories\Category\CategoryRepository;
+use App\Repositories\City\CityRepository;
 
 class SubCategoryController extends Controller
 {
     private $model;
+    private $city;
     private $page;
     private $url;
     private $data;
     private $route;
     private $category;
-    public function __construct(SubCategoryRepository $subcategory,CategoryRepository $category )
+    public function __construct(SubCategoryRepository $subcategory,CategoryRepository $category, CityRepository $city)
     {
         $this->model = $subcategory;
         $this->page  = 'dashboard.cruds.subcategories.';
@@ -24,6 +26,7 @@ class SubCategoryController extends Controller
         $this->route = 'subcategories.index';
         $this->data  = [];
         $this->category = $category;
+        $this->city = $city;
     }
 
 
@@ -48,7 +51,8 @@ class SubCategoryController extends Controller
     public function create()
     {
         $categories = $this->category->getAll();
-        return view($this->page.'create',compact('categories'));
+        $cities = $this->city->getAll();
+        return view($this->page.'create',compact('categories','cities'));
     }
 
     /**
@@ -85,7 +89,9 @@ class SubCategoryController extends Controller
     {
         $data = $this->model->getByID($id);
         $categories = $this->category->getAll();
-        return view($this->page.'edit',compact('data','categories'));
+        $cities = $this->city->getAll();
+
+        return view($this->page.'edit',compact('data','categories','cities'));
     }
 
     /**

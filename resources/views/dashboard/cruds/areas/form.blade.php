@@ -41,7 +41,7 @@
                         <label for="val-skill">المدن <span class="text-danger">*</span></label>
                         <select class="form-control js-select2" id="val-skill" name="category_id">
                             <option value=""> من فضلك إختر</option>
-                            @forelse ($citie as $item)
+                            @forelse ($cities as $item)
                              <option value="{{$item->id}}" @isset($data)
                                 @if($item->id == $data->city_id)
                                     selected
@@ -55,7 +55,7 @@
                     </div>
     
                 </div>
-
+            </div>
 
             <!-- END Regular -->
 

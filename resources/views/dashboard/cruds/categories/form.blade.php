@@ -48,7 +48,7 @@
                             {{$data->desc_en}}
                                 @endisset</textarea>
                     </div>
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label for="val-password"> الصورة <span class="text-danger">*</span></label>
                         <input type="file" class="form-control" id="val-password" name="image" placeholder="الصورة">
                     </div>
@@ -56,7 +56,7 @@
                     <div class="form-group">
                         <label for="val-password"> صورة الخلفية <span class="text-danger">*</span></label>
                         <input type="file" class="form-control" id="val-password" name="back_image" placeholder="الصورة">
-                    </div>
+                    </div> --}}
                 </div>
             </div>
             <!-- END Regular -->

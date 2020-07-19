@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Product\ProductRequest;
 use App\Repositories\Product\ProductRepository;
 use App\Repositories\Category\CategoryRepository;
+use App\Repositories\SubCategory\SubCategoryRepository;
 
 class ProductController extends Controller
 {
@@ -16,7 +17,7 @@ class ProductController extends Controller
     private $data;
     private $route;
     private $category;
-    public function __construct(ProductRepository $product,CategoryRepository $category )
+    public function __construct(ProductRepository $product,SubCategoryRepository $category )
     {
         $this->model = $product;
         $this->page  = 'dashboard.cruds.products.';

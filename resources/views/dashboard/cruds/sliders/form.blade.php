@@ -52,6 +52,40 @@
                         <label for="val-password"> الصورة <span class="text-danger">*</span></label>
                         <input type="file" class="form-control" id="val-password" name="image" placeholder="الصورة">
                     </div>
+                    
+                    <div class="form-group">
+                        <label for="val-skill">يتبع <span class="text-danger">*</span></label>
+                        <select class="form-control" name="type" id="type">
+                            <option value=""> إختر  </option>
+                            <option value="image">لا يوجد  </option>
+                            <option value="link"> لينك    </option>
+                            <option value="company"> شركة    </option>                 
+                        </select>
+                    </div>
+
+                    <div class="form-group" id="link">
+                        <label for="val-username">  اللينك  <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="link" id="val-username" name="val-username" placeholder="الإسم بالإنجليزية" @isset($data)
+                        value="{{$data->name_en}}"
+                            @endisset>
+                    </div>
+
+                    <div class="form-group" id="company">
+                        <label for="val-skill">الشركة <span class="text-danger">*</span></label>
+                        <select class="form-control" id="val-skill" name="category_id">
+                            <option value=""> من فضلك إختر</option>
+                            @forelse ($categories as $item)
+                        <option value="{{$item->id}}" @isset($data)
+                                @if($item->id == $data->category_id)
+                                    selected
+                                @endif
+                                @endisset
+                                >{{$item->name_ar}}</option>
+                            @empty
+                                
+                            @endforelse
+                        </select>
+                    </div>
 
                 </div>
             </div>
@@ -178,3 +212,25 @@
             <!-- END Submit -->
         </div>
     </div>
+
+    @section('js')
+        <script>
+            $('document').ready(function(){
+                $('#link').hide();
+                $('#company').hide();
+                $('#type').change(function(){
+
+                    if($(this).val() == 'link'){
+                        $('#link').show();
+                        $('#company').hide();
+                    }else if($(this).val() == 'company'){
+                        $('#link').hide();
+                        $('#company').show();
+                    }else{
+                     $('#link').hide();
+                     $('#company').hide();
+                    }
+                });      
+            });
+        </script>
+    @endsection

@@ -1,17 +1,17 @@
 <?php
 
 
-namespace App\Repositories\Offer;
+namespace App\Repositories\Contact;
 
 
-use App\Models\Offer;
+use App\Models\Contact;
 use Illuminate\Support\Arr;
 
-class OfferRepository implements OfferInterface
+class ContactRepository implements ContactInterface
 {
-    public function __construct(Offer $offer)
+    public function __construct(Contact $contact)
     {
-        $this->model = $offer;
+        $this->model = $contact;
     }
 
     public function getAll()

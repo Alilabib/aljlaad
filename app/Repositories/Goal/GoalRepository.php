@@ -1,17 +1,17 @@
 <?php
 
 
-namespace App\Repositories\Offer;
+namespace App\Repositories\Goal;
 
 
-use App\Models\Offer;
+use App\Models\Goal;
 use Illuminate\Support\Arr;
 
-class OfferRepository implements OfferInterface
+class GoalRepository implements GoalInterface
 {
-    public function __construct(Offer $offer)
+    public function __construct(Goal $goal)
     {
-        $this->model = $offer;
+        $this->model = $goal;
     }
 
     public function getAll()

@@ -11,7 +11,7 @@
 @endif
     <div class="block">
         <div class="block-header">
-            <h3 class="block-title">الآقسام</h3>
+            <h3 class="block-title">هدف العميل </h3>
         </div>
         <div class="block-content block-content-full">
             <!-- Regular -->
@@ -48,6 +48,29 @@
                             {{$data->desc_en}}
                                 @endisset</textarea>
                     </div>
+
+                    <div class="form-group">
+                        <label for="val-username">المرحلة الاولي <span class="text-danger">*</span></label>
+                        <input type="number" class="form-control" name="first_range" id="val-username" name="val-username" placeholder="المرحلة الاولي " @isset($data)
+                        value="{{$data->first_range}}"
+                            @endisset>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="val-username">المرحلة الثانيه <span class="text-danger">*</span></label>
+                        <input type="number" class="form-control" name="second_range" id="val-username" name="val-username" placeholder="المرحلة الثانيه " @isset($data)
+                        value="{{$data->second_range}}"
+                            @endisset>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="val-username">المرحلة النهائية <span class="text-danger">*</span></label>
+                        <input type="number" class="form-control" name="last_range" id="val-username" name="val-username" placeholder="المرحلة النهائية " @isset($data)
+                        value="{{$data->last_range}}"
+                            @endisset>
+                    </div>
+
+
                     {{-- <div class="form-group">
                         <label for="val-password"> الصورة الخارجية <span class="text-danger">*</span></label>
                         <input type="file" class="form-control" id="val-password" name="image" placeholder="الصورة">

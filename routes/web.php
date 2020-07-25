@@ -32,7 +32,6 @@ Route::group(['prefix'=>'admin','namespace' => 'Admin'], function () {
         Route::resource('categories'   , 'CategoryController'   );
         Route::resource('cities'       , 'CityController'       );
         Route::resource('countries'    , 'CountryController'    );
-        Route::resource('coupons'      , 'CouponController'     );
         Route::resource('orders'       , 'OrderController'      );
         Route::resource('products'     , 'ProductController'    );
         Route::resource('reviews'      , 'ReviewController'     );
@@ -44,6 +43,13 @@ Route::group(['prefix'=>'admin','namespace' => 'Admin'], function () {
         Route::resource('users'        , 'UserController'       );
         Route::post('providers/areas/'        , 'ProviderController@getAreas');
         Route::resource('providers'    , 'ProviderController'   );
+
+        Route::resource('coupons'      , 'CouponController'     );
+        Route::resource('offers'       , 'OfferController'      );
+        Route::resource('goals'        , 'GoalController'       );
+        Route::resource('contacts'     , 'ContactController'    );
+        
+
     });
 });
 

@@ -11,7 +11,7 @@
 @endif
     <div class="block">
         <div class="block-header">
-            <h3 class="block-title">الآقسام</h3>
+            <h3 class="block-title">العروض</h3>
         </div>
         <div class="block-content block-content-full">
             <!-- Regular -->
@@ -24,14 +24,28 @@
                 </div>
                 <div class="col-lg-8 col-xl-5">
                     <div class="form-group">
-                        <label for="val-username">الإسم <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="name_ar" id="val-username" name="val-username" placeholder="الإسم" @isset($data)
+                        <label for="val-username">العنوان الخارجي <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="title_ar" id="val-username" name="val-username" placeholder="العنوان الخارجي" @isset($data)
+                        value="{{$data->title_ar}}"
+                            @endisset>
+                    </div>
+                    <div class="form-group">
+                        <label for="val-username">  العنوان الخارجي بالإنجليزية <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="title_en" id="val-username" name="val-username" placeholder="العنوان الخارجي بالإنجليزية" @isset($data)
+                        value="{{$data->title_en}}"
+                            @endisset>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="val-username">العنوان <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="name_ar" id="val-username" name="val-username" placeholder="العنوان" @isset($data)
                         value="{{$data->name_ar}}"
                             @endisset>
                     </div>
                     <div class="form-group">
-                        <label for="val-username">  الإسم بالإنجليزية <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="name_en" id="val-username" name="val-username" placeholder="الإسم بالإنجليزية" @isset($data)
+                        <label for="val-username">  العنوان بالإنجليزية <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="name_en" id="val-username" name="val-username" placeholder="العنوان بالإنجليزية" @isset($data)
                         value="{{$data->name_en}}"
                             @endisset>
                     </div>
@@ -48,7 +62,7 @@
                             {{$data->desc_en}}
                                 @endisset</textarea>
                     </div>
-                    {{-- <div class="form-group">
+                    <div class="form-group">
                         <label for="val-password"> الصورة الخارجية <span class="text-danger">*</span></label>
                         <input type="file" class="form-control" id="val-password" name="image" placeholder="الصورة">
                     </div>
@@ -67,11 +81,10 @@
 
                     <div class="form-group">
                         <label for="val-username">نسبة الخصم <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="persentage" id="val-username" name="val-username" placeholder="نسبة الخصم" @isset($data)
-                        value="{{$data->persentage}}"
+                        <input type="text" class="form-control" name="presentage" id="val-username" name="val-username" placeholder="نسبة الخصم" @isset($data)
+                        value="{{$data->presentage}}"
                             @endisset>
-                    </div> --}}
-
+                    </div>
                 </div>
             </div>
             <!-- END Regular -->

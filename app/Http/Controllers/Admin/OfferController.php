@@ -4,9 +4,25 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Http\Requests\Offer\OfferRequest;
+use App\Repositories\Offer\OfferRepository;
 class OfferController extends Controller
 {
+
+    private $model;
+    private $page;
+    private $url;
+    private $data;
+    private $route;
+    public function __construct(OfferRepository $offer)
+    {
+        $this->model = $offer;
+        $this->page  = 'dashboard.cruds.offers.';
+        $this->url   = '/offers';
+        $this->data  = [];
+        $this->route = 'offers.index';
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,6 +31,9 @@ class OfferController extends Controller
     public function index()
     {
         //
+        $this->data['data'] = $this->model->getAll();
+        return view($this->page.'index',$this->data);
+
     }
 
     /**
@@ -25,6 +44,8 @@ class OfferController extends Controller
     public function create()
     {
         //
+        return view($this->page.'create');
+
     }
 
     /**
@@ -33,9 +54,11 @@ class OfferController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(OfferRequest $request)
     {
         //
+        $this->model->create($request->validated());
+        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>'Data added messages']);
     }
 
     /**
@@ -47,6 +70,8 @@ class OfferController extends Controller
     public function show($id)
     {
         //
+        $data = $this->model->getByID($id);
+        return view($this->page.'show',compact('data'));
     }
 
     /**
@@ -58,6 +83,8 @@ class OfferController extends Controller
     public function edit($id)
     {
         //
+        $data = $this->model->getByID($id);
+        return view($this->page.'edit',compact('data'));
     }
 
     /**
@@ -67,9 +94,10 @@ class OfferController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(OfferRequest $request, $id)
     {
-        //
+        $this->model->update($id,$request->validated());
+        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>'Data added messages']);
     }
 
     /**
@@ -80,6 +108,7 @@ class OfferController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->model->delete($id);
+        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>'Data Deleted successfully']);
     }
 }

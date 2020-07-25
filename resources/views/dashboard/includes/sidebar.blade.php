@@ -237,6 +237,84 @@
                 </ul>
             </li>
 
+            <li class="nav-main-heading"> العروض </li>
+            <li class="nav-main-item">
+                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                    <i class="nav-main-link-icon si si-energy"></i>
+                    <span class="nav-main-link-name">العروض</span>
+                </a>
+                <ul class="nav-main-submenu">
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="{{route('offers.index')}}">
+                            <span class="nav-main-link-name">الرئيسية</span>
+                        </a>
+                    </li>
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="{{route('offers.create')}}">
+                            <span class="nav-main-link-name">إنشاء</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+
+            <li class="nav-main-heading"> الكوبونات </li>
+            <li class="nav-main-item">
+                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                    <i class="nav-main-link-icon si si-energy"></i>
+                    <span class="nav-main-link-name">الكوبونات</span>
+                </a>
+                <ul class="nav-main-submenu">
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="{{route('coupons.index')}}">
+                            <span class="nav-main-link-name">الرئيسية</span>
+                        </a>
+                    </li>
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="{{route('coupons.create')}}">
+                            <span class="nav-main-link-name">إنشاء</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+
+            <li class="nav-main-heading"> أهداف العملاء </li>
+            <li class="nav-main-item">
+                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                    <i class="nav-main-link-icon si si-energy"></i>
+                    <span class="nav-main-link-name"> أهداف العملاء</span>
+                </a>
+                <ul class="nav-main-submenu">
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="{{route('goals.index')}}">
+                            <span class="nav-main-link-name">الرئيسية</span>
+                        </a>
+                    </li>
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="{{route('goals.create')}}">
+                            <span class="nav-main-link-name">إنشاء</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+
+            <li class="nav-main-heading"> التواصل </li>
+            <li class="nav-main-item">
+                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                    <i class="nav-main-link-icon si si-energy"></i>
+                    <span class="nav-main-link-name"></span>
+                </a>
+                <ul class="nav-main-submenu">
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="{{route('contacts.index')}}">
+                            <span class="nav-main-link-name">الرئيسية</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
             <li class="nav-main-heading"> الإعدادات </li>
             <li class="nav-main-item">
                 <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">

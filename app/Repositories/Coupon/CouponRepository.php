@@ -28,6 +28,7 @@ class CouponRepository implements CouponInterface
     public function create(array $attributes)
     {
         // TODO: Implement create() method.
+        $attributes['name'] = 'e'. time().'n'.rand(1, 10).'jaz';
         return $this->model->create($attributes);
     }
 

@@ -4,23 +4,25 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\Coupon\CouponRequest;
-use App\Repositories\Coupon\CouponRepository;
-class CouponController extends Controller
+use App\Http\Requests\Contact\ContactRequest;
+use App\Repositories\Contact\ContactRepository;
+class ContactController extends Controller
 {
+
     private $model;
     private $page;
     private $url;
     private $data;
     private $route;
-    public function __construct(CouponRepository $coupon)
+    public function __construct(ContactRepository $contact)
     {
-        $this->model = $coupon;
-        $this->page  = 'dashboard.cruds.coupons.';
-        $this->url   = '/coupons';
+        $this->model = $contact;
+        $this->page  = 'dashboard.cruds.contacts.';
+        $this->url   = '/contacts';
         $this->data  = [];
-        $this->route = 'coupons.index';
+        $this->route = 'contacts.index';
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -29,7 +31,7 @@ class CouponController extends Controller
     public function index()
     {
         //
-        $this->data['data'] = $this->model->getAll(); 
+        $this->data['data'] = $this->model->getAll();
         return view($this->page.'index',$this->data);
 
     }
@@ -41,7 +43,9 @@ class CouponController extends Controller
      */
     public function create()
     {
+        //
         return view($this->page.'create');
+
     }
 
     /**
@@ -50,8 +54,9 @@ class CouponController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CouponRequest $request)
+    public function store(Request $request)
     {
+        //
         $this->model->create($request->validated());
         return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>'Data added messages']);
     }
@@ -64,6 +69,7 @@ class CouponController extends Controller
      */
     public function show($id)
     {
+        //
         $data = $this->model->getByID($id);
         return view($this->page.'show',compact('data'));
     }
@@ -76,6 +82,7 @@ class CouponController extends Controller
      */
     public function edit($id)
     {
+        //
         $data = $this->model->getByID($id);
         return view($this->page.'edit',compact('data'));
     }
@@ -87,7 +94,7 @@ class CouponController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CouponRequest $request, $id)
+    public function update(Request $request, $id)
     {
         $this->model->update($id,$request->validated());
         return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>'Data added messages']);

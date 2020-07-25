@@ -39,7 +39,10 @@ class SliderRepository implements SliderInterface
     {
         // TODO: Implement update() method.
         $module = $this->model->findOrFail($id);
-        $module->update($attributes);
+        $image_name = time(). $attributes['image']->getClientOriginalName();
+        $attributes['image']->move(storage_path('app/public/uploads/slider/'),$image_name);
+        $attributes['img'] = $image_name;
+        $module->update(Arr::except($attributes,['image']));
         $module->save();
         return $module;
     }

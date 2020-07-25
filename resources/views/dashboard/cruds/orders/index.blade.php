@@ -44,7 +44,7 @@
                         {{$item->total}}
                     </td>
                     <td class="d-none d-sm-table-cell font-size-sm">
-                        {{$item->date}}
+                        {{$item->date->diffForHumans()}}
                     </td>
                     
                     <td>

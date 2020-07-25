@@ -6,17 +6,23 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\User\UserRequest;
 use App\Repositories\User\UserRepository;
+use App\Repositories\Area\AreaRepository;
+use App\Repositories\City\CityRepository;
 class UserController extends Controller
 {
 
     private $model;
+    private $city;
+    private $area;
     private $page;
     private $url;
     private $route;
     private $data;
-    public function __construct(UserRepository $user)
+    public function __construct(UserRepository $user,CityRepository $city,AreaRepository $area)
     {
         $this->model = $user;
+        $this->city = $city;
+        $this->area = $area;
         $this->page  = 'dashboard.cruds.users.';
         $this->url   = '/users';
         $this->route = 'users.index';
@@ -44,7 +50,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view($this->page.'create');
+        $cities = $this->city->getAll();
+        return view($this->page.'create',compact('cities'));
     }
 
     /**
@@ -79,8 +86,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $data = $this->model->getByID($id);
-        return view($this->page.'edit',compact('data'));
+        $data   = $this->model->getByID($id);
+        $cities = $this->city->getAll();
+        $areas  = $this->area->getByCityId($data->city_id);
+        return view($this->page.'edit',compact('data','cities','areas'));
     }
 
     /**
@@ -106,5 +115,13 @@ class UserController extends Controller
     {
         $this->model->delete($id);
         return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>'Data Deleted successfully']);
+    }
+
+    public function getAreas(Request $request)
+    {
+        $areas = $this->area->getByCityId($request->id);
+
+        $view = view($this->page.'ajax.areas', compact('areas'))->render();
+        return response()->json(['value' => 1, 'view' => $view]);
     }
 }

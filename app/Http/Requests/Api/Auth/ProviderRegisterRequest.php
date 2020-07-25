@@ -27,7 +27,9 @@ class ProviderRegisterRequest extends FormRequest
             'name'=>'required',
             'email'=>'required|unique:users,email',
             'phone'=>'required|unique:users,phone',
-            'city'=>'city_id|exists:cities,id',
+            'city_id'=>'required|exists:cities,id',
+            'areas'=>'required|array',
+            'areas.*'=>'required|exists:areas,id',
             'password'=>'required|confirmed|min:4',
             'residence_img'=>'required',
             'license_img'=>'required'

@@ -40,7 +40,9 @@ Route::group(['prefix'=>'admin','namespace' => 'Admin'], function () {
         Route::resource('settings'      , 'SettingController'    );
         Route::resource('sliders'      , 'SliderController'     );
         Route::resource('subcategories', 'SubCategoryController');
+        Route::post('users/areas/'        , 'UserController@getAreas');
         Route::resource('users'        , 'UserController'       );
+        Route::post('providers/areas/'        , 'ProviderController@getAreas');
         Route::resource('providers'    , 'ProviderController'   );
     });
 });

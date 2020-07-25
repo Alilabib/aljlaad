@@ -29,6 +29,42 @@
 
         <!-- Page JS Code -->
         <script src="{{asset('/')}}js/pages/be_pages_ecom_dashboard.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+
+        <script>
+                function getAjaxResponse(route,place) {
+                    $.ajax({
+                        url: route,
+                        method: "GET",
+                        dataType:"json",
+                        success:function(data){
+                            if (data['value'] == 1) {
+                                $('#'+place).html(data['view']);
+                            }
+                        }
+                    });
+                }
 
 
+                function getAjaxPostResponse(route,place,send_data) {
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                        }
+                    });
+
+                $.ajax({
+                    url: route,
+                    method: "POST",
+                    dataType:"json",
+                    data:send_data,
+                    success:function(data){
+                        if (data['value'] == 1) {
+                            $('#'+place).html(data['view']);
+                        }
+                    }
+                });
+            }
+
+        </script>
 @yield('js')

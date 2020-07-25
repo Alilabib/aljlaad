@@ -20,9 +20,9 @@ class CreatePaymentsTable extends Migration
             $table->string('expire_date')->nullable();
             $table->string('cvv')->nullable();
             $table->unsignedBigInteger('order_id')->nullable();	
-            $table->foreign('order_id')->references('id')->on('orders');
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->unsignedBigInteger('coupon_id')->nullable();	
-            $table->foreign('coupon_id')->references('id')->on('coupons');
+            $table->foreign('coupon_id')->references('id')->on('coupons')->onDelete('set null');
             $table->timestamps();
         });
     }

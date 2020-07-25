@@ -5,6 +5,7 @@ namespace App\Repositories\Provider;
 
 
 use App\Models\User;
+use Illuminate\Support\Arr;
 
 class ProviderRepository implements ProviderInterface
 {
@@ -29,22 +30,25 @@ class ProviderRepository implements ProviderInterface
     {
         // TODO: Implement create() method.
         $attributes['type'] = 'provider';
-        return $this->model->create($attributes);
+        $provider = $this->model->create(Arr::except($attributes,['area_id']));
+        $provider->areas()->sync($attributes['area_id']);
+        return $provider;
     }
 
     public function update($id, array $attributes)
     {
         // TODO: Implement update() method.
-        $module = $this->model->findOrFail($id);
-        $module->update($attributes);
-        $module->save();
-        return $module;
+        $provider = $this->model->findOrFail($id);
+        $provider->update(Arr::except($attributes,['area_id']));
+        $provider->save();
+        $provider->areas()->sync($attributes['area_id']);
+        return $provider;
     }
 
     public function delete($id)
     {
         // TODO: Implement delete() method.
-        $module = $this->getByID($id);
-        return $module->delete();
+        $provider = $this->getByID($id);
+        return $provider->delete();
     }
 }

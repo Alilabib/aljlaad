@@ -29,6 +29,8 @@ class UserRequest extends FormRequest
             'email'=>'required',
             'password'=>'required',
             'address'=>'required',
+            'city_id'=>'required',
+            'area_id'=>'required',
          ];
     }
 }

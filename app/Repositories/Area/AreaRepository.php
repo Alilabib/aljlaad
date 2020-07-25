@@ -19,6 +19,13 @@ class AreaRepository implements AreaInterface
         return $this->model->all();
     }
 
+    public function getByCityId($id)
+    {
+        // TODO: Implement getAll() method.
+        return $this->model->where('city_id',$id)->get();
+    }
+
+
     public function getByID($id)
     {
         // TODO: Implement getByID() method.

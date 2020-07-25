@@ -35,7 +35,7 @@ class LoginController extends Controller
 
     public function register(ProviderRegisterRequest $request)
     {
-        $request_data = $request->except(['image','residence_img' ,'license_img','password_confirmation','device_type','fcm_token','city']);
+        $request_data = $request->except(['image','residence_img' ,'license_img','password_confirmation','device_type','fcm_token','city','areas']);
         $request_data['mobile_code'] = random_int(1111, 9999);
         $request_data['type'] = 'provider';
         $request_data['address'] = $request->city;
@@ -111,7 +111,7 @@ class LoginController extends Controller
             $logged_user_token->ip =$request->ip() ;
         }
         $logged_user_token->update();
-        $this->data['data'] = new UserResource($logged_user);
+        $this->data = new UserResource($logged_user);
         return response()->json(['data'=>$this->data, 'message'=>$this->successMessage,'status'=>$this->successCode]);
 
     }

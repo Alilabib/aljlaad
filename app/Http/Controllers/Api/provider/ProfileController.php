@@ -82,4 +82,27 @@ class ProfileController extends Controller
         return response()->json(['data'=>$this->data, 'message'=>$this->successMessage,'status'=>$this->successCode]);
     }
 
+    public function updatePassword(UpdatePassowrd $request)
+    {
+        try{
+            $old_password = $request->old_password;
+            $authUser = auth()->user();
+            if(\Hash::check($old_password, $authUser->password)){
+                $authUser->password = $request->password;
+                $authUser->save();
+                $this->data = new UserResource($authUser);
+                return response()->json(['data'=>$this->data, 'message'=>$this->successMessage,'status'=>$this->successCode]);
+            }
+          
+            $this->data['data'] = "";
+            $this->data['status'] = "ok";
+            $this->data['message'] = "تأكد من كلمة المرور القديمة";
+            return response()->json($this->data, 401);
+        
+  
+        }catch (Exception $e){
+            return response()->json(['data'=>$this->data, 'message'=>$this->failMessage . $e,'status'=>$this->serverErrorCode]);
+        }
+    }
+
 }

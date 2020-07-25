@@ -67,6 +67,19 @@ class OrderController extends Controller
         }
     }
 
+    public function inwayOrder(OrderRequest $request)
+    {
+        try{
+            $order = Order::find($request->order_id);
+            $order->status = 'inway';
+            $order->save();
+            return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
+    
+        }catch (Exception $e){
+            return response()->json(['data'=>$this->data, 'message'=>$this->failMessage . $e,'status'=>$this->serverErrorCode]);
+        }
+    }
+
     public function DeliverOrder(OrderRequest $request)
     {
         try{

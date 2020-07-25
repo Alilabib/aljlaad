@@ -40,6 +40,7 @@ Route::group(['namespace' => 'Api'], function () {
         
         Route::group(['middleware' => 'auth.jwt'], function () {
             Route::post('logout', 'ApiController@logout');
+            Route::post('update/password','ProfileController@updatePassword');
             Route::get('categories','CategoryController@getAll');
             Route::post('add/to/cart','CartController@add');
             Route::get('cart/products/count','CartController@cartproudctsCount');
@@ -53,10 +54,10 @@ Route::group(['namespace' => 'Api'], function () {
             Route::post('order/cancel','OrderController@cacncelOrder');
             Route::get('orders/delivered','OrderController@deliveredOrders');
             Route::get('get/addresses','OrderController@getAddresses');
+            Route::post('get/address','OrderController@getAddress');
             Route::post('update/address','OrderController@updateAddress');
             Route::post('delete/address','OrderController@deleteAddress');
             Route::post('update/profile','ProfileController@updateProfile');
-
         });
     });
     
@@ -69,6 +70,7 @@ Route::group(['namespace' => 'Api'], function () {
         Route::post('send/code'      ,'Auth\LoginController@sendCode' );
         Route::group(['middleware' => 'auth.jwt'], function () {
             Route::post('logout', 'ApiController@logout');
+            Route::post('update/password','ProfileController@updatePassword');
             Route::get('categories','CategoryController@getAll');
             Route::get('pending/orders','OrderController@pending');
             Route::post('order/details','OrderController@details');

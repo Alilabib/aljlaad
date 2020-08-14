@@ -7,6 +7,7 @@ namespace App\Repositories\Provider;
 use App\Models\User;
 use Illuminate\Support\Arr;
 use App\Models\Token;
+use JWTAuth;
 
 class ProviderRepository implements ProviderInterface
 {
@@ -35,17 +36,8 @@ class ProviderRepository implements ProviderInterface
         $provider->areas()->sync($attributes['area_id']);
         $token = new Token();
         $token->user_id = $provider->id;
-        if($request->fcm_token){
-        $token->fcm = $request->fcm_token;
-        }
-        if($request->header('os')){
-        $token->device_type = $request->header('os');
-        }
         $token->jwt = JWTAuth::fromUser($provider);
         $token->is_logged_in = 'false';
-        if($request->ip()){
-        $token->ip = $request->ip();
-        }
         $token->save();
 
         return $provider;

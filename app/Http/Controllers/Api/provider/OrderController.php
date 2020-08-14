@@ -26,13 +26,31 @@ class OrderController extends Controller
         $this->failMessage    = 'server Error With Details => ';
     }
 
+    public function allorders()
+    {
+        try{
+            $users = User::where('city_id',$user->city_id)->get()->pluck('id')->toArray();
+             $pendingOrders = Order::whereIn('user_id',$users)->where('status','!=','received')->where('status','!=','cancelled')->get();
+             $deleviredOrders = Order::where('user_id',auth()->user()->id)->where('status','delevired')->get();
+             $cancelledOrders = Order::where('user_id',auth()->user()->id)->where('status','cancelled')->get();
+             $this->data['pending'] = MiniOrderResource::collection($deleviredOrders);   
+             $this->data['delevired'] = MiniOrderResource::collection($deleviredOrders);
+             $this->data['cancelled'] = MiniOrderResource::collection($cancelledOrders);   
+   
+            return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
+    
+        }catch (Exception $e){
+            return response()->json(['data'=>$this->data, 'message'=>$this->failMessage . $e,'status'=>$this->serverErrorCode]);
+        }
+
+    }
 
     public function pending()
     {
         try{
             $user = auth()->user();
             $users = User::where('city_id',$user->city_id)->get()->pluck('id')->toArray();
-            $orders = Order::whereIn('user_id',$users)->where('status','pending')->orWhere('status','received')->get();
+            $orders = Order::whereIn('user_id',$users)->where('status','!=','received')->where('status','!=','cancelled')->get();
              $this->data = MiniProviderOrderResource::collection($orders);   
             return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
     

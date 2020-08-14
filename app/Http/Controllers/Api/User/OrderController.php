@@ -146,10 +146,10 @@ class OrderController extends Controller
         try{
              $pendingOrders = Order::where('user_id',auth()->user()->id)->where('status','!=','received')->where('status','!=','cancelled')->get();
              $deleviredOrders = Order::where('user_id',auth()->user()->id)->where('status','delevired')->get();
-             $deleviredOrders = Order::where('user_id',auth()->user()->id)->where('status','cancelled')->get();
+             $cancelledOrders = Order::where('user_id',auth()->user()->id)->where('status','cancelled')->get();
              $this->data['pending'] = MiniOrderResource::collection($deleviredOrders);   
              $this->data['delevired'] = MiniOrderResource::collection($deleviredOrders);
-             $this->data['cancelled'] = MiniOrderResource::collection($deleviredOrders);   
+             $this->data['cancelled'] = MiniOrderResource::collection($cancelledOrders);   
    
             return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
     

@@ -75,6 +75,7 @@ Route::group(['namespace' => 'Api'], function () {
             Route::get('categories'      ,'CategoryController@getAll');
             Route::get('pending/orders'  ,'OrderController@pending');
             Route::post('order/details'  ,'OrderController@details');
+            Route::get('orders'             ,'OrderController@allorders');
             Route::post('accept/order'   ,'OrderController@acceptOrder');
             Route::post('deliver/order'  ,'OrderController@DeliverOrder');
             Route::get('compelete/orders','OrderController@compeleted');

@@ -85,6 +85,7 @@ class LoginController extends Controller
     {
         $perms['phone'] = $request->mobile;
         $perms['password'] = $request->password;
+        //$perms['email']  = $request->mobile;
         if (!$token = JWTAuth::attempt($perms)) {
             $this->data['data'] = "";
             $this->data['status'] = "fails";
@@ -98,19 +99,32 @@ class LoginController extends Controller
             $logged_user->long = $request->long;
         }
         $logged_user->update();
-        $logged_user_token = $logged_user->token;
-        $logged_user_token->jwt = $token;
-        $logged_user_token->is_logged_in = "true";
-        if($request->fcm_token){
-            $logged_user_token->fcm = $request->fcm_token;
+
+        if($logged_user->token){
+            $logged_user_token = $logged_user->token;
+            $logged_user_token->jwt = $token;
+            $logged_user_token->is_logged_in = "true";
+            if($request->fcm_token){
+                $logged_user_token->fcm = $request->fcm_token;
+            }
+            if($request->header('os')){
+                $logged_user_token->device_type = $request->header('os');
+            }
+            if($request->ip()){
+                $logged_user_token->ip =$request->ip() ;
+            }
+            $logged_user_token->update();
+        }else{
+            $token = new Token();
+            $token->user_id = $logged_user->id;
+            $token->fcm = $request->fcm_token;
+            $token->device_type = $request->header('os');
+            $token->jwt = JWTAuth::fromUser($logged_user);
+            $token->is_logged_in = 'true';
+            $token->ip = $request->ip();
+            $token->save();
         }
-        if($request->header('os')){
-            $logged_user_token->device_type = $request->header('os');
-        }
-        if($request->ip()){
-            $logged_user_token->ip =$request->ip() ;
-        }
-        $logged_user_token->update();
+
         $this->data = new UserResource($logged_user);
         return response()->json(['data'=>$this->data, 'message'=>$this->successMessage,'status'=>$this->successCode]);
 

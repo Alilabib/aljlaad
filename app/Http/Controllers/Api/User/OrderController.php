@@ -141,6 +141,24 @@ class OrderController extends Controller
         }
     }
 
+    public function allorders()
+    {
+        try{
+             $pendingOrders = Order::where('user_id',auth()->user()->id)->where('status','!=','received')->where('status','!=','cancelled')->get();
+             $deleviredOrders = Order::where('user_id',auth()->user()->id)->where('status','delevired')->get();
+             $deleviredOrders = Order::where('user_id',auth()->user()->id)->where('status','cancelled')->get();
+             $this->data['pending'] = MiniOrderResource::collection($deleviredOrders);   
+             $this->data['delevired'] = MiniOrderResource::collection($deleviredOrders);
+             $this->data['cancelled'] = MiniOrderResource::collection($deleviredOrders);   
+   
+            return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
+    
+        }catch (Exception $e){
+            return response()->json(['data'=>$this->data, 'message'=>$this->failMessage . $e,'status'=>$this->serverErrorCode]);
+        }
+
+    }
+
     public function newOrder(CreateOrderRequest $request)
     {
         try{
@@ -202,7 +220,7 @@ class OrderController extends Controller
     public function pendingOrders()
     {
         try{
-        $orders = Order::where('user_id',auth()->user()->id)->where('status','pending')->orWhere('status','received')->orWhere('status','inprogress')->get();
+        $orders = Order::where('user_id',auth()->user()->id)->where('status','!=','received')->where('status','!=','cancelled')->get();
          $this->data = MiniOrderResource::collection($orders);   
         return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
 

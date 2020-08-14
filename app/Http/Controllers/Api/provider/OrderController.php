@@ -29,13 +29,14 @@ class OrderController extends Controller
     public function allorders()
     {
         try{
+            $user = auth()->user();
             $users = User::where('city_id',$user->city_id)->get()->pluck('id')->toArray();
              $pendingOrders = Order::whereIn('user_id',$users)->where('status','!=','received')->where('status','!=','cancelled')->get();
              $deleviredOrders = Order::where('user_id',auth()->user()->id)->where('status','delevired')->get();
              $cancelledOrders = Order::where('user_id',auth()->user()->id)->where('status','cancelled')->get();
-             $this->data['pending'] = MiniOrderResource::collection($deleviredOrders);   
-             $this->data['delevired'] = MiniOrderResource::collection($deleviredOrders);
-             $this->data['cancelled'] = MiniOrderResource::collection($cancelledOrders);   
+             $this->data['pending'] = MiniProviderOrderResource::collection($deleviredOrders);   
+             $this->data['delevired'] = MiniProviderOrderResource::collection($deleviredOrders);
+             $this->data['cancelled'] = MiniProviderOrderResource::collection($cancelledOrders);   
    
             return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
     

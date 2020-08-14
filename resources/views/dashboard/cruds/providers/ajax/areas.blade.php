@@ -1,7 +1,7 @@
 <div class="form-group">
     <label for=""> المنطقة <span class="text-danger">*</span></label>
     <select  class="form-control selectpicker"  name="area_id[]" title="إختر المناطق"  multiple data-live-search="true">
-        <option ></option>
+        <option value=""> من فضلك إختر</option>
         @forelse ($areas as $item)
          <option value="{{$item->id}}" @isset($data)
             @if($item->id == $data->area_id)

@@ -16,6 +16,7 @@ use App\Http\Requests\Api\Auth\UpdatePasswordRequest;
 use App\Http\Requests\Api\Auth\ProviderRegisterRequest;
 use App\Models\User;
 use App\Models\Token;
+use App\Models\Notification;
 
 
 class ProfileController extends Controller

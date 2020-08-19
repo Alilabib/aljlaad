@@ -14,10 +14,12 @@ use App\Http\Resources\SlidersResource;
 use App\Http\Resources\ProductsResource;
 use App\Http\Resources\CityResource;
 use App\Http\Resources\AreaResource;
-
+use App\Http\Resources\CompanyResource;
 use App\Http\Requests\Api\Product\ProductRequest;
 use App\Http\Requests\Api\Product\ProductsRequest;
 use App\Http\Requests\Api\Auth\GetAreaRequest;
+use App\Http\Requests\Api\Auth\ContactRequest;
+use App\Models\Contact;
 class HomeController extends Controller
 {
     private $user;
@@ -52,7 +54,7 @@ class HomeController extends Controller
     {
         try{
             $products =  Category::where('category_id',$request->category_id)->get();
-            $this->data =  CategoriesResource::collection($products);
+            $this->data =  CompanyResource::collection($products);
          return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
         }catch (Exception $e){
             return response()->json(['data'=>$this->data, 'message'=>$this->failMessage . $e,'status'=>$this->serverErrorCode]);
@@ -137,6 +139,22 @@ class HomeController extends Controller
           $this->data    =  SETTING_VALUE('PRIVACY_POLICY_AR');
 
          return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
+        }catch (Exception $e){
+            return response()->json(['data'=>$this->data, 'message'=>$this->failMessage . $e,'status'=>$this->serverErrorCode]);
+        }   
+    }
+
+    public function contactus(ContactRequest $request)
+    {
+        try{
+            $contact = new Contact();
+            $contact->name    = $request->name;
+            $contact->phone   = $request->phone;
+            $contact->email   = $request->email;
+            $contact->message = $request->message;
+            $contact->save();
+            return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
+
         }catch (Exception $e){
             return response()->json(['data'=>$this->data, 'message'=>$this->failMessage . $e,'status'=>$this->serverErrorCode]);
         }   

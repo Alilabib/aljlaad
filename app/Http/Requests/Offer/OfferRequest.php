@@ -25,8 +25,6 @@ class OfferRequest extends FormRequest
     {
         $rules =  [
             //
-            'title_ar'=>'required',
-            'title_en'=>'required',
             'name_ar'=>'required',
             'name_en'=>'required',
             'desc_ar'=>'required',

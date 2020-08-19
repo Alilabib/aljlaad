@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Api\Cart;
+namespace App\Http\Requests\Api\Offer;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AddRequest extends FormRequest
+class WishListRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,8 +25,7 @@ class AddRequest extends FormRequest
     {
         return [
             //
-            'product_id'=>'required|exists:products,id',
-            'quantity'=>'required'
+            'category_id'=>'required|exists:categories,id'
         ];
     }
 }

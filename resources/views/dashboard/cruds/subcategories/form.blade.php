@@ -84,6 +84,14 @@
                             @endforelse
                         </select>
                     </div>
+
+                    <div class="form-group">
+                        <label for="val-username">  الحد الآدني للطلب  <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="min" id="val-username" name="val-username" placeholder=" الحد الآدني للطلب" @isset($data)
+                        value="{{$data->min}}"
+                            @endisset>
+                    </div>
+
                     <div class="form-group">
                         <label for="val-suggestions">الوصف <span class="text-danger">*</span></label>
                         <textarea class="form-control" id="val-suggestions" name="desc_ar" rows="5" placeholder="وصف الشركة">@isset($data)
@@ -98,6 +106,16 @@
                                 @endisset</textarea>
                     </div>
 
+                    <div class="form-group">
+                        <label for="val-password"> الصورة <span class="text-danger">*</span></label>
+                        <input type="file" class="form-control" id="val-password" name="image" placeholder="الصورة">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="val-password"> صورة الخلفية <span class="text-danger">*</span></label>
+                        <input type="file" class="form-control" id="val-password" name="back_image" placeholder="الصورة">
+                    </div>
+                    
                 </div>
             </div>
             <!-- END Regular -->

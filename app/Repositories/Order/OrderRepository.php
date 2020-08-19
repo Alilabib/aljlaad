@@ -20,7 +20,7 @@ class OrderRepository implements OrderInterface
     public function getAll()
     {
         // TODO: Implement getAll() method.
-        return $this->model->all();
+        return $this->model->where('type',null)->get();
     }
 
     public function getByID($id)

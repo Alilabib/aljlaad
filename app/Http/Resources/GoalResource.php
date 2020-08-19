@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CategoriesResource extends JsonResource
+class GoalResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,7 +17,9 @@ class CategoriesResource extends JsonResource
         return [
             'id'=>$this->id,
             'name'=>$this->name_ar,
-            'desc'=>$this->desc_ar,
+            'step1'=>$this->first_range,
+            'step2'=>$this->second_range,
+            'step3'=>$this->last_range
         ];
     }
 }

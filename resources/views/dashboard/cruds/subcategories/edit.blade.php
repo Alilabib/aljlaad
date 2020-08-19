@@ -1,6 +1,6 @@
 @extends('dashboard.layout.layout')
 @section('content')
-<form  action="{{route('subcategories.update',$data->id)}}" method="POST">
+<form  action="{{route('subcategories.update',$data->id)}}" method="POST" enctype="multipart/form-data">
     @method('PATCH')
     @csrf
     @include('dashboard.cruds.subcategories.form')

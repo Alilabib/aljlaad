@@ -26,8 +26,10 @@ class CreateOrderRequest extends FormRequest
         return [
             //
             'date'      =>'required',
-            'address_id'=>'required',
-            'time'      =>'required'
+            'address_id'=>'required|exists:addresses,id',
+            'time'      =>'required',
+            'coupoun'   =>'sometimes',
+            'pay_type'  =>'required|in:cache,online',
         ];
     }
 }

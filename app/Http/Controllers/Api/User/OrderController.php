@@ -15,6 +15,7 @@ use App\Models\Product;
 use App\Models\CartProduct;
 use App\Models\Order;
 use App\Models\OrderProducts;
+use App\Models\Coupon;
 use App\Http\Resources\MiniOrderResource;
 use App\Http\Resources\OrderDetailsResource;
 use App\Http\Resources\AddressResource;
@@ -144,9 +145,9 @@ class OrderController extends Controller
     public function allorders()
     {
         try{
-             $pendingOrders = Order::where('user_id',auth()->user()->id)->where('status','!=','received')->where('status','!=','cancelled')->get();
-             $deleviredOrders = Order::where('user_id',auth()->user()->id)->where('status','delevired')->get();
-             $cancelledOrders = Order::where('user_id',auth()->user()->id)->where('status','cancelled')->get();
+             $pendingOrders = Order::where('user_id',auth()->user()->id)->where('status','!=','received')->where('status','!=','cancelled')->where('type','!=','offer')->get();
+             $deleviredOrders = Order::where('user_id',auth()->user()->id)->where('status','delevired')->where('type','!=','offer')->get();
+             $cancelledOrders = Order::where('user_id',auth()->user()->id)->where('status','cancelled')->where('type','!=','offer')->get();
              $this->data['pending'] = MiniOrderResource::collection($deleviredOrders);   
              $this->data['delevired'] = MiniOrderResource::collection($deleviredOrders);
              $this->data['cancelled'] = MiniOrderResource::collection($cancelledOrders);   
@@ -181,10 +182,28 @@ class OrderController extends Controller
             $order->delivery_price = '10';
             $order->enable_tax     = '1';
             $order->tax            = $tax;
+            $order->payment_type   = $request->pay_type;
             if($cart->total !='' && $cart->total != null){
                 $order->total          = $cart->total + 10 + $tax;
             }else{
                 $order->total          =  10 + $tax;
+            }
+
+            if($request->coupoun){
+             $coupoun = Coupon::where('name',$request->coupoun)->first();
+               if($coupoun){
+                    if($coupoun->value != null && $coupoun->value != '' && $coupoun->used != '1'){
+                        $order->total  -=  $coupoun->value;
+                        $coupoun->value = '';
+                        $coupoun->used = '1';
+                        $coupoun->save();
+                    }else{
+                        return response()->json(['data'=>$this->data, 'message'=>'هذا الكوبون مستخدم من قبل ','status'=>$this->successCode]);
+                    }
+               }else{
+                return response()->json(['data'=>$this->data, 'message'=>'هذا الكوبون  غير متوفر ','status'=>$this->successCode]);
+               }  
+             
             }
 
             $order->status         = 'pending'; // pending - received - inprogress - delivered - cancelled

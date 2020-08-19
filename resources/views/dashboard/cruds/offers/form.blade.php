@@ -25,13 +25,13 @@
                 <div class="col-lg-8 col-xl-5">
                     <div class="form-group">
                         <label for="val-username">العنوان الخارجي <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="title_ar" id="val-username" name="val-username" placeholder="العنوان الخارجي" @isset($data)
+                        <input type="text" class="form-control" name="name_ar" id="val-username" name="val-username" placeholder="العنوان الخارجي" @isset($data)
                         value="{{$data->title_ar}}"
                             @endisset>
                     </div>
                     <div class="form-group">
                         <label for="val-username">  العنوان الخارجي بالإنجليزية <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="title_en" id="val-username" name="val-username" placeholder="العنوان الخارجي بالإنجليزية" @isset($data)
+                        <input type="text" class="form-control" name="name_en" id="val-username" name="val-username" placeholder="العنوان الخارجي بالإنجليزية" @isset($data)
                         value="{{$data->title_en}}"
                             @endisset>
                     </div>

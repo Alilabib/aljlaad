@@ -21,6 +21,8 @@ Route::any('/', function () {
 });
 Route::group(['namespace' => 'Api'], function () {
 
+    Route::post('contactus','User\HomeController@contactus');
+
     Route::group(['namespace' => 'User','prefix'=>'user'], function() {
         Route::get('cities'          ,'HomeController@cities');
         Route::post('areas'          ,'HomeController@areas');
@@ -37,7 +39,9 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('contact'         ,'HomeController@contact');
         Route::get('about'           ,'HomeController@about');
         Route::get('policy'          ,'HomeController@policy');
-        
+        Route::post('contactus'      ,'HomeController@contactUs');
+        Route::get('offers'         ,'OfferController@getAll');
+        Route::get('get/offer'      ,'OfferController@getOffer');
         Route::group(['middleware' => 'auth.jwt'], function () {
             Route::post('logout'            , 'ApiController@logout');
             Route::post('update/password'   ,'ProfileController@updatePassword');
@@ -59,6 +63,10 @@ Route::group(['namespace' => 'Api'], function () {
             Route::post('update/address'    ,'OrderController@updateAddress');
             Route::post('delete/address'    ,'OrderController@deleteAddress');
             Route::post('update/profile'    ,'ProfileController@updateProfile');
+            Route::post('create/offer/order','OfferController@createOffer');
+            Route::post('toggle/fav','OfferController@wishlistToggle');
+            Route::get('goals','OfferController@Goals');
+            Route::get('goal','OfferController@Goal');
         });
     });
     

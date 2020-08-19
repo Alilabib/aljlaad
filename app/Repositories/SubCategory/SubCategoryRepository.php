@@ -2,7 +2,7 @@
 
 
 namespace App\Repositories\SubCategory;
-
+use Illuminate\Support\Arr;
 
 use App\Models\Category;
 
@@ -28,14 +28,31 @@ class SubCategoryRepository implements SubCategoryInterface
     public function create(array $attributes)
     {
         // TODO: Implement create() method.
-        return $this->model->create($attributes);
+        $image_name = time() . $attributes['image']->getClientOriginalName();
+        $attributes['image']->move(storage_path('app/public/uploads/categories/'),$image_name);
+        $attributes['img'] = $image_name;
+
+        $back_image_name = time() .'back'. $attributes['back_image']->getClientOriginalName();
+        $attributes['back_image']->move(storage_path('app/public/uploads/categories/'),$back_image_name);
+        $attributes['back_img'] = $back_image_name;
+       
+        return $this->model->create(Arr::except($attributes,['image','back_image']));
     }
 
     public function update($id, array $attributes)
     {
         // TODO: Implement update() method.
         $module = $this->model->findOrFail($id);
-        $module->update($attributes);
+
+        $image_name = time() . $attributes['image']->getClientOriginalName();
+        $attributes['image']->move(storage_path('app/public/uploads/categories/'),$image_name);
+        $attributes['img'] = $image_name;
+
+        $back_image_name = time() .'back'. $attributes['back_image']->getClientOriginalName();
+        $attributes['back_image']->move(storage_path('app/public/uploads/categories/'),$back_image_name);
+        $attributes['back_img'] = $back_image_name;
+       
+        $module->update(Arr::except($attributes,['image','back_image']));
         $module->save();
         return $module;
     }

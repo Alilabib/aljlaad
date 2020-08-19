@@ -1,6 +1,6 @@
 @extends('dashboard.layout.layout')
 @section('content')
-<form  action="{{route('subcategories.store')}}" method="POST">
+<form  action="{{route('subcategories.store')}}" method="POST" enctype="multipart/form-data">
     @csrf
     @include('dashboard.cruds.subcategories.form')
 </form>

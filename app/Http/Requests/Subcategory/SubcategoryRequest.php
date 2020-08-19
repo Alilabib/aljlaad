@@ -31,6 +31,8 @@ class SubcategoryRequest extends FormRequest
             'city_id'=>'required|exists:cities,id',
             'express_delivery'=>'required',
             'category_id'=>'required|exists:categories,id',
+            'image'=>'required',
+            'back_image'=>'required',
          
         ];
     }

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Api\Order\CreateAddressRequest;
 use App\Http\Requests\Api\Order\CreateOrderRequest;
 use App\Http\Requests\Api\Order\OrderRequest;
+use App\Http\Requests\Api\Order\CancelOrderRequest;
 use App\Http\Requests\Api\Order\AddressRequest;
 
 use App\Models\Address;
@@ -272,12 +273,13 @@ class OrderController extends Controller
         }
     }
 
-    public function cacncelOrder(OrderRequest $request)
+    public function cacncelOrder(CancelOrderRequest $request)
     {
 
         try{
             $order = Order::find($request->order_id);
             $order->status = 'cancelled';
+            $order->cancel_status = $request->reason;
             $order->save();
             return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
     

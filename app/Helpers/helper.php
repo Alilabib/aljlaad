@@ -3,6 +3,14 @@ use App\Models\Cart;
 use App\Models\CartProduct;
 use App\Models\Product;
 use App\Models\CompanyWish;
+use LaravelFCM\Message\OptionsBuilder;
+use LaravelFCM\Message\PayloadDataBuilder;
+use LaravelFCM\Message\PayloadNotificationBuilder;
+use App\Models\Token;
+use App\Models\User;
+use Illuminate\Support\Facades\Notification as Notification;
+use LaravelFCM\Facades\FCM as FCM;
+
 function checkExistsInCart($product_id)
 {
     $cart = Cart::where('user_id',auth()->user()->id)->first();
@@ -45,4 +53,41 @@ function checkFavourite($user_id,$company_id)
     }else{
         return false;
     }
+}
+
+/**
+ * Push Notifications to phone FCM
+ *
+ * @param  array $fcmData
+ * @param  array $userIds
+ */
+function pushFcmNotes($fcmData, $userIds)
+{
+  $send_process = [];
+  $fail_process = [];
+  if (is_array($userIds) && !empty($userIds)) {
+    $devices = Token::whereIn('user_id',$userIds)->pluck('fcm')->toArray();
+    if (count($devices)) {
+    $optionBuilder = new OptionsBuilder();
+    $optionBuilder->setTimeToLive(60*20);
+
+    $notificationBuilder = new PayloadNotificationBuilder($fcmData['title']);
+    $notificationBuilder->setBody($fcmData['body'])
+                        ->setSound('default');
+
+    $dataBuilder = new PayloadDataBuilder();
+    $dataBuilder->addData($fcmData);
+
+    $option       = $optionBuilder->build();
+    $notification = $notificationBuilder->build();
+    $data         = $dataBuilder->build();
+
+    // You must change it to get your tokens
+    $downstreamResponse = FCM::sendTo($devices, $option, $notification, $data);
+    // return $downstreamResponse;
+    return $downstreamResponse->numberSuccess();
+  }
+  return 0;
+  }
+  return "No Users";
 }

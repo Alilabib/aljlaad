@@ -16,8 +16,9 @@ use App\Http\Requests\Api\Auth\ProviderRegisterRequest;
 use App\Models\User;
 use App\Models\Token;
 use App\Models\Notification;
-
-
+use App\Http\Resources\NotificationResource;
+use App\Models\Rate;
+use App\Http\Requests\Api\Auth\RateRequest;
 class ProfileController extends Controller
 {
     //
@@ -107,4 +108,46 @@ class ProfileController extends Controller
             return response()->json(['data'=>$this->data, 'message'=>$this->failMessage . $e,'status'=>$this->serverErrorCode]);
         }
     }
+
+
+    public function notification()
+    {
+        try{
+            $authUser = auth()->user();
+            $userOrders = $authUser->orders->pluck('id')->toArray();
+            $this->data =  Notification::whereIn('order_id',$userOrders)->where('type','user')->get();
+            $this->data = NotificationResource::collection($this->data);
+            return response()->json(['data'=>$this->data, 'message'=>$this->successMessage,'status'=>$this->successCode]);
+        
+  
+        }catch (Exception $e){
+            return response()->json(['data'=>$this->data, 'message'=>$this->failMessage . $e,'status'=>$this->serverErrorCode]);
+        }
+    }
+
+    public function Rate(RateRequest $request)
+    {
+       $user      =  auth()->user();
+
+       $review               = new Rate();
+       $review->user_id      = $user->id;
+       $review->order_id     = $request->order_id;
+       $review->product_rate	 = $request->product_rate;
+       $review->product	     = $request->product;       
+       $review->driver_rate	 = $request->driver_rate;
+       $review->driver	     = $request->driver;
+       $review->date_rate	 = $request->date_rate;
+       $review->date	     = $request->date;
+       
+     
+       
+        if($review->save()){
+            return response()->json(['data'=>$this->data, 'message'=>'تم تسجيل التقيم بنجاح','status'=>$this->successCode]);
+
+        }else{
+            return response()->json(['data'=>$this->data, 'message'=>'حاول مره أخري','status'=>$this->successCode]);
+        }
+
+    }
+
 }

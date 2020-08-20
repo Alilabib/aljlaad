@@ -67,6 +67,7 @@ Route::group(['namespace' => 'Api'], function () {
             Route::post('toggle/fav','OfferController@wishlistToggle');
             Route::get('goals','OfferController@Goals');
             Route::get('goal','OfferController@Goal');
+            Route::post('order/rate','ProfileController@Rate');
         });
     });
     
@@ -88,7 +89,7 @@ Route::group(['namespace' => 'Api'], function () {
             Route::post('deliver/order'  ,'OrderController@DeliverOrder');
             Route::get('compelete/orders','OrderController@compeleted');
             Route::post('update/profile' ,'ProfileController@updateProfile');
-
+            Route::post('order/problem'  ,'OrderController@problem');
         });
     });
 });

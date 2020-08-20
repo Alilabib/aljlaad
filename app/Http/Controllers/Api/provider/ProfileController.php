@@ -18,6 +18,8 @@ use App\Models\User;
 use App\Models\Token;
 use App\Models\Notification;
 
+use App\Models\Order;
+use App\Http\Resources\NotificationResource;
 
 class ProfileController extends Controller
 {
@@ -99,6 +101,22 @@ class ProfileController extends Controller
             $this->data['status'] = "ok";
             $this->data['message'] = "تأكد من كلمة المرور القديمة";
             return response()->json($this->data, 401);
+        
+  
+        }catch (Exception $e){
+            return response()->json(['data'=>$this->data, 'message'=>$this->failMessage . $e,'status'=>$this->serverErrorCode]);
+        }
+    }
+
+    public function notification()
+    {
+        try{
+            $authUser = auth()->user();
+            $usersId = User::where('city_id',$authUser->city_id)->pluck('id')->toArray();
+            $userOrders = Order::whereIn('user_id',$usersId)->where('driver_id',null)->orWhere('driver_id',$authUser->id)->pluck('id')->toArray();
+            $this->data = Notification::whereIn('order_id',$userOrders)->where('type','provider')->get();
+            $this->data = NotificationResource::collection($this->data);
+            return response()->json(['data'=>$this->data, 'message'=>$this->successMessage,'status'=>$this->successCode]);
         
   
         }catch (Exception $e){

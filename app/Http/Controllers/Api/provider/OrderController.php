@@ -9,7 +9,10 @@ use App\Models\Order;
 use App\Http\Resources\MiniProviderOrderResource;
 use App\Http\Resources\ProviderOrderDetailsResource;
 use App\Http\Requests\Api\Order\OrderRequest;
-
+use App\Models\Notification;
+use App\Http\Resources\NotificationResource;
+use App\Models\Problem;
+use App\Http\Requests\Api\Order\ProblemRequest;
 class OrderController extends Controller
 {
 
@@ -79,6 +82,27 @@ class OrderController extends Controller
             $order->status = 'inprogress';
             $order->driver_id = auth()->user()->id;
             $order->save();
+
+            $notifiacation = new Notification();
+            $notifiacation->title_ar = 'قام ' . $order->driver->name . ' بقبول الطلب ' ;
+            $notifiacation->value_ar = 'قام ' . $order->driver->name . ' بقبول الطلب رقم  ' . $order->id ;
+            $notifiacation->order_id = $order->id;
+            $notifiacation->type = 'user';
+            $notifiacation->save();
+
+            $notifiy = [
+                'title'=>$notifiacation->title_ar,
+                'body'=>$notifiacation->value_ar,
+                'type'=>'user',
+                'order_id'=>$order->id,
+                'click_action' => "FLUTTER_NOTIFICATION_CLICK"
+            ];
+
+            $user_id = [$order->user_id];
+            if($user_id != null){
+                pushFcmNotes($notifiy,$user_id);
+            }
+            
             return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
     
         }catch (Exception $e){
@@ -126,4 +150,39 @@ class OrderController extends Controller
         }   
     }
 
+    public function problem(ProblemRequest $request)
+    {
+        try{
+            $problem = new Problem();
+            $problem->order_id = $request->order_id;
+            $problem->user_id = auth()->user()->id;
+            $problem->problem = $request->problem;
+            $problem->save();
+            $order = Order::find($request->order_id);
+            $notifiacation = new Notification();
+            $notifiacation->title_ar = 'قام ' . $order->driver->name . ' بتقديم مشكلةعلي الطلب الطلب ' ;
+            $notifiacation->value_ar = 'قام ' . $order->driver->name . ' بتقديم مشكلةعلي الطلب الطلب  ' . $order->id ;
+            $notifiacation->order_id = $order->id;
+            $notifiacation->type = 'user';
+            $notifiacation->save();
+
+            $notifiy = [
+                'title'=>$notifiacation->title_ar,
+                'body'=>$notifiacation->value_ar,
+                'type'=>'user',
+                'order_id'=>$order->id,
+                'click_action' => "FLUTTER_NOTIFICATION_CLICK"
+            ];
+
+            $user_id = [$order->user_id];
+            if($user_id != null){
+                pushFcmNotes($notifiy,$user_id);
+            }
+            
+            return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
+    
+        }catch (Exception $e){
+            return response()->json(['data'=>$this->data, 'message'=>$this->failMessage . $e,'status'=>$this->serverErrorCode]);
+        }
+    }
 }

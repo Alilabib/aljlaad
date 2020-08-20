@@ -29,16 +29,24 @@ class CartController extends Controller
     public function add(AddRequest $request)
     {
         try{
-        $user = auth()->user();
-        $cart = Cart::where('user_id',auth()->user()->id)->first();
-        $product = Product::find($request->product_id);
+        $user     = auth()->user();
+        $cart     = Cart::where('user_id',auth()->user()->id)->first();
+        $product  = Product::find($request->product_id);
+        $category = Category::find($product->category_id);
         if($cart){
+            $anyCartproudct = CartProduct::where(['cart_id'=>$cart->id])->first();
+            if($anyCartproudct){
+                $oldCartProduct  = Product::find($anyCartproudct->product_id);
+                $oldCartCategory = Category::find($oldCartProduct->category_id);
+                if($category->express_delivery != $oldCartCategory){
+                    return response()->json(['data'=>$this->data,'message'=>'لايمكن اضافة المنتج مع منتجات السلة في حالة توصيل مختلفة','status'=>$this->successCode]);
+                }
+            }
             $cartProduct = CartProduct::where(['cart_id'=>$cart->id,'product_id'=>$product->id])->first();
             if($cartProduct){
                 $cart->total -= $product->price * $cartProduct->quantity;
                 $cart->save();
                 $cartProduct->delete();
-
                 $cart->total  += $product->price * $request->quantity;
                 $cart->save();
                 $newCartProduct          = new CartProduct();

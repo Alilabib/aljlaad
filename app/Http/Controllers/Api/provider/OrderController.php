@@ -32,8 +32,8 @@ class OrderController extends Controller
     public function allorders()
     {
         try{
-            $user = auth()->user();
-            $users = User::where('city_id',$user->city_id)->get()->pluck('id')->toArray();
+             $user = auth()->user();
+             $users = User::where('city_id',$user->city_id)->get()->pluck('id')->toArray();
              $pendingOrders = Order::whereIn('user_id',$users)->where('status','!=','received')->where('status','!=','cancelled')->get();
              $deleviredOrders = Order::where('user_id',auth()->user()->id)->where('status','delevired')->get();
              $cancelledOrders = Order::where('user_id',auth()->user()->id)->where('status','cancelled')->get();
@@ -53,6 +53,8 @@ class OrderController extends Controller
     {
         try{
             $user = auth()->user();
+            $areasId = $user->areas->pluck('areas.id')->toArray();
+            dd($areasId);
             $users = User::where('city_id',$user->city_id)->get()->pluck('id')->toArray();
             $orders = Order::whereIn('user_id',$users)->where('status','!=','received')->where('status','!=','cancelled')->get();
              $this->data = MiniProviderOrderResource::collection($orders);   

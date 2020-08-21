@@ -13,6 +13,8 @@ use App\Http\Requests\Api\Auth\ActiveRequest;
 use App\Http\Requests\Api\Auth\LoginRequest;
 use App\Http\Requests\Api\Auth\ForgetRequest;
 use App\Http\Requests\Api\Auth\UpdatePasswordRequest;
+use App\Http\Requests\Api\Auth\UpdatePassword;
+
 use App\Http\Requests\Api\Auth\ProviderRegisterRequest;
 use App\Models\User;
 use App\Models\Token;
@@ -85,7 +87,7 @@ class ProfileController extends Controller
         return response()->json(['data'=>$this->data, 'message'=>$this->successMessage,'status'=>$this->successCode]);
     }
 
-    public function updatePassword(UpdatePassowrd $request)
+    public function updatePassword(UpdatePassword $request)
     {
         try{
             $old_password = $request->old_password;

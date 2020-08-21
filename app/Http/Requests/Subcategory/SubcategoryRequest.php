@@ -33,6 +33,7 @@ class SubcategoryRequest extends FormRequest
             'category_id'=>'required|exists:categories,id',
             'image'=>'required',
             'back_image'=>'required',
+            'min'=>'required',
          
         ];
     }

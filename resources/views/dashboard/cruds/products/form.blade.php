@@ -65,7 +65,7 @@
 
                     <div class="form-group">
                         <label for="val-password"> السعر <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="val-password" name="price" placeholder=" السعر" @isset($data)
+                        <input type="number" min="1" class="form-control" id="val-password" name="price" placeholder=" السعر" @isset($data)
                         value="{{$data->price}}"
                             @endisset>
                     </div>

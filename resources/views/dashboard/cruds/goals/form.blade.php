@@ -51,21 +51,21 @@
 
                     <div class="form-group">
                         <label for="val-username">المرحلة الاولي <span class="text-danger">*</span></label>
-                        <input type="number" class="form-control" name="first_range" id="val-username" name="val-username" placeholder="المرحلة الاولي " @isset($data)
+                        <input type="number" min="1" class="form-control" name="first_range" id="val-username" name="val-username" placeholder="المرحلة الاولي " @isset($data)
                         value="{{$data->first_range}}"
                             @endisset>
                     </div>
 
                     <div class="form-group">
                         <label for="val-username">المرحلة الثانيه <span class="text-danger">*</span></label>
-                        <input type="number" class="form-control" name="second_range" id="val-username" name="val-username" placeholder="المرحلة الثانيه " @isset($data)
+                        <input type="number" min="1" class="form-control" name="second_range" id="val-username" name="val-username" placeholder="المرحلة الثانيه " @isset($data)
                         value="{{$data->second_range}}"
                             @endisset>
                     </div>
 
                     <div class="form-group">
                         <label for="val-username">المرحلة النهائية <span class="text-danger">*</span></label>
-                        <input type="number" class="form-control" name="last_range" id="val-username" name="val-username" placeholder="المرحلة النهائية " @isset($data)
+                        <input type="number" min="1" class="form-control" name="last_range" id="val-username" name="val-username" placeholder="المرحلة النهائية " @isset($data)
                         value="{{$data->last_range}}"
                             @endisset>
                     </div>

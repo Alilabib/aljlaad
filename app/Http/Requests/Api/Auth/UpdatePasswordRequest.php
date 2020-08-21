@@ -25,7 +25,7 @@ class UpdatePasswordRequest extends FormRequest
     {
         return [
             'mobile'=>'required|exists:users,phone',
-            'code'=>'required|exists:users,monile_code',
+            'code'=>'required|exists:users,mobile_code',
             'password'=>'required|confirmed|min:4'
         ];
     }

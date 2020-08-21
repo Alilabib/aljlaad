@@ -25,7 +25,7 @@ class Category extends Model
 
     public function getBackImageUrlAttribute()
     {
-        return ($this->img != null) ? asset('storage/uploads/categories/' . $this->img) : asset('media/avatars/avatar10.jpg');
+        return ($this->img != null) ? asset('storage/uploads/categories/' . $this->back_img) : asset('media/avatars/avatar10.jpg');
     }
 
 }

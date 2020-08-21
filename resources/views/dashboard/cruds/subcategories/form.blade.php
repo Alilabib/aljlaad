@@ -87,7 +87,7 @@
 
                     <div class="form-group">
                         <label for="val-username">  الحد الآدني للطلب  <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="min" id="val-username" name="val-username" placeholder=" الحد الآدني للطلب" @isset($data)
+                        <input type="number" min="1" class="form-control" name="min" id="val-username" name="val-username" placeholder=" الحد الآدني للطلب" @isset($data)
                         value="{{$data->min}}"
                             @endisset>
                     </div>

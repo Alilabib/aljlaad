@@ -39,11 +39,16 @@ class HomeController extends Controller
     public function index()
     {
         try{
-               $categories =  Category::all();
+               $categories       = Category::where('category_id',null)->get();
+               $local            = Category::where('category_id',1)->where('express_delivery','0')->get();
+               $international    = Category::where('category_id',2)->where('express_delivery','0')->get();
+               $express_delivery = Category::where('category_id','!=',null)->where('express_delivery','1')->get();
                $sliders    = Slider::all();
-               $this->data['categories'] =  CategoriesResource::collection($categories);
-               $this->data['sliders']    =  SlidersResource::collection($sliders);
-
+               $this->data['categories']         =  CategoriesResource::collection($categories);
+               $this->data['sliders']            =  SlidersResource::collection($sliders);
+               $this->data['local']              =  CompanyResource::collection($local);
+               $this->data['international']      =  CompanyResource::collection($international);
+               $this->data['express_delivery']   =  CompanyResource::collection($express_delivery);
             return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
         }catch (Exception $e){
             return response()->json(['data'=>$this->data, 'message'=>$this->failMessage . $e,'status'=>$this->serverErrorCode]);

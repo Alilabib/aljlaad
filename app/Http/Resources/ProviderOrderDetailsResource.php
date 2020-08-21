@@ -23,7 +23,10 @@ class ProviderOrderDetailsResource extends JsonResource
             'sub_total'=>$this->sub_total,
             'delivery_price'=>10,
             'tax'=>75,
-            'total'=>$this->total
+            'total'=>$this->total,
+            'payment_way'=>$this->payment_type,
+            'shipping_time'=>date_format($this->date,'d-m-Y') ,
+            
         ];
     }
 }

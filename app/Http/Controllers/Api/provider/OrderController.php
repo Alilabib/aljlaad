@@ -32,8 +32,9 @@ class OrderController extends Controller
     public function allorders()
     {
         try{
-             $user = auth()->user();
-             $users = User::where('city_id',$user->city_id)->get()->pluck('id')->toArray();
+            $user = auth()->user();
+            $areasId = $user->areas->pluck('id')->toArray();
+            $users = User::whereIn('area_id',$areasId)->get()->pluck('id')->toArray();
              $pendingOrders = Order::whereIn('user_id',$users)->where('status','!=','received')->where('status','!=','cancelled')->get();
              $deleviredOrders = Order::where('user_id',auth()->user()->id)->where('status','delevired')->get();
              $cancelledOrders = Order::where('user_id',auth()->user()->id)->where('status','cancelled')->get();
@@ -53,11 +54,10 @@ class OrderController extends Controller
     {
         try{
             $user = auth()->user();
-            $areasId = $user->areas->pluck('areas.id')->toArray();
-            dd($areasId);
-            $users = User::where('city_id',$user->city_id)->get()->pluck('id')->toArray();
+            $areasId = $user->areas->pluck('id')->toArray();
+            $users = User::whereIn('area_id',$areasId)->get()->pluck('id')->toArray();
             $orders = Order::whereIn('user_id',$users)->where('status','!=','received')->where('status','!=','cancelled')->get();
-             $this->data = MiniProviderOrderResource::collection($orders);   
+            $this->data = MiniProviderOrderResource::collection($orders);   
             return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
     
             }catch (Exception $e){

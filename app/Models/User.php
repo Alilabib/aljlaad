@@ -63,6 +63,11 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Order::class);
     }
 
+    public function area()
+    {
+        return $this->belongsTo(Area::class, 'area_id', 'id');
+    }
+
     public function areas()
     {
         return $this->belongsToMany(Area::class, 'area_providers', 'user_id', 'area_id');

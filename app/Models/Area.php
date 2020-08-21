@@ -8,4 +8,9 @@ class Area extends Model
 {
     //
     protected $guarded = ['id'];
+
+    public function city()
+    {
+        return $this->belongsTo(City::class, 'city_id', 'id');
+    }
 }

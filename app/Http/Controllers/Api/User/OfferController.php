@@ -15,7 +15,7 @@ use App\Http\Requests\Api\Offer\WishListRequest;
 use App\Models\Goal;
 use App\Models\OrderProducts;
 use Carbon\Carbon;
-
+use App\Http\Resources\CompanyResource;
 class OfferController extends Controller
 {
     private $data;
@@ -104,6 +104,18 @@ class OfferController extends Controller
             return response()->json(['data'=>$this->data, 'message'=>$this->failMessage . $e,'status'=>$this->serverErrorCode]);
         }
     
+    }
+
+    public function favCompanies()
+    {
+        try{
+            $user = auth()->user();
+            $companies = $user->favourites;
+            $this->data =  CompanyResource::collection($companies);
+         return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
+        }catch (Exception $e){
+            return response()->json(['data'=>$this->data, 'message'=>$this->failMessage . $e,'status'=>$this->serverErrorCode]);
+        }
     }
 
     public function Goals()

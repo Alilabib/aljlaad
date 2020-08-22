@@ -72,4 +72,9 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->belongsToMany(Area::class, 'area_providers', 'user_id', 'area_id');
     }
+
+    public function favourites()
+    {
+        return $this->belongsToMany(Category::class, 'company_wishes', 'user_id', 'category_id');
+    }
 }

@@ -152,6 +152,26 @@ class OrderController extends Controller
             $order->status = 'delevired';
             
             $order->save();
+
+            $notifiacation = new Notification();
+            $notifiacation->title_ar = 'قام ' . $order->driver->name . ' بتحديث حالة الطلب تم التوصيل ' ;
+            $notifiacation->value_ar = 'قام ' . $order->driver->name . '  بتحديث حالة الطلب تم التوصيل  ' . $order->id ;
+            $notifiacation->order_id = $order->id;
+            $notifiacation->type = 'user';
+            $notifiacation->save();
+
+            $notifiy = [
+                'title'=>$notifiacation->title_ar,
+                'body'=>$notifiacation->value_ar,
+                'type'=>'user',
+                'order_id'=>$order->id,
+                'click_action' => "FLUTTER_NOTIFICATION_CLICK"
+            ];
+
+            $user_id = [$order->user_id];
+            if($user_id != null){
+                pushFcmNotes($notifiy,$user_id);
+            }
             return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
     
         }catch (Exception $e){
@@ -189,8 +209,8 @@ class OrderController extends Controller
             $order->status = 'problem';
             $order->save();
             $notifiacation = new Notification();
-            $notifiacation->title_ar = 'قام ' . $order->driver->name . ' بتقديم مشكلةعلي الطلب الطلب ' ;
-            $notifiacation->value_ar = 'قام ' . $order->driver->name . ' بتقديم مشكلةعلي الطلب الطلب  ' . $order->id ;
+            $notifiacation->title_ar = 'قام ' . $order->driver->name . ' بتقديم مشكلة علي  الطلب ' ;
+            $notifiacation->value_ar = 'قام ' . $order->driver->name . ' بتقديم مشكلة علي  الطلب  ' . $order->id ;
             $notifiacation->order_id = $order->id;
             $notifiacation->type = 'user';
             $notifiacation->save();

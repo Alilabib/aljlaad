@@ -21,6 +21,8 @@ use App\Http\Resources\MiniOrderResource;
 use App\Http\Resources\OrderDetailsResource;
 use App\Http\Resources\AddressResource;
 use Carbon\Carbon;
+use App\Models\Notification;
+use App\Http\Resources\NotificationResource;
 class OrderController extends Controller
 {
     private $resource;
@@ -209,7 +211,7 @@ class OrderController extends Controller
 
             $order->status         = 'pending'; // pending - received - inprogress - delivered - cancelled
             $order->save();
-            if($cart->products){
+            if(count($cart->products) > 0){
                 foreach($cart->products as $cartProduct){
                     $orderPrdouct = new OrderProducts();
                     $orderPrdouct->order_id   =  $order->id; 
@@ -223,6 +225,27 @@ class OrderController extends Controller
                     $oldCartProduct = CartProduct::where(['cart_id'=>$cart->id,'product_id'=>$cartProduct->id])->first();
                     $oldCartProduct->delete();
                 }
+
+                $notifiacation = new Notification();
+                $notifiacation->title_ar = 'قام العميل ' . $order->user->name . ' بطلب جديد';
+                $notifiacation->value_ar = ' قام العميل ' . $order->user->name . 'بإنشاء طلب جديد رقم '. $order->id;
+                $notifiacation->order_id = $order->id;
+                $notifiacation->type = 'provider';
+                $notifiacation->save();
+                $notifiy = [
+                    'title'=>$notifiacation->title_ar,
+                    'body'=>$notifiacation->value_ar,
+                    'type'=>'provider',
+                    'order_id'=>$order->id,
+                    'click_action' => "FLUTTER_NOTIFICATION_CLICK"
+                ];
+
+                $user = auth()->user();
+                $users = User::where('area_id',$user->area_id)->where('type','provider')->get()->pluck('id')->toArray();
+                pushFcmNotes($notifiy,$users);
+        
+
+
                 return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
             }else{
                 return response()->json(['data'=>$this->data, 'message'=>'No Products In Cart','status'=>$this->successCode]);
@@ -281,6 +304,27 @@ class OrderController extends Controller
             $order->status = 'cancelled';
             $order->cancel_status = $request->reason;
             $order->save();
+
+            $notifiacation = new Notification();
+            $notifiacation->title_ar = 'قام ' . $order->user->name . ' بإلغاء الطلب ' ;
+            $notifiacation->value_ar = 'قام ' . $order->user->name . '  بإلغاء الطلب  ' . $order->id ;
+            $notifiacation->order_id = $order->id;
+            $notifiacation->type = 'user';
+            $notifiacation->save();
+
+            $notifiy = [
+                'title'=>$notifiacation->title_ar,
+                'body'=>$notifiacation->value_ar,
+                'type'=>'user',
+                'order_id'=>$order->id,
+                'click_action' => "FLUTTER_NOTIFICATION_CLICK"
+            ];
+
+            $user_id = [$order->user_id];
+            if($user_id != null){
+                pushFcmNotes($notifiy,$user_id);
+            }
+
             return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
     
             }catch (Exception $e){

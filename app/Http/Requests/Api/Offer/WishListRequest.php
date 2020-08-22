@@ -24,8 +24,8 @@ class WishListRequest extends FormRequest
     public function rules()
     {
         return [
-            //
-            'category_id'=>'required|exists:categories,id'
+            
+            'company_id'=>'required|exists:categories,id'
         ];
     }
 }

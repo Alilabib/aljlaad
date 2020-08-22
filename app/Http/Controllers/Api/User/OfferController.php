@@ -87,7 +87,7 @@ class OfferController extends Controller
     {
       try{
         $user = auth()->user();
-        $category = Category::find($request->category_id);
+        $category = Category::find($request->company_id);
         $wishlistCount = CompanyWish::where('category_id',$category->id)->where('user_id',$user->id)->count();
         if($wishlistCount > 0){
             $wishlist = CompanyWish::where('category_id',$category->id)->where('user_id',$user->id)->first();

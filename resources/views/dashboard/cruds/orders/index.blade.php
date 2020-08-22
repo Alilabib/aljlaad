@@ -11,6 +11,67 @@
     </div>
  @endif
  @endif
+
+ <form  action="{{route('orders.status')}}" method="post" enctype="multipart/form-data" id="orders_form">
+    @csrf
+    <div class="block">
+        
+        <div class="block-content block-content-full">
+            <!-- Regular -->
+            <h2 class="content-heading border-bottom mb-4 pb-2"></h2>
+            <div class="row items-push">
+            
+                <div class="col-lg-12 col-xl-12" >
+                    <div class="row">
+                        <div class="col-lg-12 col-xl-12">
+                            <div class="form-group col-xl-5" style="display:inline-block">
+                                <label for="val-skill"> طريقة الدفع <span class="text-danger">*</span></label>
+                                <select class="form-control js-select2 " name="pay_type" id="pay_type">
+                                    <option value="cache"> كاش</option>
+                                    <option value="online"> إلكتروني</option>
+
+                                </select>
+                            </div>
+                            {{-- <div class="form-group col-xl-6" style="display:inline-block" >
+                                <label for="val-skill"> نوع الشركة  <span class="text-danger">*</span></label>
+                                <select class="form-control js-select2"  name="company_type">
+                                    <option value=""> من فضلك إختر</option>
+                                    <option value="local"> محلية</option>
+                                    <option value="inter"> دولية</option>
+
+                                </select>
+                            </div>
+                            <div class="form-group col-xl-5" style="display:inline-block">
+                                <label for="val-skill"> نوع التوصيل  <span class="text-danger">*</span></label>
+                                <select class="form-control js-select2 "  name="type">
+                                    <option value="0"> عادي</option>
+                                    <option value="1"> سريع</option>
+
+                                </select>
+                            </div> --}}
+                            {{-- <div class="form-group col-xl-5" style="display:inline-block">
+                                <label for="example-flatpickr-default">التاريخ</label>
+                                <input type="text" class="js-flatpickr form-control bg-white" id="example-flatpickr-default" name="date" placeholder="Y-m-d">
+                            </div> --}}
+
+                            <br>
+                            <button type="submit" class="btn btn-sm btn-primary"> عرض</button>
+                        </div>
+
+                    </div>                  
+                </div>
+            </div>
+            <!-- END Regular -->
+            
+
+
+
+        </div>
+    </div>
+</form>
+
+
+
  <div class="block">
     <div class="block-header">
         <h3 class="block-title">الطلبات<small></small></h3>
@@ -30,7 +91,7 @@
                     <th style="width: 15%;">   </th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="data">
                 @forelse ($data as $item)
                 <tr>
                 <td class="text-center font-size-sm">{{$loop->iteration}}</td>
@@ -87,7 +148,29 @@
 <script src="{{asset('/')}}js/plugins/datatables/buttons/buttons.html5.min.js"></script>
 <script src="{{asset('/')}}js/plugins/datatables/buttons/buttons.flash.min.js"></script>
 <script src="{{asset('/')}}js/plugins/datatables/buttons/buttons.colVis.min.js"></script>
+<script src="{{asset('/')}}js/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script src="{{asset('/')}}js/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+<script src="{{asset('/')}}js/plugins/flatpickr/flatpickr.min.js"></script>
 
 <!-- Page JS Code -->
 <script src="{{asset('/')}}js/pages/be_tables_datatables.min.js"></script>
+<script>jQuery(function(){ One.helpers(['flatpickr', 'datepicker']); });</script>
+
+<script>
+        
+    $('#orders_form').on('submit',function(e){
+        e.preventDefault();
+    //    var company_type = $("input[name='company_type']").val();
+       var type = $("#pay_type").val();
+       
+       if(type !=''){
+        var data = {
+            type:type
+        }
+        getAjaxPostResponse("{{ url('admin/orders/status') }}",'data',data);
+       }
+
+    })
+</script>
+
 @endsection

@@ -209,8 +209,8 @@
                                 ticks: {
                                 beginAtZero: true,
                                 reverse: false,
-                                stepSize:1,
-                                max: 5
+                                stepSize:5,
+                                max: 50
 
                                 },
                             }]

@@ -26,7 +26,7 @@ class ProviderOrderDetailsResource extends JsonResource
             'total'=>$this->total,
             'payment_way'=>$this->payment_type,
             'shipping_time'=>date_format($this->date,'d-m-Y') ,
-            
+            'problem'=>$this->cancel_status
         ];
     }
 }

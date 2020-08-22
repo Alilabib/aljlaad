@@ -5,7 +5,7 @@
                         <div class="col-6 col-lg-3">
                             <a class="block block-link-shadow text-center" href="be_pages_ecom_orders.html">
                                 <div class="block-content block-content-full">
-                                    <div class="font-size-h2 text-primary">{{ \App\Models\Order::where('status','pending')->orWhere('status','inprogress')->count() }}</div>
+                                    <div class="font-size-h2 text-primary">{{ \App\Models\Order::where('status','pending')->count() }}</div>
                                 </div>
                                 <div class="block-content py-2 bg-body-light">
                                     <p class="font-w600 font-size-sm text-muted mb-0">
@@ -14,6 +14,19 @@
                                 </div>
                             </a>
                         </div>
+                        <div class="col-6 col-lg-3">
+                            <a class="block block-link-shadow text-center" href="javascript:void(0)">
+                                <div class="block-content block-content-full">
+                                    <div class="font-size-h2 text-dark">{{ \App\Models\Order::where('status','inprogress')->orWhere('status','inway')->count()  }}</div>
+                                </div>
+                                <div class="block-content py-2 bg-body-light">
+                                    <p class="font-w600 font-size-sm text-muted mb-0">
+                                        طلبات قيد التنفيذ
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+
                         <div class="col-6 col-lg-3">
                             <a class="block block-link-shadow text-center" href="javascript:void(0)">
                                 <div class="block-content block-content-full">
@@ -26,18 +39,7 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="col-6 col-lg-3">
-                            <a class="block block-link-shadow text-center" href="javascript:void(0)">
-                                <div class="block-content block-content-full">
-                                    <div class="font-size-h2 text-dark">{{ \App\Models\Order::whereDate('created_at',\Carbon\Carbon::today())->count() }}</div>
-                                </div>
-                                <div class="block-content py-2 bg-body-light">
-                                    <p class="font-w600 font-size-sm text-muted mb-0">
-                                        طلبات اليوم
-                                    </p>
-                                </div>
-                            </a>
-                        </div>
+
                         <div class="col-6 col-lg-3">
                             <a class="block block-link-shadow text-center" href="javascript:void(0)">
                                 <div class="block-content block-content-full">
@@ -63,7 +65,7 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="block-content block-content-full">
+                        <div class="block-content block-content-full" style="min-height: 630px">
                             <!-- Chart.js is initialized in js/pages/be_pages_ecom_dashboard.min.js which was auto compiled from _es6/pages/be_pages_ecom_dashboard.js) -->
                             <!-- For more info and examples you can check out http://www.chartjs.org/docs/ -->
                             <div style="height: 400px;"><canvas class="week-orders-chart"></canvas></div>
@@ -170,7 +172,7 @@
             let chartOverviewCon  = jQuery('.week-orders-chart');
             let chartOverview, chartOverviewOptions, chartOverviewData;
             chartOverviewData = {
-            labels: ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'],
+            labels: ['{{$label1}}', '{{$label2}}', '{{$label3}}', '{{$label4}}', '{{$label5}}', '{{$label6}}', '{{$label7}}'],
             datasets: [
                 {
                     label: 'هذا الإسبوع',
@@ -181,7 +183,7 @@
                     pointBorderColor: '#fff',
                     pointHoverBackgroundColor: '#fff',
                     pointHoverBorderColor: 'rgba(132, 94, 247, 1)',
-                    data: [390, 290, 410, 290, 450, 180, 360]
+                    data: [ {{$incoming_day1}}  , {{$incoming_day2}}, {{$incoming_day3}}, {{$incoming_day4}}, {{$incoming_day5}}, {{$incoming_day6}}, {{$incoming_day7}}]
                 },
                 {
                     label: 'الإسبوع الماضي',
@@ -192,7 +194,7 @@
                     pointBorderColor: '#fff',
                     pointHoverBackgroundColor: '#fff',
                     pointHoverBorderColor: 'rgba(233, 236, 239, 1)',
-                    data: [180, 360, 236, 320, 210, 295, 260]
+                    data: [{{$outcoming_day1}}, {{$outcoming_day2}}, {{$outcoming_day3}}, {{$outcoming_day4}}, {{$outcoming_day5}}, {{$outcoming_day6}}, {{$outcoming_day7}}]
                 }
             ]
             };
@@ -201,6 +203,20 @@
                 chartOverview = new Chart(chartOverviewCon, {
                     type: 'line',
                     data: chartOverviewData,
+                    options: {
+                            scales: {
+                            yAxes: [{
+                                ticks: {
+                                beginAtZero: true,
+                                reverse: false,
+                                stepSize:1,
+                                max: 5
+
+                                },
+                            }]
+                            }
+                        }
+                    
                 });
              }
         });

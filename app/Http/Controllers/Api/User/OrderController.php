@@ -9,7 +9,7 @@ use App\Http\Requests\Api\Order\CreateOrderRequest;
 use App\Http\Requests\Api\Order\OrderRequest;
 use App\Http\Requests\Api\Order\CancelOrderRequest;
 use App\Http\Requests\Api\Order\AddressRequest;
-
+use App\Models\User;
 use App\Models\Address;
 use App\Models\Cart;
 use App\Models\Product;

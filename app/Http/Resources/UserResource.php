@@ -22,7 +22,8 @@ class UserResource extends JsonResource
             'phone'=>$this->phone,
             'image'=>$this->ImageUrl,
             'city_id'=>$this->city_id,
-            'city_name'=>$this->city_id ? $this->city->name_ar : $this->city_id
+            'city_name'=>$this->city_id ? $this->city->name_ar : $this->city_id,
+            'address'=>$this->address
         ];
     }
 }

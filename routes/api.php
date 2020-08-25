@@ -65,6 +65,7 @@ Route::group(['namespace' => 'Api'], function () {
             Route::post('update/profile'    ,'ProfileController@updateProfile');
             Route::post('create/offer/order','OfferController@createOffer');
             Route::post('toggle/fav','OfferController@wishlistToggle');
+            Route::get('fav','OfferController@favCompanies');
             Route::get('goals','OfferController@Goals');
             Route::get('goal','OfferController@Goal');
             Route::post('order/rate','ProfileController@Rate');

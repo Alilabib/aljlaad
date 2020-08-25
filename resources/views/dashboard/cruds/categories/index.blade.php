@@ -48,13 +48,13 @@
                             <a href="{{route('categories.edit',$item->id)}}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Edit">
                                 <i class="fa fa-fw fa-pencil-alt"></i>
                             </a>
-                            <form action="{{route('categories.destroy',$item->id)}}" method="POST">
+                            {{-- <form action="{{route('categories.destroy',$item->id)}}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-primary"  title="Delete">
                                     <i class="fa fa-fw fa-times"></i>
                                 </button>
-                            </form>
+                            </form> --}}
 
                         </div>
                     </td>

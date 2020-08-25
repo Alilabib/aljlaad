@@ -16,11 +16,13 @@ class OfferResource extends JsonResource
     {
         return [
             'id'=>$this->id,
+            'mini_title'=>$this->title_ar,
             'name'=>$this->name_ar,
             'desc'=>$this->desc_ar,
             'price'=>$this->price,
             'image'=>$this->ImageURL,
-            'back_img'=>$this->BackImageURL
+            'back_img'=>$this->BackImageURL,
+            'discount'=>$this->presentage
         ];
     }
 }

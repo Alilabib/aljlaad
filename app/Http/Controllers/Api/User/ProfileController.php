@@ -72,7 +72,11 @@ class ProfileController extends Controller
         }
 
         if($request->city_id){
-            $request->city_id = $request->city_id;
+            $user->city_id = $request->city_id;
+        }
+
+        if($request->address){
+            $user->address = $request->address;
         }
 
         if($request->image){

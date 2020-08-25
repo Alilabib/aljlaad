@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\Product;
+use App\Models\Category;
+
 use App\Models\CartProduct;
 use App\Http\Requests\Api\Cart\AddRequest;
 use App\Http\Requests\Api\Cart\DeleteProductRequest;

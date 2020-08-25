@@ -9,7 +9,7 @@
 
         <!-- User Info -->
         <div class="ml-2">
-            <a class="link-fx text-dark font-w600" href="javascript:void(0)">Adam McCoy</a>
+            <a class="link-fx text-dark font-w600" href="javascript:void(0)"></a>
         </div>
         <!-- END User Info -->
 
@@ -29,12 +29,12 @@
             <ul class="nav nav-tabs nav-tabs-alt nav-justified" data-toggle="tabs" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active" href="#so-overview">
-                        <i class="fa fa-fw fa-coffee text-gray mr-1"></i> Overview
+                        <i class="fa fa-fw fa-coffee text-gray mr-1"></i> الإشعارات
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#so-sales">
-                        <i class="fa fa-fw fa-chart-line text-gray mr-1"></i> Sales
+                        <i class="fa fa-fw fa-chart-line text-gray mr-1"></i> الطلبات
                     </a>
                 </li>
             </ul>
@@ -44,7 +44,7 @@
                     <!-- Activity -->
                     <div class="block">
                         <div class="block-header block-header-default">
-                            <h3 class="block-title">Recent Activity</h3>
+                            <h3 class="block-title"> إرسال الإشعارات </h3>
                             <div class="block-options">
                                 <button type="button" class="btn-block-option" data-toggle="block-option" data-action="state_toggle" data-action-mode="demo">
                                     <i class="si si-refresh"></i>
@@ -54,46 +54,7 @@
                         </div>
                         <div class="block-content">
                             <!-- Activity List -->
-                            <ul class="nav-items mb-0">
-                                <li>
-                                    <a class="text-dark media py-2" href="javascript:void(0)">
-                                        <div class="mr-3 ml-2">
-                                            <i class="si si-wallet text-success"></i>
-                                        </div>
-                                        <div class="media-body">
-                                            <div class="font-w600">New sale ($15)</div>
-                                            <div class="text-success">Admin Template</div>
-                                            <small class="text-muted">3 min ago</small>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="text-dark media py-2" href="javascript:void(0)">
-                                        <div class="mr-3 ml-2">
-                                            <i class="si si-pencil text-info"></i>
-                                        </div>
-                                        <div class="media-body">
-                                            <div class="font-w600">You edited the file</div>
-                                            <div class="text-info">
-                                                <i class="fa fa-file-text"></i> Documentation.doc
-                                            </div>
-                                            <small class="text-muted">15 min ago</small>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="text-dark media py-2" href="javascript:void(0)">
-                                        <div class="mr-3 ml-2">
-                                            <i class="si si-close text-danger"></i>
-                                        </div>
-                                        <div class="media-body">
-                                            <div class="font-w600">Project deleted</div>
-                                            <div class="text-danger">Line Icon Set</div>
-                                            <small class="text-muted">4 hours ago</small>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
+                          
                             <!-- END Activity List -->
                         </div>
                     </div>

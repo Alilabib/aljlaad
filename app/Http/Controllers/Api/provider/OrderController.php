@@ -33,11 +33,10 @@ class OrderController extends Controller
     {
         try{
              $user = auth()->user();
-             $users = User::where('city_id',$user->city_id)->get()->pluck('id')->toArray();
-             $pendingOrders = Order::whereIn('user_id',$users)->where('status','!=','received')->where('status','!=','cancelled')->get();
-             $deleviredOrders = Order::where('user_id',auth()->user()->id)->where('status','delevired')->get();
-             $cancelledOrders = Order::where('user_id',auth()->user()->id)->where('status','cancelled')->get();
-             $this->data['pending'] = MiniProviderOrderResource::collection($deleviredOrders);   
+             $pendingOrders = Order::where('driver_id',auth()->user()->id)->where('status','inprogress')->OrWhere('status','inway')->where('type','!=','offer')->get();
+             $deleviredOrders = Order::where('driver_id',auth()->user()->id)->where('status','delevired')->where('type','!=','offer')->get();
+             $cancelledOrders = Order::where('driver_id',auth()->user()->id)->where('status','problem')->where('type','!=','offer')->get();
+             $this->data['pending'] = MiniProviderOrderResource::collection($pendingOrders);   
              $this->data['delevired'] = MiniProviderOrderResource::collection($deleviredOrders);
              $this->data['cancelled'] = MiniProviderOrderResource::collection($cancelledOrders);   
    
@@ -53,11 +52,10 @@ class OrderController extends Controller
     {
         try{
             $user = auth()->user();
-            $areasId = $user->areas->pluck('areas.id')->toArray();
-            dd($areasId);
-            $users = User::where('city_id',$user->city_id)->get()->pluck('id')->toArray();
-            $orders = Order::whereIn('user_id',$users)->where('status','!=','received')->where('status','!=','cancelled')->get();
-             $this->data = MiniProviderOrderResource::collection($orders);   
+            $areasId = $user->areas->pluck('id')->toArray();
+            $users = User::whereIn('area_id',$areasId)->get()->pluck('id')->toArray();
+            $orders = Order::whereIn('user_id',$users)->where('status','pending')->where('type','!=','offer')->get();
+            $this->data = MiniProviderOrderResource::collection($orders);   
             return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
     
             }catch (Exception $e){
@@ -118,6 +116,28 @@ class OrderController extends Controller
             $order = Order::find($request->order_id);
             $order->status = 'inway';
             $order->save();
+
+
+            $notifiacation = new Notification();
+            $notifiacation->title_ar = 'قام ' . $order->driver->name . ' بتحديث حالة الطلب في الطريق ' ;
+            $notifiacation->value_ar = 'قام ' . $order->driver->name . '  بتحديث حالة الطلب في الطريق  ' . $order->id ;
+            $notifiacation->order_id = $order->id;
+            $notifiacation->type = 'user';
+            $notifiacation->save();
+
+            $notifiy = [
+                'title'=>$notifiacation->title_ar,
+                'body'=>$notifiacation->value_ar,
+                'type'=>'user',
+                'order_id'=>$order->id,
+                'click_action' => "FLUTTER_NOTIFICATION_CLICK"
+            ];
+
+            $user_id = [$order->user_id];
+            if($user_id != null){
+                pushFcmNotes($notifiy,$user_id);
+            }
+
             return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
     
         }catch (Exception $e){
@@ -132,6 +152,26 @@ class OrderController extends Controller
             $order->status = 'delevired';
             
             $order->save();
+
+            $notifiacation = new Notification();
+            $notifiacation->title_ar = 'قام ' . $order->driver->name . ' بتحديث حالة الطلب تم التوصيل ' ;
+            $notifiacation->value_ar = 'قام ' . $order->driver->name . '  بتحديث حالة الطلب تم التوصيل  ' . $order->id ;
+            $notifiacation->order_id = $order->id;
+            $notifiacation->type = 'user';
+            $notifiacation->save();
+
+            $notifiy = [
+                'title'=>$notifiacation->title_ar,
+                'body'=>$notifiacation->value_ar,
+                'type'=>'user',
+                'order_id'=>$order->id,
+                'click_action' => "FLUTTER_NOTIFICATION_CLICK"
+            ];
+
+            $user_id = [$order->user_id];
+            if($user_id != null){
+                pushFcmNotes($notifiy,$user_id);
+            }
             return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
     
         }catch (Exception $e){
@@ -155,15 +195,22 @@ class OrderController extends Controller
     public function problem(ProblemRequest $request)
     {
         try{
+            $oldProblem = Problem::where('user_id',auth()->user()->id)->where('order_id',$request->order_id)->first();
+            if($oldProblem){
+                $oldProblem->delete();
+            }
             $problem = new Problem();
             $problem->order_id = $request->order_id;
             $problem->user_id = auth()->user()->id;
             $problem->problem = $request->problem;
             $problem->save();
             $order = Order::find($request->order_id);
+            $order->cancel_status = $request->problem;
+            $order->status = 'problem';
+            $order->save();
             $notifiacation = new Notification();
-            $notifiacation->title_ar = 'قام ' . $order->driver->name . ' بتقديم مشكلةعلي الطلب الطلب ' ;
-            $notifiacation->value_ar = 'قام ' . $order->driver->name . ' بتقديم مشكلةعلي الطلب الطلب  ' . $order->id ;
+            $notifiacation->title_ar = 'قام ' . $order->driver->name . ' بتقديم مشكلة علي  الطلب ' ;
+            $notifiacation->value_ar = 'قام ' . $order->driver->name . ' بتقديم مشكلة علي  الطلب  ' . $order->id ;
             $notifiacation->order_id = $order->id;
             $notifiacation->type = 'user';
             $notifiacation->save();

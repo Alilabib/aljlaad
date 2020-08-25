@@ -3,7 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-
+use Carbon\Carbon;
 class MiniProviderOrderResource extends JsonResource
 {
     /**
@@ -19,7 +19,9 @@ class MiniProviderOrderResource extends JsonResource
             'id'=>$this->id,
             'username'=>$this->user_id ?  $this->user->name : $this->user_id, 
             'total'=>$this->total,
-            'product_count'=>$this->products->count()
+            'product_count'=>$this->products->count(),
+            'date'=>date_format($this->date,'d-m-Y') ,
+            'address'=>$this->user_id ? $this->user->area->city->name_ar .','. $this->user->area->name_ar : $this->user_id
         ];
         
     }

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Api\Offer;
+namespace App\Http\Requests\Api\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class WishListRequest extends FormRequest
+class UpdatePassword extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,9 @@ class WishListRequest extends FormRequest
     public function rules()
     {
         return [
-            
-            'company_id'=>'required|exists:categories,id'
+            //
+            'old_password'=>'required',
+            'password'=>'required|confirmed'
         ];
     }
 }

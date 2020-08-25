@@ -26,7 +26,7 @@
 
                     <div class="form-group">
                         <label for="val-username">قيمة الكوبون <span class="text-danger">*</span></label>
-                        <input type="number" class="form-control" name="value" id="val-username" name="val-username" placeholder="قيمة الكوبون" @isset($data)
+                        <input type="number" min="1" class="form-control" name="value" id="val-username" name="val-username" placeholder="قيمة الكوبون" @isset($data)
                         value="{{$data->value}}"
                             @endisset>
                     </div>

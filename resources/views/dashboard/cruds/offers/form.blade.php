@@ -74,14 +74,14 @@
 
                     <div class="form-group">
                         <label for="val-username">السعر <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="price" id="val-username" name="val-username" placeholder="السعر" @isset($data)
+                        <input type="number" min="1" class="form-control" name="price" id="val-username" name="val-username" placeholder="السعر" @isset($data)
                         value="{{$data->price}}"
                             @endisset>
                     </div>
 
                     <div class="form-group">
                         <label for="val-username">نسبة الخصم <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="presentage" id="val-username" name="val-username" placeholder="نسبة الخصم" @isset($data)
+                        <input type="number" min="1" class="form-control" name="presentage" id="val-username" name="val-username" placeholder="نسبة الخصم" @isset($data)
                         value="{{$data->presentage}}"
                             @endisset>
                     </div>

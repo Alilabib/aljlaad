@@ -8,7 +8,7 @@ use App\Http\Requests\Order\OrderRequest;
 use App\Repositories\Order\OrderRepository;
 use App\Repositories\User\UserRepository;
 use App\Repositories\Product\ProductRepository;
-
+use App\Models\Order;
 class OrderController extends Controller
 {
 
@@ -114,5 +114,14 @@ class OrderController extends Controller
     {
         $this->model->delete($id);
         return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>'Data Deleted successfully']);
+    }
+
+    public function status(Request $request)
+    {
+        $data = Order::where('payment_type',$request->type)->get();
+        $dataCount = count($data);
+        $view = view($this->page.'ajax.orders', compact('data','dataCount'))->render();
+        return response()->json(['value' => 1, 'view' => $view]);
+
     }
 }

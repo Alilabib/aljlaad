@@ -19,14 +19,15 @@ class CreateNotificationsTable extends Migration
             $table->string('title_en')->nullable();
             $table->string('value_ar')->nullable();
             $table->string('value_en')->nullable();
-            $table->string('icon')->value('');
-            $table->boolean('is_seen');
+            $table->string('icon')->nullable();
+            $table->boolean('is_seen')->nullable();
             $table->bigInteger('city_id')->unsigned()->nullable();
             $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
             $table->bigInteger('order_id')->unsigned()->nullable();
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('type')->nullable();
             $table->timestamps();
         });
     }

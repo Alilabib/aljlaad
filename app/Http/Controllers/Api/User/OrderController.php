@@ -146,10 +146,10 @@ class OrderController extends Controller
     public function allorders()
     {
         try{
-             $pendingOrders = Order::where('user_id',auth()->user()->id)->where('status','!=','received')->where('status','!=','cancelled')->where('type','!=','offer')->get();
-             $deleviredOrders = Order::where('user_id',auth()->user()->id)->where('status','delevired')->where('type','!=','offer')->get();
-             $cancelledOrders = Order::where('user_id',auth()->user()->id)->where('status','cancelled')->where('type','!=','offer')->get();
-             $this->data['pending'] = MiniOrderResource::collection($deleviredOrders);   
+             $pendingOrders           = Order::where('user_id',auth()->user()->id)->where('status','!=','received')->where('status','!=','cancelled')->where('type','!=','offer')->get();
+             $deleviredOrders         = Order::where('user_id',auth()->user()->id)->where('status','delevired')->where('type','!=','offer')->get();
+             $cancelledOrders         = Order::where('user_id',auth()->user()->id)->where('status','cancelled')->where('type','!=','offer')->get();
+             $this->data['pending']   = MiniOrderResource::collection($pendingOrders);   
              $this->data['delevired'] = MiniOrderResource::collection($deleviredOrders);
              $this->data['cancelled'] = MiniOrderResource::collection($cancelledOrders);   
    
@@ -241,7 +241,7 @@ class OrderController extends Controller
     {
         try{
         $orders = Order::where('user_id',auth()->user()->id)->where('status','!=','received')->where('status','!=','cancelled')->get();
-         $this->data = MiniOrderResource::collection($orders);   
+        $this->data = MiniOrderResource::collection($orders);   
         return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
 
         }catch (Exception $e){

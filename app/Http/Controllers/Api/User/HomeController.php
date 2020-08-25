@@ -17,6 +17,7 @@ use App\Http\Resources\AreaResource;
 use App\Http\Resources\CompanyResource;
 use App\Http\Requests\Api\Product\ProductRequest;
 use App\Http\Requests\Api\Product\ProductsRequest;
+use App\Http\Requests\Api\HomeRequest;
 use App\Http\Requests\Api\Auth\GetAreaRequest;
 use App\Http\Requests\Api\Auth\ContactRequest;
 use App\Models\Contact;
@@ -36,7 +37,7 @@ class HomeController extends Controller
         $this->failMessage    = 'server Error With Details => ';
     }
 
-    public function index()
+    public function index(HomeRequest $request)
     {
         try{
                $categories       = Category::where('category_id',null)->get();

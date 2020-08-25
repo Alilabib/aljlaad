@@ -3,9 +3,12 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-
+use JWTAuth;
 class CompanyResource extends JsonResource
 {
+
+ 
+
     /**
      * Transform the resource into an array.
      *
@@ -14,6 +17,17 @@ class CompanyResource extends JsonResource
      */
     public function toArray($request)
     {
+       // dd($request->bearerToken());
+       //$token = $request->header('Authorization');
+        try{
+            $token = JWTAuth::getToken();
+            $user =  JWTAuth::parseToken()->toUser();
+        }catch(\Exception $e){
+                $user = null;
+        }
+            // $token = JWTAuth::getToken();
+      // $user =  JWTAuth::parseToken()->toUser();
+      // $user = $token ?  JWTAuth::toUser($token) : null;
         return [
             'id'=>$this->id,
             'name'=>$this->name_ar,
@@ -22,7 +36,7 @@ class CompanyResource extends JsonResource
             'back_image'=>$this->BackImageUrl,
             'mini_cost'=>$this->min,
             'total_review'=>$this->total_review,
-            'fav'=> auth()->user() ? checkFavourite(auth()->user()->id,$this->id) : false,
+            'fav'=> $user ? checkFavourite($user->id,$this->id) : false,
         ];
     }
 }

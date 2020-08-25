@@ -148,9 +148,10 @@ class OrderController extends Controller
     public function allorders()
     {
         try{
-             $pendingOrders           = Order::where('user_id',auth()->user()->id)->where('status','!=','received')->where('status','!=','cancelled')->where('type','===',null)->get();
-             $deleviredOrders         = Order::where('user_id',auth()->user()->id)->where('status','delevired')->where('type','====',null)->get();
-             $cancelledOrders         = Order::where('user_id',auth()->user()->id)->where('status','cancelled')->where('type','===',null)->get();
+ 
+             $pendingOrders           = Order::where(['user_id'=>auth()->user()->id,'type'=>null])->where('status','!=','received')->where('status','!=','cancelled')->get();
+             $deleviredOrders         = Order::where(['user_id'=>auth()->user()->id,'type'=>null])->where('status','delevired')->get();
+             $cancelledOrders         = Order::where(['user_id'=>auth()->user()->id,'type'=>null])->where('status','cancelled')->get();
              $this->data['pending']   = MiniOrderResource::collection($pendingOrders);   
              $this->data['delevired'] = MiniOrderResource::collection($deleviredOrders);
              $this->data['cancelled'] = MiniOrderResource::collection($cancelledOrders);   

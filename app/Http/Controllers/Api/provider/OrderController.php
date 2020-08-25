@@ -54,7 +54,7 @@ class OrderController extends Controller
             $user = auth()->user();
             $areasId = $user->areas->pluck('id')->toArray();
             $users = User::whereIn('area_id',$areasId)->get()->pluck('id')->toArray();
-            $orders = Order::whereIn('user_id',$users)->where('type','!=','offer')->where('status','pending')->get();
+            $orders = Order::whereIn('user_id',$users)->where(['type'=>null,'status'=>'pending'])->get();
             $this->data = MiniProviderOrderResource::collection($orders);   
             return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
     

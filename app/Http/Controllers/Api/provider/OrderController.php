@@ -33,9 +33,9 @@ class OrderController extends Controller
     {
         try{
              $user = auth()->user();
-             $pendingOrders = Order::where('driver_id',auth()->user()->id)->where('status','inprogress')->OrWhere('status','inway')->where('type','!=','offer')->get();
-             $deleviredOrders = Order::where('driver_id',auth()->user()->id)->where('status','delevired')->where('type','!=','offer')->get();
-             $cancelledOrders = Order::where('driver_id',auth()->user()->id)->where('status','problem')->where('type','!=','offer')->get();
+             $pendingOrders = Order::where(['driver_id'=>auth()->user()->id,'type'=>null])->where('status','inprogress')->OrWhere('status','inway')->get();
+             $deleviredOrders = Order::where(['driver_id'=>auth()->user()->id,'type'=>null])->where('status','delevired')->get();
+             $cancelledOrders = Order::where(['driver_id'=>auth()->user()->id,'type'=>null])->where('status','problem')->get();
              $this->data['pending'] = MiniProviderOrderResource::collection($pendingOrders);   
              $this->data['delevired'] = MiniProviderOrderResource::collection($deleviredOrders);
              $this->data['cancelled'] = MiniProviderOrderResource::collection($cancelledOrders);   

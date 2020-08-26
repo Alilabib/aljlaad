@@ -40,15 +40,17 @@ class CartController extends Controller
             if($anyCartproudct){
                 $oldCartProduct  = Product::find($anyCartproudct->product_id);
                 $oldCartCategory = Category::find($oldCartProduct->category_id);
-                if($category->express_delivery != $oldCartCategory){
+                if($category->express_delivery != $oldCartCategory->express_delivery){
                     return response()->json(['data'=>$this->data,'message'=>'لايمكن اضافة المنتج مع منتجات السلة في حالة توصيل مختلفة','status'=>$this->successCode]);
                 }
             }
             $cartProduct = CartProduct::where(['cart_id'=>$cart->id,'product_id'=>$product->id])->first();
             if($cartProduct){
-                $cart->total -= $product->price * $cartProduct->quantity;
-                $cart->save();
-                $cartProduct->delete();
+                if($product->id === $cartProduct->id){
+                    $cart->total -= $product->price * $cartProduct->quantity;
+                    $cart->save();
+                    $cartProduct->delete();    
+                }
                 $cart->total  += $product->price * $request->quantity;
                 $cart->save();
                 $newCartProduct          = new CartProduct();

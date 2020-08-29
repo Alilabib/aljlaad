@@ -21,7 +21,8 @@ class ProviderResource extends JsonResource
             'phone'=>$this->phone,
             'image'=>$this->ImageUrl,
             'total_review'=>$this->total_review,
-            'city'=>$this->city->name_ar
+            'city'=>$this->city->name_ar,
+            'type'=>$this->type
         ];
     }
 }

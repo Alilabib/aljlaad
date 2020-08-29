@@ -46,18 +46,26 @@ class CartController extends Controller
             }
             $cartProduct = CartProduct::where(['cart_id'=>$cart->id,'product_id'=>$product->id])->first();
             if($cartProduct){
-                if($product->id === $cartProduct->id){
+                if($product->id === $cartProduct->product_id){
                     $cart->total -= $product->price * $cartProduct->quantity;
                     $cart->save();
                     $cartProduct->delete();    
+
+                    $newCartProduct             = new CartProduct();
+                    $newCartProduct->cart_id    = $cart->id;
+                    $newCartProduct->product_id = $product->id;
+                    $newCartProduct->quantity   = $request->quantity;
+                    $newCartProduct->save();
+                }else{
+                    $newCartProduct             = new CartProduct();
+                    $newCartProduct->cart_id    = $cart->id;
+                    $newCartProduct->product_id = $product->id;
+                    $newCartProduct->quantity   = $request->quantity;
+                    $newCartProduct->save();
                 }
                 $cart->total  += $product->price * $request->quantity;
                 $cart->save();
-                $newCartProduct          = new CartProduct();
-                $newCartProduct->cart_id    = $cart->id;
-                $newCartProduct->product_id = $product->id;
-                $newCartProduct->quantity   = $request->quantity;
-                $newCartProduct->save();
+
                 return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
 
             }else{
@@ -113,11 +121,15 @@ class CartController extends Controller
         try{
             $user = auth()->user();
             $cart = Cart::where('user_id',auth()->user()->id)->first();
-            $cartproudcts = CartProduct::where('cart_id',$cart->id)->get();
-            $this->data['total'] = $cart->total;
-            $this->data['products'] = CartProductsResource::collection($cartproudcts);
-            return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
-
+            if($cart){
+                $cartproudcts = CartProduct::where('cart_id',$cart->id)->get();
+                $this->data['total'] = $cart->total;
+                $this->data['products'] = CartProductsResource::collection($cartproudcts);
+            }else{
+                $this->data['total'] = "0";
+                $this->data['products'] = [];
+            }
+            return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);    
         }catch (Exception $e){
             return response()->json(['data'=>$this->data, 'message'=>$this->failMessage . $e,'status'=>$this->serverErrorCode]);
         }

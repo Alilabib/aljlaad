@@ -13,7 +13,6 @@
                 </a>
             </li>
 
-            <li class="nav-main-heading"> المدن </li>
             <li class="nav-main-item">
                 <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                     <i class="nav-main-link-icon si si-energy"></i>
@@ -22,12 +21,12 @@
                 <ul class="nav-main-submenu">
                     <li class="nav-main-item">
                     <a class="nav-main-link" href="{{route('cities.index')}}">
-                            <span class="nav-main-link-name">الرئيسية</span>
+                            <span class="nav-main-link-name">عرض الكل</span>
                         </a>
                     </li>
                     <li class="nav-main-item">
                         <a class="nav-main-link" href="{{route('cities.create')}}">
-                            <span class="nav-main-link-name">إنشاء</span>
+                            <span class="nav-main-link-name">إضافة جديد</span>
                         </a>
                     </li>
 
@@ -47,14 +46,13 @@
                     </li>
                     <li class="nav-main-item">
                         <a class="nav-main-link" href="{{route('areas.create')}}">
-                            <span class="nav-main-link-name">إنشاء</span>
+                            <span class="nav-main-link-name">إضافة جديد</span>
                         </a>
                     </li>
 
                 </ul>
             </li>
 
-            <li class="nav-main-heading"> المستخدمين </li>
             <li class="nav-main-item">
                 <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                     <i class="nav-main-link-icon si si-energy"></i>
@@ -68,7 +66,7 @@
                     </li>
                     <li class="nav-main-item">
                         <a class="nav-main-link" href="{{route('admins.create')}}">
-                            <span class="nav-main-link-name">إنشاء</span>
+                            <span class="nav-main-link-name">إضافة جديد</span>
                         </a>
                     </li>
 
@@ -87,7 +85,7 @@
                     </li>
                     <li class="nav-main-item">
                         <a class="nav-main-link" href="{{route('users.create')}}">
-                            <span class="nav-main-link-name">إنشاء</span>
+                            <span class="nav-main-link-name">إضافة جديد</span>
                         </a>
                     </li>
 
@@ -107,14 +105,13 @@
                     </li>
                     <li class="nav-main-item">
                         <a class="nav-main-link" href="{{route('providers.create')}}">
-                            <span class="nav-main-link-name">إنشاء</span>
+                            <span class="nav-main-link-name">إضافة جديد</span>
                         </a>
                     </li>
 
                 </ul>
             </li>
             
-            <li class="nav-main-heading"> الأقسام </li>
             <li class="nav-main-item">
                 <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                     <i class="nav-main-link-icon si si-energy"></i>
@@ -128,7 +125,7 @@
                     </li>
                     <li class="nav-main-item">
                         <a class="nav-main-link" href="{{route('categories.create')}}">
-                            <span class="nav-main-link-name">إنشاء</span>
+                            <span class="nav-main-link-name">إضافة جديد</span>
                         </a>
                     </li>
 
@@ -148,7 +145,7 @@
                     </li>
                     <li class="nav-main-item">
                         <a class="nav-main-link" href="{{route('subcategories.create')}}">
-                            <span class="nav-main-link-name">إنشاء</span>
+                            <span class="nav-main-link-name">إضافة جديد</span>
                         </a>
                     </li>
 
@@ -167,14 +164,13 @@
                     </li>
                     <li class="nav-main-item">
                         <a class="nav-main-link" href="{{route('subcategories.create')}}">
-                            <span class="nav-main-link-name">إنشاء</span>
+                            <span class="nav-main-link-name">إضافة جديد</span>
                         </a>
                     </li>
 
                 </ul>
             </li> --}}
 
-            <li class="nav-main-heading"> المنتجات </li>
             <li class="nav-main-item">
                 <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                     <i class="nav-main-link-icon si si-energy"></i>
@@ -188,14 +184,13 @@
                     </li>
                     <li class="nav-main-item">
                         <a class="nav-main-link" href="{{route('products.create')}}">
-                            <span class="nav-main-link-name">إنشاء</span>
+                            <span class="nav-main-link-name">إضافة جديد</span>
                         </a>
                     </li>
 
                 </ul>
             </li>
 
-            <li class="nav-main-heading"> الطلبات </li>
             <li class="nav-main-item">
                 <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                     <i class="nav-main-link-icon si si-energy"></i>
@@ -209,14 +204,13 @@
                     </li>
                     <li class="nav-main-item">
                         <a class="nav-main-link" href="{{route('orders.create')}}">
-                            <span class="nav-main-link-name">إنشاء</span>
+                            <span class="nav-main-link-name">إضافة جديد</span>
                         </a>
                     </li>
 
                 </ul>
             </li>
        
-            <li class="nav-main-heading"> البنرات </li>
             <li class="nav-main-item">
                 <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                     <i class="nav-main-link-icon si si-energy"></i>
@@ -230,14 +224,13 @@
                     </li>
                     <li class="nav-main-item">
                         <a class="nav-main-link" href="{{route('sliders.create')}}">
-                            <span class="nav-main-link-name">إنشاء</span>
+                            <span class="nav-main-link-name">إضافة جديد</span>
                         </a>
                     </li>
 
                 </ul>
             </li>
 
-            <li class="nav-main-heading"> العروض </li>
             <li class="nav-main-item">
                 <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                     <i class="nav-main-link-icon si si-energy"></i>
@@ -251,14 +244,13 @@
                     </li>
                     <li class="nav-main-item">
                         <a class="nav-main-link" href="{{route('offers.create')}}">
-                            <span class="nav-main-link-name">إنشاء</span>
+                            <span class="nav-main-link-name">إضافة جديد</span>
                         </a>
                     </li>
 
                 </ul>
             </li>
 
-            <li class="nav-main-heading"> الكوبونات </li>
             <li class="nav-main-item">
                 <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                     <i class="nav-main-link-icon si si-energy"></i>
@@ -272,14 +264,13 @@
                     </li>
                     <li class="nav-main-item">
                         <a class="nav-main-link" href="{{route('coupons.create')}}">
-                            <span class="nav-main-link-name">إنشاء</span>
+                            <span class="nav-main-link-name">إضافة جديد</span>
                         </a>
                     </li>
 
                 </ul>
             </li>
 
-            <li class="nav-main-heading"> أهداف العملاء </li>
             <li class="nav-main-item">
                 <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                     <i class="nav-main-link-icon si si-energy"></i>
@@ -293,7 +284,7 @@
                     </li>
                     <li class="nav-main-item">
                         <a class="nav-main-link" href="{{route('goals.create')}}">
-                            <span class="nav-main-link-name">إنشاء</span>
+                            <span class="nav-main-link-name">إضافة جديد</span>
                         </a>
                     </li>
 

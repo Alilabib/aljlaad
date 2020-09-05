@@ -6,6 +6,12 @@
         <meta name="_token" content="{{csrf_token()}}" />
         <title>لوحة التحكم</title>
         @include('dashboard.includes.css')
+        <link href='https://fonts.googleapis.com/css?family=Cairo' rel='stylesheet'>
+        <style>
+        body {
+            font-family: 'Cairo';font-size: 22px;
+        }
+        </style>
     </head>
     <body>
         <!-- Page Container -->

@@ -58,7 +58,7 @@ class AreaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AreaRequest $request)
     {
         $this->model->create($request->validated());
         return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>'Data added messages']);
@@ -96,7 +96,7 @@ class AreaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AreaRequest $request, $id)
     {
         $this->model->update($id,$request->validated());
         return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>'Data added messages']);

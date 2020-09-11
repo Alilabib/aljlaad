@@ -41,7 +41,7 @@
                 <ul class="nav-main-submenu">
                     <li class="nav-main-item">
                     <a class="nav-main-link" href="{{route('areas.index')}}">
-                            <span class="nav-main-link-name">الرئيسية</span>
+                            <span class="nav-main-link-name">عرض الكل</span>
                         </a>
                     </li>
                     <li class="nav-main-item">
@@ -61,7 +61,7 @@
                 <ul class="nav-main-submenu">
                     <li class="nav-main-item">
                     <a class="nav-main-link" href="{{route('admins.index')}}">
-                            <span class="nav-main-link-name">الرئيسية</span>
+                            <span class="nav-main-link-name">عرض الكل</span>
                         </a>
                     </li>
                     <li class="nav-main-item">
@@ -80,7 +80,7 @@
                 <ul class="nav-main-submenu">
                     <li class="nav-main-item">
                         <a class="nav-main-link" href="{{route('users.index')}}">
-                            <span class="nav-main-link-name">الرئيسية</span>
+                            <span class="nav-main-link-name">عرض الكل</span>
                         </a>
                     </li>
                     <li class="nav-main-item">
@@ -100,7 +100,7 @@
                 <ul class="nav-main-submenu">
                     <li class="nav-main-item">
                         <a class="nav-main-link" href="{{route('providers.index')}}">
-                            <span class="nav-main-link-name">الرئيسية</span>
+                            <span class="nav-main-link-name">عرض الكل</span>
                         </a>
                     </li>
                     <li class="nav-main-item">
@@ -115,12 +115,12 @@
             <li class="nav-main-item">
                 <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                     <i class="nav-main-link-icon si si-energy"></i>
-                    <span class="nav-main-link-name">الأقسام الرئيسية</span>
+                    <span class="nav-main-link-name">الأقسام عرض الكل</span>
                 </a>
                 <ul class="nav-main-submenu">
                     <li class="nav-main-item">
                         <a class="nav-main-link" href="{{route('categories.index')}}">
-                            <span class="nav-main-link-name">الرئيسية</span>
+                            <span class="nav-main-link-name">عرض الكل</span>
                         </a>
                     </li>
                     <li class="nav-main-item">
@@ -140,7 +140,7 @@
                 <ul class="nav-main-submenu">
                     <li class="nav-main-item">
                         <a class="nav-main-link" href="{{route('subcategories.index')}}">
-                            <span class="nav-main-link-name">الرئيسية</span>
+                            <span class="nav-main-link-name">عرض الكل</span>
                         </a>
                     </li>
                     <li class="nav-main-item">
@@ -159,7 +159,7 @@
                 <ul class="nav-main-submenu">
                     <li class="nav-main-item">
                         <a class="nav-main-link" href="{{route('subcategories.index')}}">
-                            <span class="nav-main-link-name">الرئيسية</span>
+                            <span class="nav-main-link-name">عرض الكل</span>
                         </a>
                     </li>
                     <li class="nav-main-item">
@@ -179,7 +179,7 @@
                 <ul class="nav-main-submenu">
                     <li class="nav-main-item">
                         <a class="nav-main-link" href="{{route('products.index')}}">
-                            <span class="nav-main-link-name">الرئيسية</span>
+                            <span class="nav-main-link-name">عرض الكل</span>
                         </a>
                     </li>
                     <li class="nav-main-item">
@@ -199,7 +199,7 @@
                 <ul class="nav-main-submenu">
                     <li class="nav-main-item">
                         <a class="nav-main-link" href="{{route('orders.index')}}">
-                            <span class="nav-main-link-name">الرئيسية</span>
+                            <span class="nav-main-link-name">عرض الكل</span>
                         </a>
                     </li>
                     <li class="nav-main-item">
@@ -219,7 +219,7 @@
                 <ul class="nav-main-submenu">
                     <li class="nav-main-item">
                         <a class="nav-main-link" href="{{route('sliders.index')}}">
-                            <span class="nav-main-link-name">الرئيسية</span>
+                            <span class="nav-main-link-name">عرض الكل</span>
                         </a>
                     </li>
                     <li class="nav-main-item">
@@ -239,7 +239,7 @@
                 <ul class="nav-main-submenu">
                     <li class="nav-main-item">
                         <a class="nav-main-link" href="{{route('offers.index')}}">
-                            <span class="nav-main-link-name">الرئيسية</span>
+                            <span class="nav-main-link-name">عرض الكل</span>
                         </a>
                     </li>
                     <li class="nav-main-item">
@@ -259,7 +259,7 @@
                 <ul class="nav-main-submenu">
                     <li class="nav-main-item">
                         <a class="nav-main-link" href="{{route('coupons.index')}}">
-                            <span class="nav-main-link-name">الرئيسية</span>
+                            <span class="nav-main-link-name">عرض الكل</span>
                         </a>
                     </li>
                     <li class="nav-main-item">
@@ -279,7 +279,7 @@
                 <ul class="nav-main-submenu">
                     <li class="nav-main-item">
                         <a class="nav-main-link" href="{{route('goals.index')}}">
-                            <span class="nav-main-link-name">الرئيسية</span>
+                            <span class="nav-main-link-name">عرض الكل</span>
                         </a>
                     </li>
                     <li class="nav-main-item">
@@ -300,7 +300,7 @@
                 <ul class="nav-main-submenu">
                     <li class="nav-main-item">
                         <a class="nav-main-link" href="{{route('contacts.index')}}">
-                            <span class="nav-main-link-name">الرئيسية</span>
+                            <span class="nav-main-link-name">عرض الكل</span>
                         </a>
                     </li>
                 </ul>
@@ -315,7 +315,7 @@
                 <ul class="nav-main-submenu">
                     <li class="nav-main-item">
                         <a class="nav-main-link" href="{{route('settings.index')}}">
-                            <span class="nav-main-link-name">الرئيسية</span>
+                            <span class="nav-main-link-name">عرض الكل</span>
                         </a>
                     </li>
                 </ul>

@@ -27,69 +27,45 @@
                         <select class="js-select2 form-control" id="example-select2" name="user_id" style="width: 100%;" data-placeholder="من فضلك إختر العميل">
                             <option > </option>
                             @forelse ($users as $item)
-                        <option value="{{$item->id}}">{{$item->name}}</option>
+                        <option value="{{$item->id}}" @isset($data)
+                            @if ($data->user_id == $item->id)
+                                selected
+                            @endif
+                        @endisset>{{$item->name}}</option>
                             @empty
                                 
                             @endforelse
                         </select>
                     </div>
 
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label for="val-price"> سعر التوصيل <span class="text-danger">*</span></label>
                         <input type="number" min="1" class="form-control" id="val-price" name="delivery_price" placeholder="سعر التوصيل">
-                    </div>
+                    </div> --}}
                     <div class="form-group">
                         <label for="val-password"> تاريخ التوصيل <span class="text-danger">*</span></label>
-                        <input type="text" class="js-flatpickr form-control bg-white" id="example-flatpickr-default" name="date" placeholder="Y-m-d">
+                        <input type="text" @isset($data)
+                    value="{{$data->date}}"
+                        @endisset class="js-flatpickr form-control bg-white" id="example-flatpickr-default" name="date" placeholder="Y-m-d">
                     </div>
                     <div class="form-group">
                         <label for="val-password"> وقت التوصيل <span class="text-danger">*</span></label>
-                        <input type="text" class="js-flatpickr form-control bg-white" id="example-flatpickr-time-standalone" name="time" data-enable-time="true" data-no-calendar="true" data-date-format="H:i">
+                    <input type="text" @isset($data) value="{{$data->time}}" @endisset class="js-flatpickr form-control bg-white" id="example-flatpickr-time-standalone" name="time" data-enable-time="true" data-no-calendar="true" data-date-format="H:i">
                     </div>
                     <div class="form-group">
-                        <label class="d-block">الضريبة</label>
+                        <label class="d-block">طريقة الدفع</label>
 
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="example-radio-custom-inline2" name="enable_tax" value="0">
-                            <label class="custom-control-label" for="example-radio-custom-inline2">لايوجد ضريبة</label>
+                            <input type="radio" class="custom-control-input" id="example-radio-custom-inline2" name="payment_type" value="cache">
+                            <label class="custom-control-label" for="example-radio-custom-inline2">كاش </label>
                         </div>
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="example-radio-custom-inline1" name="enable_tax" value="1">
-                            <label class="custom-control-label" for="example-radio-custom-inline1">إضافة ضريبة</label>
+                            <input type="radio" class="custom-control-input" id="example-radio-custom-inline1" name="payment_type" value="Online">
+                            <label class="custom-control-label" for="example-radio-custom-inline1"> Online </label>
                         </div>
 
                     </div>
                     
-                    <div class="form-group" id="tax-value">
-                        <label for="val-price">  قيمة  الضريبة<span class="text-danger">*</span></label>
-                        <input type="number" min="1" class="form-control" id="val-price" name="tax" placeholder=" % الضريبة "> 
-                    </div>
-
-                    <div class="form-group">
-                        <label class="d-block">الخصم</label>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="example-radio-discount-inline1" name="discount" value="none">
-                            <label class="custom-control-label" for="example-radio-discount-inline1">لايوجد خصم</label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="example-radio-discount-inline2" name="discount" value="persentage">
-                            <label class="custom-control-label" for="example-radio-discount-inline2">خصم نسبة مئوية</label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="example-radio-discount-inline3" name="discount" value="money">
-                            <label class="custom-control-label" for="example-radio-discount-inline3">خصم مبلغ</label>
-                        </div>
-                    </div>
-
-                    <div class="form-group" id="discount-persentage">
-                        <label for="val-price">  قيمة الخصم  بالنسبة المئوية<span class="text-danger">*</span></label>
-                        <input type="number" min="1" class="form-control" id="val-price" name="price_persentage_discount" placeholder="النسبة المئوية ">
-                    </div>
-
-                    <div class="form-group" id="discount-money">
-                        <label for="val-price">  قيمة مبلغ الخصم<span class="text-danger">*</span></label>
-                        <input type="number" min="1" class="form-control" id="val-price" name="price_money_discount" placeholder=" الخصم ">
-                    </div>
 
                     <div class="new-product-block">
                         <div class="new-product">
@@ -97,6 +73,32 @@
                                 <img src="{{asset("/")}}images/icons/plus.png" class="img-fluid pr-2"> إضافة منتج 
                             </div>
                         </div>
+                        @isset($data)
+                            @if (count($data->products) > 0)
+                              @forelse ($data->products as $product)
+                              <div class="block row mb-md-0 mb-4 form-group">
+                                <div class="col-md-6 form-group">
+                                <select class="form-control" name=items[]>
+                                <option value=""> إختر المنتج</option>
+            
+                                @foreach($products as $item)
+                                <option value={{$item->id}} @if ($product->id == $item->id)
+                                    selected
+                                @endif>{{$item->name_ar}}</option>
+                                @endforeach
+                                </select>
+                                </div>
+                                <div class="col-md-4 form-group">
+                                <input class="form-control" type="number" name="quantity[]" min="1"  value="{{$product->pivot->quantity}}" placeholder="الكمية">
+                                </div>
+                                <i class="far fa-trash-alt remove"></i>
+                                </div>
+                              @empty
+                                  
+                              @endforelse
+                    
+                            @endif
+                        @endisset
                     </div>
                 </div>
             </div>
@@ -175,7 +177,7 @@
                     '</select>' +
                     '</div>' +
                     '<div class="col-md-4 form-group">' +
-                    '<input class="form-control" type="number" name="quantity[]" placeholder="الكمية">' +
+                    '<input class="form-control" type="number" min="1"  name="quantity[]" placeholder="الكمية">' +
                     '</div>' +
                     '<i class="far fa-trash-alt remove"></i>' +
                     '</div>');

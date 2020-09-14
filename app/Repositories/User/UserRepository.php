@@ -5,7 +5,8 @@ namespace App\Repositories\User;
 
 
 use App\Models\User;
-
+use App\Models\Token;
+use JWTAuth;
 class UserRepository implements UserInterface
 {
     public function __construct(User $user)
@@ -16,7 +17,7 @@ class UserRepository implements UserInterface
     public function getAll()
     {
         // TODO: Implement getAll() method.
-        return $this->model->where('type','!=','provider')->get();
+        return $this->model->where('type','!=','provider')->orderBy('id', 'DESC')->get();
     }
 
     public function getByID($id)
@@ -29,7 +30,13 @@ class UserRepository implements UserInterface
     {
         // TODO: Implement create() method.
         $attributes['type'] = 'user';
-        return $this->model->create($attributes);
+        $user = $this->model->create($attributes);
+        $token = new Token();
+        $token->user_id = $user->id;
+        $token->jwt = JWTAuth::fromUser($user);
+        $token->is_logged_in = 'false';
+        $token->save();
+        return $user;
     }
 
     public function update($id, array $attributes)

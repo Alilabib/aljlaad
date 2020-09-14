@@ -40,10 +40,10 @@ class HomeController extends Controller
     public function index(HomeRequest $request)
     {
         try{
-               $categories       = Category::where('category_id',null)->get();
-               $local            = Category::where('category_id',1)->where('express_delivery','0')->get();
-               $international    = Category::where('category_id',2)->where('express_delivery','0')->get();
-               $express_delivery = Category::where('category_id','!=',null)->where('express_delivery','1')->get();
+               $categories       = Category::where('category_id',null)->orderBy('id', 'DESC')->get();
+               $local            = Category::where('category_id',1)->orderBy('id', 'DESC')->get();
+               $international    = Category::where('category_id',2)->orderBy('id', 'DESC')->get();
+               $express_delivery = Category::where('category_id','!=',null)->where('express_delivery','1')->orderBy('id', 'DESC')->get();
                $sliders    = Slider::all();
                $this->data['categories']         =  CategoriesResource::collection($categories);
                $this->data['sliders']            =  SlidersResource::collection($sliders);
@@ -59,7 +59,7 @@ class HomeController extends Controller
     public function companies(Request $request)
     {
         try{
-            $products =  Category::where('category_id',$request->category_id)->get();
+            $products =  Category::where('category_id',$request->category_id)->orderBy('id', 'DESC')->get();
             $this->data =  CompanyResource::collection($products);
          return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
         }catch (Exception $e){
@@ -70,7 +70,7 @@ class HomeController extends Controller
     public function products(ProductsRequest $request)
     {
         try{
-            $products =  Product::where('category_id',$request->company_id)->get();
+            $products =  Product::where('category_id',$request->company_id)->orderBy('id', 'DESC')->get();
             $this->data =  ProductsResource::collection($products);
          return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
      }catch (Exception $e){
@@ -92,7 +92,7 @@ class HomeController extends Controller
     public function cities()
     {
         try{
-            $cities =  City::all();
+            $cities =  City::orderBy('id', 'DESC')->get();
             $this->data = CityResource::collection($cities);
          return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
         }catch (Exception $e){
@@ -103,7 +103,7 @@ class HomeController extends Controller
     public function areas(GetAreaRequest $request)
     {
         try{
-            $areas =  Area::where('city_id',$request->city_id)->get();
+            $areas =  Area::where('city_id',$request->city_id)->orderBy('id', 'DESC')->get();
             $this->data = AreaResource::collection($areas);
          return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
         }catch (Exception $e){

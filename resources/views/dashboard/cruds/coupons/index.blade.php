@@ -22,8 +22,11 @@
             <thead>
                 <tr>
                     <th class="text-center" style="width: 80px;"></th>
-                    <th>الكود</th>
-                    <th class="d-none d-sm-table-cell" style="width: 30%;"> القيمة</th>
+                    <th>الإسم</th>
+                    <th class="d-none d-sm-table-cell" style="width: 30%;"> المبلغ</th>
+                    <th class="d-none d-sm-table-cell" style="width: 30%;"> تاريخ الآنتهاء</th>
+                    <th class="d-none d-sm-table-cell" style="width: 30%;">  الكود</th>
+
                     <th style="width: 15%;"> تاريخ التسجيل </th>
                     <th style="width: 15%;">   </th>
                 </tr>
@@ -37,6 +40,12 @@
                     </td>
                     <td class="d-none d-sm-table-cell font-size-sm">
                         {{$item->value}}
+                    </td>
+                    <td class="d-none d-sm-table-cell font-size-sm">
+                        {{$item->date}}
+                    </td>
+                    <td class="d-none d-sm-table-cell font-size-sm">
+                        {{$item->code}}
                     </td>
                     <td>
                         <em class="text-muted font-size-sm">{{$item->created_at->diffForHumans()}}</em>

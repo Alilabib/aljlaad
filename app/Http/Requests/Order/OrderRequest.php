@@ -25,18 +25,13 @@ class OrderRequest extends FormRequest
     {
         return [
             'user_id'=>'required',
-            'delivery_price'=>'required',
-            'enable_tax'=>'required',
-            'tax'=>'required_if:enable_tax,1',
-            'discount'=>'required',
-            'price_persentage_discount'=>'required_if:discount,persentage',
-            'price_money_discount'=>'required_if:discount,money',
-            'date'=>'required|date',
+            'date'=>'required|date|after:yesterday',
             'time'=>'required',
+            'payment_type'=>'required',
             'items'=>'required|array',
             'items.*'=>'required|exists:products,id',
             'quantity'=>'required|array',
-            'quantity.*'=>'required',
+            'quantity.*'=>'required|numeric|min:0',
         ];
     }
 }

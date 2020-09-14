@@ -16,7 +16,7 @@ class ProductRepository implements ProductInterface
     public function getAll()
     {
         // TODO: Implement getAll() method.
-        return $this->model->all();
+        return $this->model->orderBy('id', 'DESC')->get();
     }
 
     public function getByID($id)
@@ -28,9 +28,12 @@ class ProductRepository implements ProductInterface
     public function create(array $attributes)
     {
         // TODO: Implement create() method.
+        if(Arr::exists($attributes,'image')){
+
         $image_name = time(). $attributes['image']->getClientOriginalName();
         $attributes['image']->move(storage_path('app/public/uploads/products/'),$image_name);
         $attributes['img'] = $image_name;
+        }
         return $this->model->create(Arr::except($attributes,['image']));
     }
 
@@ -38,10 +41,12 @@ class ProductRepository implements ProductInterface
     {
         // TODO: Implement update() method.
         $module = $this->model->findOrFail($id);
+        if(Arr::exists($attributes,'image')){
+
         $image_name = time(). $attributes['image']->getClientOriginalName();
         $attributes['image']->move(storage_path('app/public/uploads/products/'),$image_name);
         $attributes['img'] = $image_name;
-
+        }
         $module->update(Arr::except($attributes,['image']));
         $module->save();
         return $module;

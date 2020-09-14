@@ -17,7 +17,7 @@ class SliderRepository implements SliderInterface
     public function getAll()
     {
         // TODO: Implement getAll() method.
-        return $this->model->all();
+        return $this->model->orderBy('id', 'DESC')->get();
     }
 
     public function getByID($id)
@@ -29,9 +29,12 @@ class SliderRepository implements SliderInterface
     public function create(array $attributes)
     {
         // TODO: Implement create() method.
+        if(Arr::exists($attributes,'image')){
+
         $image_name = time(). $attributes['image']->getClientOriginalName();
         $attributes['image']->move(storage_path('app/public/uploads/slider/'),$image_name);
         $attributes['img'] = $image_name;
+        }
         return $this->model->create(Arr::except($attributes,['image']));
     }
 
@@ -39,9 +42,12 @@ class SliderRepository implements SliderInterface
     {
         // TODO: Implement update() method.
         $module = $this->model->findOrFail($id);
+        if(Arr::exists($attributes,'image')){
+
         $image_name = time(). $attributes['image']->getClientOriginalName();
         $attributes['image']->move(storage_path('app/public/uploads/slider/'),$image_name);
         $attributes['img'] = $image_name;
+        }
         $module->update(Arr::except($attributes,['image']));
         $module->save();
         return $module;

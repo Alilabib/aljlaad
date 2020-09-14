@@ -33,7 +33,7 @@ class OfferController extends Controller
     public function getAll()
     {
         try{
-            $offers = Offer::all();
+            $offers = Offer::orderBy('id', 'DESC')->get();
             $this->data = OfferResource::collection($offers);   
          
            return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
@@ -122,7 +122,7 @@ class OfferController extends Controller
     {
         try{
             
-            $this->data = GoalResource::collection(Goal::all());
+            $this->data = GoalResource::collection(Goal::orderBy('id', 'DESC')->get());
             return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
        
             }catch (Exception $e){

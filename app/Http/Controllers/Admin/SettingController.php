@@ -188,9 +188,11 @@ class SettingController extends Controller
         if ($request->tax) {
             $this->update_setting('tax', $request->tax);
         }
+        if ($request->deleviery) {
+            $this->update_setting('deleviery', $request->deleviery);
+        }
 
-
-        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>'Data Deleted successfully']);
+        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>'تم التحديث بنجاح']);
 
     }
 

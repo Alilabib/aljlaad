@@ -23,16 +23,23 @@ class ProductRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'name_ar'=>'required',
             'name_en'=>'required',
-
             'desc_ar'=>'required',
             'desc_en'=>'required',
-
             'category_id'=>'required|exists:categories,id',
-            'image'    =>'required',
             'price'  =>'required',
         ];
+
+        if ($this->route('product')){
+            $rules['image']='sometimes|image';
+
+        }else{
+            $rules['image']='required|image';
+
+        }
+        return $rules;
+
     }
 }

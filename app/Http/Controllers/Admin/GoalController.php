@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Goal\GoalRequest;
 use App\Repositories\Goal\GoalRepository;
+use App\Repositories\Product\ProductRepository;
+
 class GoalController extends Controller
 {
 
@@ -14,9 +16,11 @@ class GoalController extends Controller
     private $url;
     private $data;
     private $route;
-    public function __construct(GoalRepository $goal)
+    private $product;
+    public function __construct(GoalRepository $goal,ProductRepository $product)
     {
         $this->model = $goal;
+        $this->product = $product;
         $this->page  = 'dashboard.cruds.goals.';
         $this->url   = '/goals';
         $this->data  = [];
@@ -44,7 +48,8 @@ class GoalController extends Controller
     public function create()
     {
         //
-        return view($this->page.'create');
+        $products = $this->product->getAll();
+        return view($this->page.'create',compact('products'));
 
     }
 
@@ -84,7 +89,8 @@ class GoalController extends Controller
     {
         //
         $data = $this->model->getByID($id);
-        return view($this->page.'edit',compact('data'));
+        $products = $this->product->getAll();
+        return view($this->page.'edit',compact('data','products'));
     }
 
     /**

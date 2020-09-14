@@ -17,7 +17,7 @@ class GoalRepository implements GoalInterface
     public function getAll()
     {
         // TODO: Implement getAll() method.
-        return $this->model->all();
+        return $this->model->orderBy('id', 'DESC')->get();
     }
 
     public function getByID($id)

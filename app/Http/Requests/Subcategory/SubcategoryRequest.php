@@ -23,7 +23,7 @@ class SubcategoryRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules= [
             'name_ar'=>'required',
             'name_en'=>'required',
             'desc_ar'=>'nullable',
@@ -31,10 +31,19 @@ class SubcategoryRequest extends FormRequest
             'city_id'=>'required|exists:cities,id',
             'express_delivery'=>'required',
             'category_id'=>'required|exists:categories,id',
-            'image'=>'required',
             'back_image'=>'required',
             'min'=>'required',
-         
         ];
+        if ($this->route('subcategory')){
+            $rules['image']='sometimes|image';
+        }else{
+            $rules['image']='required|image';
+        }
+        if ($this->route('subcategory')){
+            $rules['back_image']='sometimes|image';
+        }else{
+            $rules['back_image']='required|image';
+        }
+        return $rules;
     }
 }

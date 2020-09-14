@@ -35,15 +35,16 @@ class OfferRequest extends FormRequest
             'back_image'=>'nullable|image'
         ];
 
-        // if($this->route('offers')){
-        //     $rules['image'] ='required|image';
-        //     $rules['back_image']='required|image';
-
-        // }else{
-
-        //     $rules['image'] ='nullable|image';
-        //     $rules['back_image']='nullable|image';
-        // }
+        if ($this->route('offer')){
+            $rules['image']='sometimes|image';
+        }else{
+            $rules['image']='required|image';
+        }
+        if ($this->route('offer')){
+            $rules['back_image']='sometimes|image';
+        }else{
+            $rules['back_image']='required|image';
+        }
 
         return $rules;
     }

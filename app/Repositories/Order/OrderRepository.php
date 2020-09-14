@@ -20,7 +20,7 @@ class OrderRepository implements OrderInterface
     public function getAll()
     {
         // TODO: Implement getAll() method.
-        return $this->model->where('type',null)->get();
+        return $this->model->where('type',null)->orderBy('id', 'DESC')->get();
     }
 
     public function getByID($id)
@@ -41,22 +41,36 @@ class OrderRepository implements OrderInterface
 
         $attributes['sub_total'] = $sub_total;
         // TODO: Implement create() method.
-        if ($attributes['enable_tax'] == '1') {
-           $total = $total + ($total * $attributes['tax'] / 100 );
-        }else{
-            $attributes['tax'] = '';
+        if(Arr::exists($attributes,'enable_tax')){
+            if ($attributes['enable_tax'] == '1') {
+                $total = $total + ($total * $attributes['tax'] / 100 );
+             }else{
+                 $attributes['tax'] = '';
+             }
         }
 
-        if($attributes['discount'] =='persentage'){
-            $total = $total - ($total * $attributes['price_persentage_discount'] / 100 );
-        }elseif($attributes['discount'] =='money'){
-            $total = $total -  $attributes['price_money_discount'] ;
-        }else{
-            $attributes['price_money_discount'] ='';
-            $attributes['price_persentage_discount'] = '';
+        if(Arr::exists($attributes,'discount')){
+            if($attributes['discount'] =='persentage'){
+                $total = $total - ($total * $attributes['price_persentage_discount'] / 100 );
+            }elseif($attributes['discount'] =='money'){
+                $total = $total -  $attributes['price_money_discount'] ;
+            }else{
+                $attributes['price_money_discount'] ='';
+                $attributes['price_persentage_discount'] = '';
+            }
         }
 
-        $total = $total + $attributes['delivery_price'];
+        $tax = 75;
+        $delivery_price = '10';
+
+        if(SETTING_VALUE('tax') !='' && SETTING_VALUE('tax') !=null ){
+            $tax = SETTING_VALUE('tax');
+        }
+        if(SETTING_VALUE('deleviery') !='' && SETTING_VALUE('deleviery') !=null ){
+            $delivery_price = SETTING_VALUE('deleviery');
+        }
+
+        $total = $total + $tax + $delivery_price;
         $attributes['total'] = $total;
         $attributes['date'] = \Carbon\Carbon::createFromFormat('Y-m-d',$attributes['date']);
         $attributes['time'] = \Carbon\Carbon::createFromFormat('H:i',$attributes['time']);
@@ -86,21 +100,38 @@ class OrderRepository implements OrderInterface
 
         $attributes['sub_total'] = $sub_total;
         // TODO: Implement create() method.
-        if ($attributes['enable_tax'] == '1') {
-           $total = $total + ($total * $attributes['tax'] / 100 );
-        }else{
-            $attributes['tax'] = '';
+
+        if(Arr::exists($attributes,'enable_tax')){
+            if ($attributes['enable_tax'] == '1') {
+                $total = $total + ($total * $attributes['tax'] / 100 );
+             }else{
+                 $attributes['tax'] = '';
+             }
         }
 
-        if($attributes['discount'] =='persentage'){
-            $total = $total - ($total * $attributes['price_persentage_discount'] / 100 );
-        }elseif($attributes['discount'] =='money'){
-            $total = $total -  $attributes['price_money_discount'] ;
-        }else{
-            $attributes['price_money_discount'] ='';
-            $attributes['price_persentage_discount'] = '';
+        if(Arr::exists($attributes,'discount')){
+            if($attributes['discount'] =='persentage'){
+                $total = $total - ($total * $attributes['price_persentage_discount'] / 100 );
+            }elseif($attributes['discount'] =='money'){
+                $total = $total -  $attributes['price_money_discount'] ;
+            }else{
+                $attributes['price_money_discount'] ='';
+                $attributes['price_persentage_discount'] = '';
+            }
         }
-        
+
+        $tax = 75;
+        $delivery_price = '10';
+
+        if(SETTING_VALUE('tax') !='' && SETTING_VALUE('tax') !=null ){
+            $tax = SETTING_VALUE('tax');
+        }
+        if(SETTING_VALUE('deleviery') !='' && SETTING_VALUE('deleviery') !=null ){
+            $delivery_price = SETTING_VALUE('deleviery');
+        }
+
+        $total = $total + $tax + $delivery_price;
+        $attributes['total'] = $total;
         // TODO: Implement update() method.
         $order = $this->model->findOrFail($id);
         $attributes['date'] = \Carbon\Carbon::createFromFormat('Y-m-d',$attributes['date']);

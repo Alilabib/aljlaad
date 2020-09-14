@@ -19,7 +19,7 @@ class ProviderRepository implements ProviderInterface
     public function getAll()
     {
         // TODO: Implement getAll() method.
-        return $this->model->where('type','!=','user')->get();
+        return $this->model->where('type','!=','user')->orderBy('id', 'DESC')->get();
     }
 
     public function getByID($id)

@@ -30,8 +30,8 @@ class HomeController extends Controller
     {
         try{
 
-               $categories =  Category::all();
-               $sliders    = Slider::all();
+               $categories =  Category::orderBy('id', 'DESC')->get();
+               $sliders    = Slider::orderBy('id', 'DESC')->get();
                $this->data['categories'] = new CategoriesResource($categories);
                $this->data['sliders']    = new SlidersResource($sliders);
 

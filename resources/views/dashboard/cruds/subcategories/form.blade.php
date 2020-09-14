@@ -109,11 +109,25 @@
                     <div class="form-group">
                         <label for="val-password"> الصورة <span class="text-danger">*</span></label>
                         <input type="file" class="form-control" id="val-password" name="image" placeholder="الصورة">
+                        @isset($data)
+                        <div class="col-md-4 animated fadeIn">
+                            <div class="options-container fx-item-zoom-in">
+                                <img class="img-fluid options-item" src="{{asset('storage/uploads/categories/'. $data->img)}}">
+                            </div>
+                        </div>
+                       @endisset
                     </div>
 
                     <div class="form-group">
                         <label for="val-password"> صورة الخلفية <span class="text-danger">*</span></label>
                         <input type="file" class="form-control" id="val-password" name="back_image" placeholder="الصورة">
+                        @isset($data)
+                        <div class="col-md-4 animated fadeIn">
+                            <div class="options-container fx-item-zoom-in">
+                                <img class="img-fluid options-item" src="{{asset('storage/uploads/categories/'. $data->back_img)}}">
+                            </div>
+                        </div>
+                       @endisset
                     </div>
                     
                 </div>

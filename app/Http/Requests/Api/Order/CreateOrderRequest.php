@@ -24,7 +24,6 @@ class CreateOrderRequest extends FormRequest
     public function rules()
     {
         return [
-            //
             'date'      =>'required',
             'address_id'=>'required|exists:addresses,id',
             'time'      =>'required',

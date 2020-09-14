@@ -16,7 +16,7 @@ class SubCategoryRepository implements SubCategoryInterface
     public function getAll()
     {
         // TODO: Implement getAll() method.
-        return $this->model->where('category_id','!=',null)->get();
+        return $this->model->where('category_id','!=',null)->orderBy('id', 'DESC')->get();
     }
 
     public function getByID($id)
@@ -28,14 +28,17 @@ class SubCategoryRepository implements SubCategoryInterface
     public function create(array $attributes)
     {
         // TODO: Implement create() method.
-        $image_name = time() . $attributes['image']->getClientOriginalName();
-        $attributes['image']->move(storage_path('app/public/uploads/categories/'),$image_name);
-        $attributes['img'] = $image_name;
+        if(Arr::exists($attributes,'image')){
+            $image_name = time() . $attributes['image']->getClientOriginalName();
+            $attributes['image']->move(storage_path('app/public/uploads/categories/'),$image_name);
+            $attributes['img'] = $image_name;
+        }
 
-        $back_image_name = time() .'back'. $attributes['back_image']->getClientOriginalName();
-        $attributes['back_image']->move(storage_path('app/public/uploads/categories/'),$back_image_name);
-        $attributes['back_img'] = $back_image_name;
-       
+        if(Arr::exists($attributes,'back_image')){
+            $back_image_name = time() .'back'. $attributes['back_image']->getClientOriginalName();
+            $attributes['back_image']->move(storage_path('app/public/uploads/categories/'),$back_image_name);
+            $attributes['back_img'] = $back_image_name;
+        }       
         return $this->model->create(Arr::except($attributes,['image','back_image']));
     }
 
@@ -43,15 +46,18 @@ class SubCategoryRepository implements SubCategoryInterface
     {
         // TODO: Implement update() method.
         $module = $this->model->findOrFail($id);
+        if(Arr::exists($attributes,'image')){
 
         $image_name = time() . $attributes['image']->getClientOriginalName();
         $attributes['image']->move(storage_path('app/public/uploads/categories/'),$image_name);
         $attributes['img'] = $image_name;
 
+        }
+        if(Arr::exists($attributes,'back_image')){
         $back_image_name = time() .'back'. $attributes['back_image']->getClientOriginalName();
         $attributes['back_image']->move(storage_path('app/public/uploads/categories/'),$back_image_name);
         $attributes['back_img'] = $back_image_name;
-       
+        }
         $module->update(Arr::except($attributes,['image','back_image']));
         $module->save();
         return $module;

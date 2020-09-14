@@ -16,7 +16,7 @@ class CouponRepository implements CouponInterface
     public function getAll()
     {
         // TODO: Implement getAll() method.
-        return $this->model->all();
+        return $this->model->orderBy('id', 'DESC')->get();
     }
 
     public function getByID($id)
@@ -28,7 +28,7 @@ class CouponRepository implements CouponInterface
     public function create(array $attributes)
     {
         // TODO: Implement create() method.
-        $attributes['name'] = 'e'. time().'n'.rand(1, 10).'jaz';
+        $attributes['code'] = 'e'. time().'n'.rand(1, 10).'jaz';
         return $this->model->create($attributes);
     }
 
@@ -36,6 +36,7 @@ class CouponRepository implements CouponInterface
     {
         // TODO: Implement update() method.
         $module = $this->model->findOrFail($id);
+        $attributes['code'] = 'e'. time().'n'.rand(1, 10).'jaz';
         $module->update($attributes);
         $module->save();
         return $module;

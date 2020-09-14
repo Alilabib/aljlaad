@@ -34,7 +34,13 @@ class CartController extends Controller
         $user     = auth()->user();
         $cart     = Cart::where('user_id',auth()->user()->id)->first();
         $product  = Product::find($request->product_id);
+
         $category = Category::find($product->category_id);
+        if($category->min > $request->quantity){
+            return response()->json(['data'=>$this->data,'message'=>'يجب الآلتزام بالحد الأدني للشركة','status'=>$this->successCode]);
+
+        }
+
         if($cart){
             $anyCartproudct = CartProduct::where(['cart_id'=>$cart->id])->first();
             if($anyCartproudct){

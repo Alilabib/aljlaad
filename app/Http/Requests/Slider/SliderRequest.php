@@ -23,15 +23,21 @@ class SliderRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'name_ar'=>'required',
             'name_en'=>'required',
             'desc_ar'=>'nullable',
             'desc_en'=>'nullable',
-            'image'=>'required',
             'type'=>'required',
             'link'=>'requiredIf:type,link',
             'category_id'=>'requiredIf:type,company'
         ];
+
+        if ($this->route('slider')){
+            $rules['image']='sometimes|image';
+        }else{
+            $rules['image']='required|image';           
+        }
+        return $rules;
     }
 }

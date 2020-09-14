@@ -25,7 +25,9 @@ class CouponRequest extends FormRequest
     {
         return [
             //
-            'value'=>'required'
+            'name'=>'required',
+            'value'=>'required',
+            'date'=>'required|date|after:yesterday'
         ];
     }
 }

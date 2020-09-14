@@ -126,16 +126,25 @@ class OrderController extends Controller
         try{
             $user = auth()->user();
             $cart = Cart::where('user_id',auth()->user()->id)->first();
-            $cartproudcts = CartProduct::where('cart_id',$cart->id)->get();
-        
-            $this->data['sub_total'] = $cart->total;
-            $this->data['delivery']  = 10;
+            $deliveryCost = 10;
+            if(SETTING_VALUE('deleviery') !='' && SETTING_VALUE('deleviery') !=null ){
+                $deliveryCost = SETTING_VALUE('deleviery');
+            }
+            $this->data['delivery']  = $deliveryCost;
             $tax = 75;
             if(SETTING_VALUE('tax') !='' && SETTING_VALUE('tax') !=null ){
                 $tax = SETTING_VALUE('tax');
             }
             $this->data['tax']    = $tax;
                 
+            $cartproudcts = CartProduct::where('cart_id',$cart->id)->get();
+            if(count($cartproudcts) == 0 ){
+                return response()->json(['data'=>$this->data, 'message'=>$this->failMessage.trans('api.no-products-in-cart'),'status'=>$this->serverErrorCode]);
+            }
+
+            
+            $this->data['sub_total'] = $cart->total;
+
                  
             $this->data['total']     = $cart->total + $this->data['delivery'] + $this->data['tax'];
             return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
@@ -149,9 +158,9 @@ class OrderController extends Controller
     {
         try{
  
-             $pendingOrders           = Order::where(['user_id'=>auth()->user()->id,'type'=>null])->where('status','!=','received')->where('status','!=','cancelled')->get();
-             $deleviredOrders         = Order::where(['user_id'=>auth()->user()->id,'type'=>null])->where('status','delevired')->get();
-             $cancelledOrders         = Order::where(['user_id'=>auth()->user()->id,'type'=>null])->where('status','cancelled')->get();
+             $pendingOrders           = Order::where(['user_id'=>auth()->user()->id,'type'=>null])->where('status','!=','received')->where('status','!=','cancelled')->orderBy('id', 'DESC')->get();
+             $deleviredOrders         = Order::where(['user_id'=>auth()->user()->id,'type'=>null])->where('status','delevired')->orderBy('id', 'DESC')->get();
+             $cancelledOrders         = Order::where(['user_id'=>auth()->user()->id,'type'=>null])->where('status','cancelled')->orderBy('id', 'DESC')->get();
              $this->data['pending']   = MiniOrderResource::collection($pendingOrders);   
              $this->data['delevired'] = MiniOrderResource::collection($deleviredOrders);
              $this->data['cancelled'] = MiniOrderResource::collection($cancelledOrders);   
@@ -171,10 +180,13 @@ class OrderController extends Controller
         $cart = Cart::where('user_id',auth()->user()->id)->first();
         $cartproudcts = CartProduct::where('cart_id',$cart->id)->get();
         $tax = 75;
+        $delivery_price = '10';
         if(SETTING_VALUE('tax') !='' && SETTING_VALUE('tax') !=null ){
             $tax = SETTING_VALUE('tax');
         }
-            
+        if(SETTING_VALUE('deleviery') !='' && SETTING_VALUE('deleviery') !=null ){
+            $delivery_price = SETTING_VALUE('deleviery');
+        }
 
         if($cart){
             $order = new Order ();
@@ -183,14 +195,14 @@ class OrderController extends Controller
             $order->date           = Carbon::parse($request->date);
             $order->time           = Carbon::parse($request->time);
             $order->sub_total      = $cart->total;
-            $order->delivery_price = '10';
+            $order->delivery_price = $delivery_price;
             $order->enable_tax     = '1';
             $order->tax            = $tax;
             $order->payment_type   = $request->pay_type;
             if($cart->total !='' && $cart->total != null){
-                $order->total          = $cart->total + 10 + $tax;
+                $order->total          = $cart->total + $delivery_price  + $tax;
             }else{
-                $order->total          =  10 + $tax;
+                $order->total          =  $delivery_price  + $tax;
             }
 
             if($request->coupoun){

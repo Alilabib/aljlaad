@@ -58,7 +58,18 @@
                                 <input type="number" min="1" value="{{ SETTING_VALUE('tax') }}" name="tax" class="form-control" required="required" placeholder="الضريبة ">
                             </div>
                         </div>
-        
+                        <div class="form-group">
+                            <label class="control-label ">   قيمة التوصيل <span class="text-danger">*</span></label>
+                            <div class="">
+                                <input type="number" min="1" value="{{ SETTING_VALUE('deleviery') }}" name="deleviery" class="form-control" required="required" placeholder=" قيمة التوصيل">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label "> قيمة التوصيل السريع <span class="text-danger">*</span></label>
+                            <div class="">
+                                <input type="number" min="1" value="{{ SETTING_VALUE('fast_deleviery') }}" name="fast_deleviery" class="form-control" required="required" placeholder=" قيمة التوصيل السريع">
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label class="control-label "> وصف التطبيق الاسم باللغة العربية <span class="text-danger">*</span></label>
                             <div class="">

@@ -88,7 +88,9 @@ class OrderController extends Controller
     public function edit($id)
     {
         $data = $this->model->getByID($id);
-        return view($this->page.'edit',compact('data'));
+        $users = $this->user->getAll();
+        $products = $this->product->getAll();
+        return view($this->page.'edit',compact('data','users','products'));
     }
 
     /**

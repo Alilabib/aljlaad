@@ -31,7 +31,8 @@ class GoalRequest extends FormRequest
             'desc_en'=>'required',
             'first_range'=>'required',
             'second_range'=>'required|gte:first_range',
-            'last_range'=>'required|gte:second_range'
+            'last_range'=>'required|gte:second_range',
+            'product_id'=>'required|exists:products,id'
         ];
     }
 }

@@ -28,7 +28,7 @@ class CreateAddressRequest extends FormRequest
             'lat'=>'required',
             'long'=>'required',
             'type'=>'required',
-            'number'=>'required',
+            'number'=>'nullable',
             'details'=>'nullable',
             'near_place'=>'nullable',
 

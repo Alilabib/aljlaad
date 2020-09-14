@@ -33,9 +33,9 @@ class OrderController extends Controller
     {
         try{
              $user = auth()->user();
-             $pendingOrders = Order::where(['driver_id'=>auth()->user()->id,'type'=>null])->where('status','inprogress')->OrWhere('status','inway')->get();
-             $deleviredOrders = Order::where(['driver_id'=>auth()->user()->id,'type'=>null])->where('status','delevired')->get();
-             $cancelledOrders = Order::where(['driver_id'=>auth()->user()->id,'type'=>null])->where('status','problem')->get();
+             $pendingOrders = Order::where(['driver_id'=>auth()->user()->id,'type'=>null])->where('status','inprogress')->OrWhere('status','inway')->orderBy('id', 'DESC')->get();
+             $deleviredOrders = Order::where(['driver_id'=>auth()->user()->id,'type'=>null])->where('status','delevired')->orderBy('id', 'DESC')->get();
+             $cancelledOrders = Order::where(['driver_id'=>auth()->user()->id,'type'=>null])->where('status','problem')->orderBy('id', 'DESC')->get();
              $this->data['pending'] = MiniProviderOrderResource::collection($pendingOrders);   
              $this->data['delevired'] = MiniProviderOrderResource::collection($deleviredOrders);
              $this->data['cancelled'] = MiniProviderOrderResource::collection($cancelledOrders);   
@@ -54,7 +54,7 @@ class OrderController extends Controller
             $user = auth()->user();
             $areasId = $user->areas->pluck('id')->toArray();
             $users = User::whereIn('area_id',$areasId)->get()->pluck('id')->toArray();
-            $orders = Order::whereIn('user_id',$users)->where(['type'=>null,'status'=>'pending'])->get();
+            $orders = Order::whereIn('user_id',$users)->where(['type'=>null,'status'=>'pending'])->orderBy('id', 'DESC')->get();
             $this->data = MiniProviderOrderResource::collection($orders);   
             return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
     
@@ -183,7 +183,7 @@ class OrderController extends Controller
     {
         try{
             $user = auth()->user();
-            $orders = Order::where('driver_id',$user->id)->where('status','delevired')->get();
+            $orders = Order::where('driver_id',$user->id)->where('status','delevired')->orderBy('id', 'DESC')->get();
              $this->data = MiniProviderOrderResource::collection($orders);   
             return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
     

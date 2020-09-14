@@ -48,7 +48,20 @@
                             {{$data->desc_en}}
                                 @endisset</textarea>
                     </div>
-
+                    <div class="form-group">
+                        {{-- <label for="val-username"> المنتج <span class="text-danger">*</span></label> --}}
+                        <select class="form-control" name="product_id">
+                            <option value=""> إختر المنتج</option>
+        
+                            @foreach($products as $item)
+                            <option value={{$item->id}} @isset($data)
+                                @if ($data->product_id == $item->id)
+                                selected
+                            @endif
+                            @endisset >{{$item->name_ar}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="form-group">
                         <label for="val-username">المرحلة الاولي <span class="text-danger">*</span></label>
                         <input type="number" min="1" class="form-control" name="first_range" id="val-username" name="val-username" placeholder="المرحلة الاولي " @isset($data)
@@ -71,29 +84,7 @@
                     </div>
 
 
-                    {{-- <div class="form-group">
-                        <label for="val-password"> الصورة الخارجية <span class="text-danger">*</span></label>
-                        <input type="file" class="form-control" id="val-password" name="image" placeholder="الصورة">
-                    </div>
 
-                    <div class="form-group">
-                        <label for="val-password"> صورة الخلفية <span class="text-danger">*</span></label>
-                        <input type="file" class="form-control" id="val-password" name="back_image" placeholder="الصورة">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="val-username">السعر <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="price" id="val-username" name="val-username" placeholder="السعر" @isset($data)
-                        value="{{$data->price}}"
-                            @endisset>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="val-username">نسبة الخصم <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="persentage" id="val-username" name="val-username" placeholder="نسبة الخصم" @isset($data)
-                        value="{{$data->persentage}}"
-                            @endisset>
-                    </div> --}}
 
                 </div>
             </div>
@@ -110,3 +101,4 @@
             <!-- END Submit -->
         </div>
     </div>
+

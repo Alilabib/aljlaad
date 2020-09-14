@@ -17,7 +17,7 @@ class CategoryRepository implements CategoryInterface
     public function getAll()
     {
         // TODO: Implement getAll() method.
-        return $this->model->where('category_id',null)->get();
+        return $this->model->where('category_id',null)->orderBy('id', 'DESC')->get();
     }
 
     public function getByID($id)

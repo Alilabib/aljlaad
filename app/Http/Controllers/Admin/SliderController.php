@@ -17,6 +17,8 @@ class SliderController extends Controller
     private $route;
     private $data;
     private $category;
+    private $message;
+
     public function __construct(SliderRepository $Slider,SubCategoryRepository $category)
     {
         $this->model = $Slider;
@@ -25,6 +27,8 @@ class SliderController extends Controller
         $this->route = 'sliders.index';
         $this->data  = [];
         $this->category = $category;
+        $this->message  = 'تم بنجاح';
+
     }
     /**
      * Display a listing of the resource.
@@ -59,7 +63,7 @@ class SliderController extends Controller
     public function store(SliderRequest $request)
     {
         $this->model->create($request->validated());
-        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>'Data added messages']);
+        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>$this->message]);
     }
 
     /**
@@ -97,7 +101,7 @@ class SliderController extends Controller
     public function update(SliderRequest $request, $id)
     {
         $this->model->update($id,$request->validated());
-        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>'Data added messages']);
+        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>$this->message]);
     }
 
     /**
@@ -109,6 +113,6 @@ class SliderController extends Controller
     public function destroy($id)
     {
         $this->model->delete($id);
-        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>'Data Deleted successfully']);
+        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>$this->message]);
     }
 }

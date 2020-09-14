@@ -26,9 +26,9 @@ class CreateProductsTable extends Migration
             $table->string('price_persentage_discount')->nullable();
             $table->string('price_money_discount')->nullable();
             $table->unsignedBigInteger('category_id')->nullable();	
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->unsignedBigInteger('brand_id')->nullable();	
-            $table->foreign('brand_id')->references('id')->on('brands');
+            $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
             $table->enum('active',['0','1'])->nullable();
             $table->timestamps();
         });

@@ -13,6 +13,8 @@ class BrandController extends Controller
     private $url;
     private $data;
     private $route;
+    private $message;
+
     public function __construct(BrandRepository $brand)
     {
         $this->model = $brand;
@@ -20,6 +22,7 @@ class BrandController extends Controller
         $this->url   = '/brands';
         $this->data  = [];
         $this->route = 'brands.index';
+        $this->message  = 'تم بنجاح';
 
     }
 
@@ -54,7 +57,7 @@ class BrandController extends Controller
     public function store(Request $request)
     {
         $this->model->create($request->validated());
-        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>'Data added messages']);
+        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>$this->message]);
     }
 
     /**
@@ -91,7 +94,7 @@ class BrandController extends Controller
     public function update(Request $request, $id)
     {
         $this->model->update($id,$request->validated());
-        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>'Data added messages']);
+        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>$this->message]);
     }
 
     /**
@@ -103,6 +106,6 @@ class BrandController extends Controller
     public function destroy($id)
     {
         $this->model->delete($id);
-        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>'Data Deleted successfully']);
+        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>$this->message]);
     }
 }

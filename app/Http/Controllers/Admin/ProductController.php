@@ -17,6 +17,8 @@ class ProductController extends Controller
     private $data;
     private $route;
     private $category;
+    private $message;
+
     public function __construct(ProductRepository $product,SubCategoryRepository $category )
     {
         $this->model = $product;
@@ -25,6 +27,8 @@ class ProductController extends Controller
         $this->route = 'products.index';
         $this->data  = [];
         $this->category = $category;
+        $this->message  = 'تم بنجاح';
+
     }
 
     /**
@@ -60,7 +64,7 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         $this->model->create($request->validated());
-        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>'Data added messages']);
+        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>$this->message]);
     }
 
     /**
@@ -98,7 +102,7 @@ class ProductController extends Controller
     public function update(ProductRequest $request, $id)
     {
         $this->model->update($id,$request->validated());
-        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>'Data added messages']);
+        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>$this->message]);
     }
 
     /**
@@ -110,6 +114,6 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $this->model->delete($id);
-        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>'Data Deleted successfully']);
+        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>$this->message]);
     }
 }

@@ -18,6 +18,8 @@ class ProviderController extends Controller
     private $url;
     private $route;
     private $data;
+    private $message;
+
     public function __construct(ProviderRepository $provider,CityRepository $city,AreaRepository $area)
     {
         $this->model = $provider;
@@ -27,6 +29,8 @@ class ProviderController extends Controller
         $this->url   = '/providers';
         $this->route = 'providers.index';
         $this->data  = [];
+        $this->message  = 'تم بنجاح';
+
     }
 
 
@@ -64,7 +68,7 @@ class ProviderController extends Controller
     public function store(UserRequest $request)
     {
         $this->model->create($request->validated());
-        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>'Data added messages']);
+        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>$this->message]);
     }
 
     /**
@@ -104,7 +108,7 @@ class ProviderController extends Controller
     public function update(UserRequest $request, $id)
     {
         $this->model->update($id,$request->validated());
-        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>'Data added messages']);
+        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>$this->message]);
     }
 
     /**
@@ -116,7 +120,7 @@ class ProviderController extends Controller
     public function destroy($id)
     {
         $this->model->delete($id);
-        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>'Data Deleted successfully']);
+        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>$this->message]);
     }
 
     public function getAreas(Request $request)

@@ -14,6 +14,8 @@ class CategoryController extends Controller
     private $url;
     private $data;
     private $route;
+    private $message;
+
     public function __construct(CategoryRepository $category)
     {
         $this->model = $category;
@@ -21,6 +23,8 @@ class CategoryController extends Controller
         $this->url   = '/categories';
         $this->data  = [];
         $this->route = 'categories.index';
+        $this->message  = 'تم بنجاح';
+
     }
 
     /**
@@ -55,7 +59,7 @@ class CategoryController extends Controller
     public function store(CategoryRequest $request)
     {
         $this->model->create($request->validated());
-        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>'Data added messages']);
+        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>$this->message]);
     }
 
     /**
@@ -92,7 +96,7 @@ class CategoryController extends Controller
     public function update(CategoryRequest $request, $id)
     {
         $this->model->update($id,$request->validated());
-        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>'Data added messages']);
+        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>$this->message]);
     }
 
     /**
@@ -104,6 +108,6 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $this->model->delete($id);
-        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>'Data Deleted successfully']);
+        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>$this->message]);
     }
 }

@@ -18,6 +18,8 @@ class SubCategoryController extends Controller
     private $data;
     private $route;
     private $category;
+    private $message;
+
     public function __construct(SubCategoryRepository $subcategory,CategoryRepository $category, CityRepository $city)
     {
         $this->model = $subcategory;
@@ -27,6 +29,8 @@ class SubCategoryController extends Controller
         $this->data  = [];
         $this->category = $category;
         $this->city = $city;
+        $this->message  = 'تم بنجاح';
+
     }
 
 
@@ -64,7 +68,7 @@ class SubCategoryController extends Controller
     public function store(SubCategoryRequest $request)
     {
         $this->model->create($request->validated());
-        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>'Data added messages']);
+        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>$this->message]);
     }
 
     /**
@@ -104,7 +108,7 @@ class SubCategoryController extends Controller
     public function update(SubCategoryRequest $request, $id)
     {
         $this->model->update($id,$request->validated());
-        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>'Data added messages']);
+        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>$this->message]);
     }
 
     /**
@@ -116,6 +120,6 @@ class SubCategoryController extends Controller
     public function destroy($id)
     {
         $this->model->delete($id);
-        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>'Data Deleted successfully']);
+        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>$this->message]);
     }
 }

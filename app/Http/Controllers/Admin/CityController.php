@@ -13,6 +13,8 @@ class CityController extends Controller
     private $url;
     private $data;
     private $route;
+    private $message;
+
     public function __construct(CityRepository $city)
     {
         $this->model = $city;
@@ -20,6 +22,7 @@ class CityController extends Controller
         $this->url   = '/cities';
         $this->data  = [];
         $this->route = 'cities.index';
+        $this->message  = 'تم بنجاح';
 
     }
 
@@ -55,7 +58,7 @@ class CityController extends Controller
     public function store(CityRequest $request)
     {
         $this->model->create($request->validated());
-        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>'Data added messages']);
+        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>$this->message]);
     }
 
     /**
@@ -92,7 +95,7 @@ class CityController extends Controller
     public function update(CityRequest $request, $id)
     {
         $this->model->update($id,$request->validated());
-        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>'Data added messages']);
+        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>$this->message]);
     }
 
     /**
@@ -104,6 +107,6 @@ class CityController extends Controller
     public function destroy($id)
     {
         $this->model->delete($id);
-        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>'Data Deleted successfully']);
+        return back()->withMessage(['type'=>'success','content'=>$this->message]);
     }
 }

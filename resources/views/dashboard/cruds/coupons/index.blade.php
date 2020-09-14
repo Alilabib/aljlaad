@@ -57,13 +57,16 @@
                             <a href="{{route('coupons.edit',$item->id)}}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Edit">
                                 <i class="fa fa-fw fa-pencil-alt"></i>
                             </a>
-                            <form action="{{route('coupons.destroy',$item->id)}}" method="POST">
+                            <a href="javascript" class="btn btn-sm btn-primary delete-link"   data-route="{{route('coupons.destroy',$item->id)}}" data-toggle="modal" data-target="#modal-block-normal" title="Edit">
+                                <i class="fa fa-fw fa-times"></i>
+                            </a>
+                            {{-- <form action="{{route('coupons.destroy',$item->id)}}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-primary"  title="Delete">
                                     <i class="fa fa-fw fa-times"></i>
                                 </button>
-                            </form>
+                            </form> --}}
 
                         </div>
                     </td>
@@ -78,6 +81,36 @@
     </div>
 </div>
 <!-- END Dynamic Table with Export Buttons -->
+       <!-- Normal Block Modal -->
+       <div class="modal" id="modal-block-normal" tabindex="-1" role="dialog" aria-labelledby="modal-block-normal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="block block-themed block-transparent mb-0">
+                    <div class="block-header bg-danger">
+                        <h3 class="block-title">حذف </h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                                <i class="fa fa-fw fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="block-content font-size-m">
+                        <h3> هل أنت متأكد من الحذف</h3>
+                        <form class="delete-form" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-primary" ><i class="fa fa-check mr-1"></i>تأكيد</button>
+
+                        </form>
+                    </div>
+                    <div class="block-content block-content-full text-right border-top">
+                        <button type="button" class="btn btn-sm btn-light" data-dismiss="modal">إغلاق</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END Normal Block Modal -->
 @endsection
 
 @section('js')
@@ -91,4 +124,13 @@
 
 <!-- Page JS Code -->
 <script src="{{asset('/')}}js/pages/be_tables_datatables.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('.delete-link').on('click',function(){
+            var route = $(this).data('route');
+            //alert(route);
+            $('.delete-form').attr('action',route);
+        });
+    });
+</script>
 @endsection

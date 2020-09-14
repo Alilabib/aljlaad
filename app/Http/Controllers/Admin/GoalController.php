@@ -17,6 +17,8 @@ class GoalController extends Controller
     private $data;
     private $route;
     private $product;
+    private $message;
+
     public function __construct(GoalRepository $goal,ProductRepository $product)
     {
         $this->model = $goal;
@@ -25,6 +27,8 @@ class GoalController extends Controller
         $this->url   = '/goals';
         $this->data  = [];
         $this->route = 'goals.index';
+        $this->message  = 'تم بنجاح';
+
     }
 
     /**
@@ -63,7 +67,7 @@ class GoalController extends Controller
     {
         //
         $this->model->create($request->validated());
-        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>'Data added messages']);
+        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>$this->message]);
     }
 
     /**
@@ -103,7 +107,7 @@ class GoalController extends Controller
     public function update(GoalRequest $request, $id)
     {
         $this->model->update($id,$request->validated());
-        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>'Data added messages']);
+        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>$this->message]);
     }
 
     /**
@@ -115,6 +119,6 @@ class GoalController extends Controller
     public function destroy($id)
     {
         $this->model->delete($id);
-        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>'Data Deleted successfully']);
+        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>$this->message]);
     }
 }

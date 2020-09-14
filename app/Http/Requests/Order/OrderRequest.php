@@ -24,7 +24,8 @@ class OrderRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id'=>'required',
+            'user_id'=>'required|exists:users,id',
+            'driver_id'=>'required|exists:users,id',
             'date'=>'required|date|after:yesterday',
             'time'=>'required',
             'payment_type'=>'required',

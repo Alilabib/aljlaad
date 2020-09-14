@@ -38,6 +38,21 @@
                         </select>
                     </div>
 
+                    <div class="form-group">
+                        <label for="val-skill"> المندوب <span class="text-danger">*</span></label>
+                        <select class="js-select2 form-control" id="example-select2" name="driver_id" style="width: 100%;" data-placeholder="من فضلك إختر المندوب">
+                            <option > </option>
+                            @forelse ($providers as $item)
+                        <option value="{{$item->id}}" @isset($data)
+                            @if ($data->driver_id == $item->id)
+                                selected
+                            @endif
+                        @endisset>{{$item->name}}</option>
+                            @empty
+                                
+                            @endforelse
+                        </select>
+                    </div>
                     {{-- <div class="form-group">
                         <label for="val-price"> سعر التوصيل <span class="text-danger">*</span></label>
                         <input type="number" min="1" class="form-control" id="val-price" name="delivery_price" placeholder="سعر التوصيل">
@@ -56,11 +71,19 @@
                         <label class="d-block">طريقة الدفع</label>
 
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="example-radio-custom-inline2" name="payment_type" value="cache">
+                            <input type="radio" class="custom-control-input" id="example-radio-custom-inline2" name="payment_type" value="cache" @isset($data) @if ($data->payment_type =='cache')
+                                checked
+                            @endif
+                                
+                            @endisset>
                             <label class="custom-control-label" for="example-radio-custom-inline2">كاش </label>
                         </div>
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="example-radio-custom-inline1" name="payment_type" value="Online">
+                            <input type="radio" class="custom-control-input" id="example-radio-custom-inline1" name="payment_type" value="Online" @isset($data) @if ($data->payment_type =='online')
+                            checked
+                        @endif
+                            
+                        @endisset>
                             <label class="custom-control-label" for="example-radio-custom-inline1"> Online </label>
                         </div>
 

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Order\OrderRequest;
 use App\Repositories\Order\OrderRepository;
 use App\Repositories\User\UserRepository;
+use App\Repositories\Provider\ProviderRepository;
 use App\Repositories\Product\ProductRepository;
 use App\Models\Order;
 class OrderController extends Controller
@@ -20,8 +21,8 @@ class OrderController extends Controller
     private $user;
     private $product;
     private $message;
-
-    public function __construct(OrderRepository $order,UserRepository $user,ProductRepository $product)
+    private $provider;
+    public function __construct(OrderRepository $order,UserRepository $user,ProductRepository $product,ProviderRepository $provider)
     {
         $this->model = $order;
         $this->page  = 'dashboard.cruds.orders.';
@@ -31,7 +32,7 @@ class OrderController extends Controller
         $this->product = $product;
         $this->user = $user;
         $this->message  = 'تم بنجاح';
-
+        $this->provider  = $provider;
     }
 
     /**
@@ -55,8 +56,9 @@ class OrderController extends Controller
     public function create()
     {
         $users = $this->user->getAll();
+        $providers = $this->provider->getAll();
         $products = $this->product->getAll();
-        return view($this->page.'create',compact('users','products'));
+        return view($this->page.'create',compact('users','products','providers'));
     }
 
     /**
@@ -94,7 +96,9 @@ class OrderController extends Controller
         $data = $this->model->getByID($id);
         $users = $this->user->getAll();
         $products = $this->product->getAll();
-        return view($this->page.'edit',compact('data','users','products'));
+        $providers = $this->provider->getAll();
+
+        return view($this->page.'edit',compact('data','users','products','providers'));
     }
 
     /**

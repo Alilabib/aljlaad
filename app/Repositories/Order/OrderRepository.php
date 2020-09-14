@@ -6,15 +6,17 @@ namespace App\Repositories\Order;
 
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\User;
 use App\Models\OrderProducts;
 use Illuminate\Support\Arr;
 class OrderRepository implements OrderInterface
 {
-    public function __construct(Order $order,Product $product, OrderProducts $orderProduct)
+    public function __construct(Order $order,Product $product, OrderProducts $orderProduct,User $user)
     {
         $this->model = $order;
         $this->product = $product;
         $this->orderProduct = $orderProduct;
+        $this->user = $user;
     }
 
     public function getAll()
@@ -90,6 +92,8 @@ class OrderRepository implements OrderInterface
 
     public function update($id, array $attributes)
     {
+        $order = $this->model->findOrFail($id);
+       $order->products()->detach();
         $total = 0;
         $sub_total =0;
         for($i=0; $i < count($attributes['items'])  ; $i++){
@@ -108,6 +112,7 @@ class OrderRepository implements OrderInterface
                  $attributes['tax'] = '';
              }
         }
+        
 
         if(Arr::exists($attributes,'discount')){
             if($attributes['discount'] =='persentage'){
@@ -118,6 +123,10 @@ class OrderRepository implements OrderInterface
                 $attributes['price_money_discount'] ='';
                 $attributes['price_persentage_discount'] = '';
             }
+        }
+
+        if (Arr::exists($attributes,'driver_id')) {
+             $this->user->find($attributes['driver_id']);
         }
 
         $tax = 75;
@@ -133,7 +142,7 @@ class OrderRepository implements OrderInterface
         $total = $total + $tax + $delivery_price;
         $attributes['total'] = $total;
         // TODO: Implement update() method.
-        $order = $this->model->findOrFail($id);
+       
         $attributes['date'] = \Carbon\Carbon::createFromFormat('Y-m-d',$attributes['date']);
         $attributes['time'] = \Carbon\Carbon::createFromFormat('H:i',$attributes['time']);
         $order->update(Arr::except($attributes,['items','quantity']));

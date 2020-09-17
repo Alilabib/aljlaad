@@ -10,6 +10,8 @@ use App\Models\Token;
 use App\Models\User;
 use Illuminate\Support\Facades\Notification as Notification;
 use LaravelFCM\Facades\FCM as FCM;
+use App\Models\Order;
+use App\Models\OrderProducts;
 
 function checkExistsInCart($product_id)
 {
@@ -90,4 +92,14 @@ function pushFcmNotes($fcmData, $userIds)
   return 0;
   }
   return "No Users";
+}
+
+
+ function getProductCountByUserId($user_id , $product_id)
+{
+    //dd($user_id);
+    $orders = Order::where('user_id',$user_id)->get()->pluck('id')->toArray();
+    // dd($orders);
+    $count  = OrderProducts::whereIn('order_id',$orders)->where('product_id',$product_id)->sum('quantity');
+    return $count;
 }

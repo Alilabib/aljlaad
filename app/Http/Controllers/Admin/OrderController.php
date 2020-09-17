@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Order\OrderRequest;
+use App\Http\Requests\Order\AcceptRequest;
+
 use App\Repositories\Order\OrderRepository;
 use App\Repositories\User\UserRepository;
 use App\Repositories\Provider\ProviderRepository;
@@ -44,7 +46,9 @@ class OrderController extends Controller
     {
         //
         $data = $this->model->getAll();
-        return view($this->page.'index',compact('data'));
+        $providers = $this->provider->getAll();
+
+        return view($this->page.'index',compact('data','providers'));
 
     }
 
@@ -133,5 +137,13 @@ class OrderController extends Controller
         $view = view($this->page.'ajax.orders', compact('data','dataCount'))->render();
         return response()->json(['value' => 1, 'view' => $view]);
 
+    }
+
+    public function accept(AcceptRequest $request)
+    {
+        $id = $request->order_id;
+        $data['driver_id'] = $request->driver_id;
+        $this->model->updateAttr($id,$data);
+        return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>$this->message]);
     }
 }

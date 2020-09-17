@@ -33,6 +33,7 @@ Route::group(['prefix'=>'admin','namespace' => 'Admin'], function () {
         Route::resource('cities'       , 'CityController'       );
         Route::resource('countries'    , 'CountryController'    );
         Route::post('orders/status'      , 'OrderController@status')->name('orders.status');
+        Route::post('orders/accept'      , 'OrderController@accept')->name('orders.accept');
         Route::resource('orders'       , 'OrderController'      );
         Route::resource('products'     , 'ProductController'    );
         Route::resource('reviews'      , 'ReviewController'     );

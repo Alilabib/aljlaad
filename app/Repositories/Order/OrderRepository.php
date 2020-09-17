@@ -166,4 +166,13 @@ class OrderRepository implements OrderInterface
         $module = $this->getByID($id);
         return $module->delete();
     }
+
+    public function updateAttr($id, array $attributes)
+    {
+        $order = $this->model->findOrFail($id);
+        $order->update($attributes);
+        $order->save();
+        return $order;
+
+    }
 }

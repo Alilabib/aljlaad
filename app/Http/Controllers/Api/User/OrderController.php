@@ -160,7 +160,7 @@ class OrderController extends Controller
  
              $pendingOrders           = Order::where(['user_id'=>auth()->user()->id,'type'=>null])->where('status','!=','received')->where('status','!=','cancelled')->orderBy('id', 'DESC')->get();
              $deleviredOrders         = Order::where(['user_id'=>auth()->user()->id,'type'=>null])->where('status','delevired')->orderBy('id', 'DESC')->get();
-             $cancelledOrders         = Order::where(['user_id'=>auth()->user()->id,'type'=>null])->where('status','cancelled')->orderBy('id', 'DESC')->get();
+             $cancelledOrders         = Order::where(['user_id'=>auth()->user()->id,'type'=>null])->where('status','cancelled')->orWhere('status','problem')->orderBy('id', 'DESC')->get();
              $this->data['pending']   = MiniOrderResource::collection($pendingOrders);   
              $this->data['delevired'] = MiniOrderResource::collection($deleviredOrders);
              $this->data['cancelled'] = MiniOrderResource::collection($cancelledOrders);   

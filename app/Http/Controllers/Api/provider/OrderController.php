@@ -52,7 +52,7 @@ class OrderController extends Controller
     {
         try{
             $user = auth()->user();
-            $orders = Order::where('driver_id',$user->id)->where(['type'=>null,'status'=>'pending'])->orderBy('id', 'DESC')->get();
+            $orders = Order::where('driver_id',$user->id)->where(['type'=>null,'status'=>'pending'])->orWhere('status','inprogress')->orderBy('id', 'DESC')->get();
             $this->data = MiniProviderOrderResource::collection($orders);   
             return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
     

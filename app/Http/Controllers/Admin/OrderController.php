@@ -143,6 +143,7 @@ class OrderController extends Controller
     {
         $id = $request->order_id;
         $data['driver_id'] = $request->driver_id;
+        $data['status'] = 'inprogress';
         $this->model->updateAttr($id,$data);
         return redirect()->route($this->route)->withMessage(['type'=>'success','content'=>$this->message]);
     }

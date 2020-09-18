@@ -23,4 +23,9 @@ class Order extends Model
     {
         return $this->belongsTo(User::class, 'driver_id', 'id');
     }
+
+    public function problem()
+    {
+        return $this->hasOne(Problem::class, 'order_id', 'id');
+    }
 }

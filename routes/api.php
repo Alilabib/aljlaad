@@ -87,6 +87,8 @@ Route::group(['namespace' => 'Api'], function () {
             Route::post('order/details'  ,'OrderController@details');
             Route::get('orders'             ,'OrderController@allorders');
             Route::post('accept/order'   ,'OrderController@acceptOrder');
+            Route::post('inway/order','OrderController@inwayOrder');
+
             Route::post('deliver/order'  ,'OrderController@DeliverOrder');
             Route::get('compelete/orders','OrderController@compeleted');
             Route::post('update/profile' ,'ProfileController@updateProfile');

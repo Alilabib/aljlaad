@@ -86,6 +86,7 @@
                     <th class="d-none d-sm-table-cell" style="width: 30%;">إجمالي المنتجات</th>
                     <th class="d-none d-sm-table-cell" style="width: 30%;">إجمالي الطلب</th>
                     <th class="d-none d-sm-table-cell" style="width: 30%;">تاريخ الطلب</th>
+                    <th class="d-none d-sm-table-cell" style="width: 30%;">حالة الطلب</th>
 
                     <th style="width: 15%;"> تاريخ التسجيل </th>
                     <th style="width: 15%;">   </th>
@@ -107,22 +108,41 @@
                     <td class="d-none d-sm-table-cell font-size-sm">
                         {{$item->date->diffForHumans()}}
                     </td>
-                    
+                    <td class="d-none d-sm-table-cell font-size-sm">
+                        @if ($item->status =='inprogress' || $item->status =='pending')
+                            <span class="badge badge-info"> جاري التجهيز </span>
+                           @elseif($item->status =='inway')
+                           <span class="badge badge-info"> في الطريق </span>
+                           @elseif($item->status =='delevired')
+                           <span class="badge badge-info"> تم التوصيل </span>
+
+                           @elseif($item->status !='cancelled' && $item->status != 'problem')
+                           <span class="badge badge-info"> تم الإلغاء </span>
+
+                        @endif
+                    </td>
                     <td>
                         <em class="text-muted font-size-sm">{{$item->created_at->diffForHumans()}}</em>
                     </td>
                     <td class="text-center">
                         <div class="btn-group">
-                            @if ($item->driver_id == null)
-                        <a href="javascript" class="btn btn-sm btn-success accept-link"   data-route="{{route('orders.accept')}}" data-id="{{$item->id}}" data-toggle="modal" data-target="#modal1-block-normal" title="موافقة علي الطلب وتحديد مندوب">
+                            @if ($item->driver_id == null && $item->status !='cancelled' && $item->status != 'problem')
+                            <a href="javascript" class="btn btn-sm btn-success accept-link"   data-route="{{route('orders.accept')}}" data-id="{{$item->id}}" data-toggle="modal" data-target="#modal1-block-normal" title="موافقة علي الطلب وتحديد مندوب">
                                 <i class="fa fa-fw fa-location-arrow"></i>
                             </a>
 
                             @endif
-
+                            @if ($item->status !='cancelled' && $item->status != 'problem')
                             <a href="{{route('orders.edit',$item->id)}}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="تعديل ">
                                 <i class="fa fa-fw fa-pencil-alt"></i>
-                            </a>
+                            </a>                                
+                            @endif
+
+                            @if ($item->status =='problem')
+                        <a href="javascript" class="btn btn-sm btn-warning problem-link"   data-content="{{ optional($item->problem)->problem}}" data-toggle="modal" data-target="#modal2-block-normal" title="حذف">
+                                    <i class="fa fa-fw fa-share-alt"></i>
+                                </a>
+                            @endif                            
 
                             <a href="javascript" class="btn btn-sm btn-danger delete-link"   data-route="{{route('orders.destroy',$item->id)}}" data-toggle="modal" data-target="#modal-block-normal" title="حذف">
                                 <i class="fa fa-fw fa-times"></i>

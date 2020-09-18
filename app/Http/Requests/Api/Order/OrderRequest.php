@@ -25,7 +25,7 @@ class OrderRequest extends FormRequest
     {
         return [
             //
-            'order_id'=>'required'
+            'order_id'=>'required|exists:orders,id'
         ];
     }
 }

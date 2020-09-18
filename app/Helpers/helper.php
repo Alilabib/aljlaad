@@ -98,7 +98,7 @@ function pushFcmNotes($fcmData, $userIds)
  function getProductCountByUserId($user_id , $product_id)
 {
     //dd($user_id);
-    $orders = Order::where('user_id',$user_id)->get()->pluck('id')->toArray();
+    $orders = Order::where('user_id',$user_id)->where('status','!=','cancelled')->where('status','!=','problem')->get()->pluck('id')->toArray();
     // dd($orders);
     $count  = OrderProducts::whereIn('order_id',$orders)->where('product_id',$product_id)->sum('quantity');
     return $count;

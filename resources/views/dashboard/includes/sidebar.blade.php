@@ -291,11 +291,11 @@
                 </ul>
             </li>
 
-            <li class="nav-main-heading"> التواصل </li>
+           
             <li class="nav-main-item">
                 <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                     <i class="nav-main-link-icon si si-energy"></i>
-                    <span class="nav-main-link-name"></span>
+                    <span class="nav-main-link-name">التواصل</span>
                 </a>
                 <ul class="nav-main-submenu">
                     <li class="nav-main-item">
@@ -306,11 +306,23 @@
                 </ul>
             </li>
 
-            <li class="nav-main-heading"> الإعدادات </li>
             <li class="nav-main-item">
                 <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                     <i class="nav-main-link-icon si si-energy"></i>
-                    <span class="nav-main-link-name"></span>
+                    <span class="nav-main-link-name"> الإعدادات</span>
+                </a>
+                <ul class="nav-main-submenu">
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="{{route('settings.index')}}">
+                            <span class="nav-main-link-name">عرض الكل</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-main-item">
+                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                    <i class="nav-main-link-icon si si-energy"></i>
+                    <span class="nav-main-link-name"> التقارير</span>
                 </a>
                 <ul class="nav-main-submenu">
                     <li class="nav-main-item">

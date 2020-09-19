@@ -24,8 +24,8 @@ class CartController extends Controller
         $this->data           = [];
         $this->successCode    = 200;
         $this->serverErrorCode    = 500;
-        $this->successMessage = 'Request Done successfully';
-        $this->failMessage    = 'server Error With Details => ';
+        $this->successMessage = trans('api.api-success-message');
+        $this->failMessage    = trans('api.api-error-message');
     }
 
     public function add(AddRequest $request)
@@ -37,7 +37,7 @@ class CartController extends Controller
 
         $category = Category::find($product->category_id);
         if($category->min > $request->quantity){
-            return response()->json(['data'=>$this->data,'message'=>'يجب الآلتزام بالحد الأدني للشركة','status'=>$this->successCode]);
+            return response()->json(['data'=>$this->data,'message'=>trans('api.must-mini-company'),'status'=>$this->successCode]);
 
         }
 
@@ -47,7 +47,7 @@ class CartController extends Controller
                 $oldCartProduct  = Product::find($anyCartproudct->product_id);
                 $oldCartCategory = Category::find($oldCartProduct->category_id);
                 if($category->express_delivery != $oldCartCategory->express_delivery){
-                    return response()->json(['data'=>$this->data,'message'=>'لايمكن اضافة المنتج مع منتجات السلة في حالة توصيل مختلفة','status'=>$this->successCode]);
+                    return response()->json(['data'=>$this->data,'message'=>trans('api.can-not-add-product-to-diffrent-deliver'),'status'=>$this->successCode]);
                 }
             }
             $cartProduct = CartProduct::where(['cart_id'=>$cart->id,'product_id'=>$product->id])->first();
@@ -150,7 +150,7 @@ class CartController extends Controller
             if($cart){
                 $cartProduct = CartProduct::where(['cart_id'=>$cart->id,'product_id'=>$product->id])->first();
                 if($cartProduct){
-                    return response()->json(['data'=>$this->data,'message'=>'This Product Already in cart','status'=>$this->successCode]);
+                    return response()->json(['data'=>$this->data,'message'=>trans('api.product-in-cart') ,'status'=>$this->successCode]);
                 }else{
                     $cart->total  += $product->price;
                     $cart->save();
@@ -195,10 +195,10 @@ class CartController extends Controller
                         $cart->total -= $product->price * $cartProduct->quantity;
                         $cart->save();
                         $cartProduct->delete();
-                        return response()->json(['data'=>$this->data,'message'=>'Product Deleted','status'=>$this->successCode]);
+                        return response()->json(['data'=>$this->data,'message'=>trans('api.product-deleted'),'status'=>$this->successCode]);
                     }else{
     
-                        return response()->json(['data'=>$this->data,'message'=>'Product Dosn\'t exists ','status'=>$this->successCode]);
+                        return response()->json(['data'=>$this->data,'message'=>trans('api.product-not-exists'),'status'=>$this->successCode]);
                     }
                 }
             }

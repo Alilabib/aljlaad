@@ -29,8 +29,8 @@ class LoginController extends Controller
         $this->data           = [];
         $this->successCode    = 200;
         $this->serverErrorCode    = 500;
-        $this->successMessage = 'Request Done successfully';
-        $this->failMessage    = 'server Error With Details => ';
+        $this->successMessage = trans('api.api-success-message');
+        $this->failMessage    = trans('api.api-error-message');
     }
 
     public function register(RegisterRequest $request)

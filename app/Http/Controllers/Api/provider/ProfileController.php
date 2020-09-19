@@ -36,8 +36,8 @@ class ProfileController extends Controller
         $this->data           = [];
         $this->successCode    = 200;
         $this->serverErrorCode    = 500;
-        $this->successMessage = 'Request Done successfully';
-        $this->failMessage    = 'server Error With Details => ';
+        $this->successMessage = trans('api.api-success-message');
+        $this->failMessage    = trans('api.api-error-message');
     }
 
     public function Logout()
@@ -101,7 +101,7 @@ class ProfileController extends Controller
           
             $this->data['data'] = "";
             $this->data['status'] = "ok";
-            $this->data['message'] = "تأكد من كلمة المرور القديمة";
+            $this->data['message'] = trans('api.please-check-last-password');
             return response()->json($this->data, 401);
         
   

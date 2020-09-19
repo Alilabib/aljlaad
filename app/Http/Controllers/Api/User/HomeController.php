@@ -33,8 +33,8 @@ class HomeController extends Controller
         $this->data           = [];
         $this->successCode    = 200;
         $this->serverErrorCode    = 500;
-        $this->successMessage = 'Request Done successfully';
-        $this->failMessage    = 'server Error With Details => ';
+        $this->successMessage = trans('api.api-success-message');
+        $this->failMessage    = trans('api.api-error-message');
     }
 
     public function index(HomeRequest $request)
@@ -103,6 +103,8 @@ class HomeController extends Controller
     public function areas(GetAreaRequest $request)
     {
         try{
+            
+            
             $areas =  Area::where('city_id',$request->city_id)->orderBy('id', 'DESC')->get();
             $this->data = AreaResource::collection($areas);
          return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);

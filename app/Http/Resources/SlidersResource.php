@@ -15,8 +15,8 @@ class SlidersResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'name'=>$this->name_ar,
-            'content'=>$this->desc_ar,
+            'name'=>$request->header('lang') =='en' ? $this->name_en : $this->name_ar,
+            'content'=>$request->header('lang') =='en' ? $this->desc_en : $this->desc_ar,
             'image'=> $this->ImageUrl,
             'type'=>$this->type,
             'link'=>$this->link,

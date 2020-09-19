@@ -16,9 +16,9 @@ class OfferResource extends JsonResource
     {
         return [
             'id'=>$this->id,
-            'mini_title'=>$this->title_ar,
-            'name'=>$this->name_ar,
-            'desc'=>$this->desc_ar,
+            'mini_title'=>$request->header('lang') =='en' ? $this->title_en: $this->title_ar,
+            'name'=> $request->header('lang') =='en' ? $this->name_en: $this->name_ar,
+            'desc'=> $request->header('lang') =='en' ? $this->desc_en: $this->desc_ar,
             'price'=>$this->price,
             'image'=>$this->ImageURL,
             'back_img'=>$this->BackImageURL,

@@ -16,7 +16,7 @@ class OrderProductResource extends JsonResource
     {
         return [
             'id'=>$this->id,
-            'name'=>$this->name_ar,
+            'name'=>$request->header('lang') =='en' ? $this->name_en : $this->name_ar,
             'quantity'=>$this->pivot->quantity,
             'price'=>$this->price,
             'image'=>$this->ImageURL

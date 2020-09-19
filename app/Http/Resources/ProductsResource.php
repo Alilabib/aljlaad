@@ -16,12 +16,12 @@ class ProductsResource extends JsonResource
     {
         return [
             'id'=>$this->id,
-            'name'=>$this->name_ar,
-            'desc'=>$this->desc_ar,
+            'name'=>$request->header('lang') =='en' ? $this->name_en : $this->name_ar,
+            'desc'=> $request->header('lang') =='en' ? $this->desc_en : $this->desc_ar ,
             'image'=> $this->ImageUrl,
             'price'=>$this->price,
             'category_id'=>$this->category->id,
-            'category_name'=>$this->category->name_ar
+            'category_name'=> $request->header('lang') =='en' ? $this->category->name_en : $this->category->name_ar
         ];
     }
 }

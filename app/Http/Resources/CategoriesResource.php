@@ -16,8 +16,8 @@ class CategoriesResource extends JsonResource
     {
         return [
             'id'=>$this->id,
-            'name'=>$this->name_ar,
-            'desc'=>$this->desc_ar,
+            'name'=>$request->header('lang') =='en' ? $this->name_en : $this->name_ar,
+            'desc'=>$request->header('lang') =='en' ? $this->desc_en : $this->desc_ar ,
         ];
     }
 }

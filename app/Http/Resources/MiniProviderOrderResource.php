@@ -21,7 +21,7 @@ class MiniProviderOrderResource extends JsonResource
             'total'=>$this->total,
             'product_count'=>$this->products->count(),
             'date'=>date_format($this->date,'d-m-Y') ,
-            'address'=>$this->user_id ? $this->user->area->city->name_ar .','. $this->user->area->name_ar : $this->user_id
+            'address'=>$this->user_id ?  $request->header('lang') =='en' ?  $this->user->area->city->name_en :  $this->user->area->city->name_ar.','. $request->header('lang') =='en' ? $this->user->area->name_en : $this->user->area->name_ar : $this->user_id
         ];
         
     }

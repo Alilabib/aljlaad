@@ -16,7 +16,7 @@ class NotificationResource extends JsonResource
     {
         return [
             'id'=>$this->id,
-            'title'=>$this->title_ar,
+            'title'=> $request->header('lang') =='en' ? $this->title_en: $this->title_ar,
             'content'=>$this->value_ar,
             'order_id'=>$this->order_id,
             'updated_at'=>$this->updated_at->diffForHumans(),

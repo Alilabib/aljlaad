@@ -14,6 +14,10 @@ class AreaResource extends JsonResource
      */
     public function toArray($request)
     {
-        return ['id'=>$this->id,'name'=>$this->name_ar,'city_id'=>$this->city_id];
+        return [
+            'id'=>$this->id,
+            'name'=> $request->header('lang') =='en' ? $this->name_en : $this->name_ar,
+            'city_id'=>$this->city_id
+        ];
     }
 }

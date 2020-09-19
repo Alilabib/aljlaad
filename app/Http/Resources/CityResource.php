@@ -14,6 +14,6 @@ class CityResource extends JsonResource
      */
     public function toArray($request)
     {
-        return ['id'=>$this->id,'name'=>$this->name_ar];
+        return ['id'=>$this->id,'name'=>$request->header('lang') =='en' ? $this->name_en : $this->name_ar,];
     }
 }

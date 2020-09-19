@@ -30,8 +30,8 @@ class CompanyResource extends JsonResource
       // $user = $token ?  JWTAuth::toUser($token) : null;
         return [
             'id'=>$this->id,
-            'name'=>$this->name_ar,
-            'desc'=>$this->desc_ar,
+            'name'=>$request->header('lang') =='en' ? $this->name_en : $this->name_ar,
+            'desc'=>$request->header('lang') =='en' ? $this->desc_en : $this->desc_ar,
             'image'=>$this->ImageUrl,
             'back_image'=>$this->BackImageUrl,
             'mini_cost'=>$this->min,

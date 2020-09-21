@@ -25,7 +25,7 @@ class DeleteProductRequest extends FormRequest
     {
         return [
             //
-            'product_id'=>'required'
+            'product_id'=>'required|exists:products,id'
         ];
     }
 }

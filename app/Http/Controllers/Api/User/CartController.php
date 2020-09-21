@@ -192,7 +192,17 @@ class CartController extends Controller
             $cart = Cart::where('user_id',auth()->user()->id)->first();
             $product = Product::find($request->product_id);
             if($cart){
-                if(count($cart->products) > 0 ){
+                if(count($cart->products) == 1 ){
+                    $cartProduct = CartProduct::where(['cart_id'=>$cart->id,'product_id'=>$product->id])->first();
+                    if($cartProduct){
+                        $cart->total = 0;
+                        $cart->save();
+                        $cartProduct->delete();
+                        return response()->json(['data'=>$this->data,'message'=>trans('api.product-deleted'),'status'=>$this->successCode]);
+                    }else{
+                        return response()->json(['data'=>$this->data,'message'=>trans('api.product-not-exists'),'status'=>$this->successCode]);
+                    }
+                }elseif(count($cart->products) >1){
                     $cartProduct = CartProduct::where(['cart_id'=>$cart->id,'product_id'=>$product->id])->first();
                     if($cartProduct){
                         $cart->total -= $product->price * $cartProduct->quantity;

@@ -19,6 +19,8 @@ class CartProductsResource extends JsonResource
             'quantity'=>$this->quantity,
             'image'=> \App\Models\Product::find($this->product_id)->ImageUrl,
             'price'=> \App\Models\Product::find($this->product_id)->price,
+            'min'=>\App\Models\Product::find($this->product_id)->category->min ? \App\Models\Product::find($this->product_id)->category->min  : 0,
+            
         ];
     }
 }

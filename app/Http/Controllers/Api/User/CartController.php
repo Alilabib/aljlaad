@@ -92,6 +92,7 @@ class CartController extends Controller
             $newCart = new Cart();
             $newCart->user_id = $user->id;
             $newCart->total   = $product->price * $request->quantity;
+            $newCart->deleviery = $request->express;
             $newCart->save();
             
             $cartProduct = new CartProduct();

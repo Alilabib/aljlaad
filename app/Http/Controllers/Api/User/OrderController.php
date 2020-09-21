@@ -136,7 +136,6 @@ class OrderController extends Controller
                 $tax = SETTING_VALUE('tax');
             }
             $this->data['tax']    = $tax;
-                
             $cartproudcts = CartProduct::where('cart_id',$cart->id)->get();
             if(count($cartproudcts) == 0 ){
                 return response()->json(['data'=>$this->data, 'message'=>$this->failMessage.trans('api.no-products-in-cart'),'status'=>$this->serverErrorCode]);
@@ -181,12 +180,21 @@ class OrderController extends Controller
         $cartproudcts = CartProduct::where('cart_id',$cart->id)->get();
         $tax = 75;
         $delivery_price = '10';
+        
         if(SETTING_VALUE('tax') !='' && SETTING_VALUE('tax') !=null ){
             $tax = SETTING_VALUE('tax');
         }
-        if(SETTING_VALUE('deleviery') !='' && SETTING_VALUE('deleviery') !=null ){
-            $delivery_price = SETTING_VALUE('deleviery');
+
+        if($cart->deleviery == 1){
+            if(SETTING_VALUE('fast_deleviery') !='' && SETTING_VALUE('fast_deleviery') !=null ){
+                $delivery_price = SETTING_VALUE('fast_deleviery');
+            }
+        }elseif($cart->deleviery == 0){
+            if(SETTING_VALUE('deleviery') !='' && SETTING_VALUE('deleviery') !=null ){
+                $delivery_price = SETTING_VALUE('deleviery');
+            }
         }
+
 
         if($cart){
             $order = new Order ();

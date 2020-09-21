@@ -119,7 +119,7 @@ class HomeController extends Controller
     {
         try{
           $this->data['phone']    =  SETTING_VALUE('MOBILE');
-          $this->data['whatsapp'] =  SETTING_VALUE('ABOUT_AR');
+          $this->data['whatsapp'] = $request->header('lang') =='en' ? SETTING_VALUE('ABOUT_EN') : SETTING_VALUE('ABOUT_AR');
           $this->data['email']    =  SETTING_VALUE('FORMAL_EMAIL');
           $this->data['facebook'] =  SETTING_VALUE('FACEBOOK_URL');
           $this->data['twitter']  =  SETTING_VALUE('TWITTER_URL');
@@ -130,10 +130,10 @@ class HomeController extends Controller
         }   
     }
 
-    public function about()
+    public function about(Request $request)
     {
         try{
-          $this->data    =   SETTING_VALUE('ABOUT_AR');
+          $this->data    = $request->header('lang') =='en' ? SETTING_VALUE('ABOUT_EN') : SETTING_VALUE('ABOUT_AR');
 
          return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
         }catch (Exception $e){
@@ -141,10 +141,11 @@ class HomeController extends Controller
         }   
     }
 
-    public function policy()
+    public function policy(Request $request)
     {
         try{
-          $this->data    =  SETTING_VALUE('PRIVACY_POLICY_AR');
+
+          $this->data    =  $request->header('lang') =='en' ? SETTING_VALUE('PRIVACY_POLICY_EN') : SETTING_VALUE('PRIVACY_POLICY_AR');
 
          return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);
         }catch (Exception $e){

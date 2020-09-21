@@ -126,7 +126,7 @@ class OrderController extends Controller
         try{
             $user = auth()->user();
             $cart = Cart::where('user_id',auth()->user()->id)->first();
-            $deliveryCost = 10;
+            $deliveryCost = '10';
             if($cart->deleviery == 1){
                 if(SETTING_VALUE('fast_deleviery') !='' && SETTING_VALUE('fast_deleviery') !=null ){
                     $deliveryCost = SETTING_VALUE('fast_deleviery');
@@ -138,7 +138,7 @@ class OrderController extends Controller
             }
     
             $this->data['delivery']  = $deliveryCost;
-            $tax = 75;
+            $tax = '75';
             if(SETTING_VALUE('tax') !='' && SETTING_VALUE('tax') !=null ){
                 $tax = SETTING_VALUE('tax');
             }

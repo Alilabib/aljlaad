@@ -70,7 +70,7 @@ class CartController extends Controller
                     $newCartProduct->save();
                 }
                 $cart->total  += $product->price * $request->quantity;
-                $newCart->deleviery = $request->express;
+                $cart->deleviery = $request->express;
                 $cart->save();
 
                 return response()->json(['data'=>$this->data,'message'=>$this->successMessage,'status'=>$this->successCode]);

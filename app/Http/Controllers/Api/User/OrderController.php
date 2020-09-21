@@ -129,11 +129,11 @@ class OrderController extends Controller
             $deliveryCost = 10;
             if($cart->deleviery == 1){
                 if(SETTING_VALUE('fast_deleviery') !='' && SETTING_VALUE('fast_deleviery') !=null ){
-                    $delivery_price = SETTING_VALUE('fast_deleviery');
+                    $deliveryCost = SETTING_VALUE('fast_deleviery');
                 }
             }elseif($cart->deleviery == 0){
                 if(SETTING_VALUE('deleviery') !='' && SETTING_VALUE('deleviery') !=null ){
-                    $delivery_price = SETTING_VALUE('deleviery');
+                    $deliveryCost = SETTING_VALUE('deleviery');
                 }
             }
     

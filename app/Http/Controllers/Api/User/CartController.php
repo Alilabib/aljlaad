@@ -81,6 +81,7 @@ class CartController extends Controller
                 }else{
                     $cart->total  = $product->price * $request->quantity;
                 }
+                $newCart->deleviery = $request->express;
                 $cart->save();
                 $newCartProduct          = new CartProduct();
                 $newCartProduct->cart_id    = $cart->id;

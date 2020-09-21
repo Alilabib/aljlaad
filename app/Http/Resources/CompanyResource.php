@@ -37,6 +37,7 @@ class CompanyResource extends JsonResource
             'mini_cost'=>$this->min,
             'total_review'=>$this->total_review,
             'fav'=> $user ? checkFavourite($user->id,$this->id) : false,
+            'express'=>$this->express_delivery
         ];
     }
 }

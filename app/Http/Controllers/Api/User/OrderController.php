@@ -331,6 +331,7 @@ class OrderController extends Controller
             $order = Order::find($request->order_id);
             $order->status = 'cancelled';
             $order->cancel_status = $request->reason;
+            $order->cancel_type = 'user';
             $order->save();
 
             $notifiacation = new Notification();

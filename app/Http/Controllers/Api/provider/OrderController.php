@@ -197,15 +197,21 @@ class OrderController extends Controller
             if($oldProblem){
                 $oldProblem->delete();
             }
-            $problem = new Problem();
-            $problem->order_id = $request->order_id;
-            $problem->user_id = auth()->user()->id;
-            $problem->problem = $request->problem;
-            $problem->save();
             $order = Order::find($request->order_id);
+            $order->status = 'cancelled';
             $order->cancel_status = $request->problem;
-            $order->status = 'problem';
+            $order->cancel_type = 'provider';
             $order->save();
+
+            // $problem = new Problem();
+            // $problem->order_id = $request->order_id;
+            // $problem->user_id = auth()->user()->id;
+            // $problem->problem = $request->problem;
+            // $problem->save();
+            // $order = Order::find($request->order_id);
+            // $order->cancel_status = $request->problem;
+            // $order->status = 'problem';
+            // $order->save();
             $notifiacation = new Notification();
             $notifiacation->title_ar = 'قام ' . $order->driver->name . ' بتقديم مشكلة علي  الطلب ' ;
             $notifiacation->value_ar = 'قام ' . $order->driver->name . ' بتقديم مشكلة علي  الطلب  ' . $order->id ;

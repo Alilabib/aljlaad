@@ -34,7 +34,7 @@ class CompanyResource extends JsonResource
             'desc'=>$request->header('lang') =='en' ? $this->desc_en : $this->desc_ar,
             'image'=>$this->ImageUrl,
             'back_image'=>$this->BackImageUrl,
-            'mini_cost'=>$this->min,
+            'mini_cost'=>$this->min ? $this->min : 0,
             'total_review'=>$this->total_review,
             'fav'=> $user ? checkFavourite($user->id,$this->id) : false,
             'express'=>$this->express_delivery

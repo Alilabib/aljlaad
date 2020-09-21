@@ -19,7 +19,8 @@ class OrderProductResource extends JsonResource
             'name'=>$request->header('lang') =='en' ? $this->name_en : $this->name_ar,
             'quantity'=>$this->pivot->quantity,
             'price'=>$this->price,
-            'image'=>$this->ImageURL
+            'image'=>$this->ImageURL,
+            'min'=>$this->category->min ? $this->category->min : 0 
         ];
     }
 }

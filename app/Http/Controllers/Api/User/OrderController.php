@@ -127,9 +127,16 @@ class OrderController extends Controller
             $user = auth()->user();
             $cart = Cart::where('user_id',auth()->user()->id)->first();
             $deliveryCost = 10;
-            if(SETTING_VALUE('deleviery') !='' && SETTING_VALUE('deleviery') !=null ){
-                $deliveryCost = SETTING_VALUE('deleviery');
+            if($cart->deleviery == 1){
+                if(SETTING_VALUE('fast_deleviery') !='' && SETTING_VALUE('fast_deleviery') !=null ){
+                    $delivery_price = SETTING_VALUE('fast_deleviery');
+                }
+            }elseif($cart->deleviery == 0){
+                if(SETTING_VALUE('deleviery') !='' && SETTING_VALUE('deleviery') !=null ){
+                    $delivery_price = SETTING_VALUE('deleviery');
+                }
             }
+    
             $this->data['delivery']  = $deliveryCost;
             $tax = 75;
             if(SETTING_VALUE('tax') !='' && SETTING_VALUE('tax') !=null ){

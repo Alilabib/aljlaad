@@ -116,8 +116,8 @@
                            @elseif($item->status =='delevired')
                            <span class="badge badge-info"> تم التوصيل </span>
 
-                           @elseif($item->status !='cancelled' && $item->status != 'problem')
-                           <span class="badge badge-info"> تم الإلغاء </span>
+                           @elseif($item->status =='cancelled' || $item->status == 'problem')
+                           <span class="badge badge-warning"> تم الإلغاء </span>
 
                         @endif
                     </td>
@@ -128,9 +128,9 @@
                         <div class="btn-group">
                             @if ($item->status =='cancelled' || $item->status == 'problem')
                                 <a href="javascript" class="btn btn-sm btn-warning cancel-link"   data-reason="{{$item->cancel_status}}" data-type="{{$item->cancel_type}}" @if ($item->cancel_type)
-                                    data-name={{$item->user->name}}
+                                    data-name={{optional($item->user)->name}}
                                 @else
-                                data-name={{$item->driver->name}}
+                                data-name={{optional($item->driver)->name}}
                                 @endif data-toggle="modal" data-target="#modal2-block-normal" title="عرض سبب الإلغاء ">
                                     <i class="fa fa-fw fa-location-arrow"></i>
                                 </a>

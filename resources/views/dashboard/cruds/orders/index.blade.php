@@ -117,7 +117,7 @@
                            <span class="badge badge-info"> تم التوصيل </span>
 
                            @elseif($item->status =='cancelled' || $item->status == 'problem')
-                           <span class="badge badge-warning"> تم الإلغاء </span>
+                           <span class="badge badge-warning" title="{{$item->cancel_status}}"> تم الإلغاء </span>
 
                         @endif
                     </td>
@@ -133,7 +133,7 @@
                                 @else
                                 data-name="{{optional($item->driver)->name}}"
                                 @endif 
-                                 title="عرض سبب الإلغاء ">
+                                 title="{{$item->cancel_status}}">
                                     <i class="fa fa-fw fa-share-alt"></i>
                                 </a>
                             @endif

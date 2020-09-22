@@ -127,12 +127,14 @@
                     <td class="text-center">
                         <div class="btn-group">
                             @if ($item->status =='cancelled' || $item->status == 'problem')
-                                <a href="javascript" class="btn btn-sm btn-warning cancel-link"   data-reason="{{$item->cancel_status}}" data-type="{{$item->cancel_type}}" @if ($item->cancel_type)
-                                    data-name={{optional($item->user)->name}}
+                                <a href="javascript:;" class="btn btn-sm btn-warning cancel-link"   data-reason="{{$item->cancel_status}}" data-type="{{$item->cancel_type}}" 
+                                @if ($item->cancel_type)
+                                    data-name="{{optional($item->user)->name}}"
                                 @else
-                                data-name={{optional($item->driver)->name}}
-                                @endif data-toggle="modal" data-target="#modal2-block-normal" title="عرض سبب الإلغاء ">
-                                    <i class="fa fa-fw fa-location-arrow"></i>
+                                data-name="{{optional($item->driver)->name}}"
+                                @endif 
+                                 title="عرض سبب الإلغاء ">
+                                    <i class="fa fa-fw fa-share-alt"></i>
                                 </a>
                             @endif
 
@@ -147,12 +149,7 @@
                                 <i class="fa fa-fw fa-pencil-alt"></i>
                             </a>                                
                             @endif
-
-                            @if ($item->status =='problem')
-                        <a href="javascript" class="btn btn-sm btn-warning problem-link"   data-content="{{ optional($item->problem)->problem}}" data-toggle="modal" data-target="#modal2-block-normal" title="حذف">
-                                    <i class="fa fa-fw fa-share-alt"></i>
-                                </a>
-                            @endif                            
+                         
 
                             <a href="javascript" class="btn btn-sm btn-danger delete-link"   data-route="{{route('orders.destroy',$item->id)}}" data-toggle="modal" data-target="#modal-block-normal" title="حذف">
                                 <i class="fa fa-fw fa-times"></i>
@@ -347,6 +344,7 @@
             let reason = $(this).data('reason');
             let type = $(this).data('type');
             let name = $(this).data('name');
+            alert(name);
             $('#cancel-reason').html(reason);
             $('#cancel-type-name').html(name);
             if(type == 'user'){
@@ -354,6 +352,8 @@
             }else{
                 $('#cancel-type').html(' إسم السائق ')
             }
+            $('#modal2-block-normal').modal('show');
+
         });
     });
 </script>

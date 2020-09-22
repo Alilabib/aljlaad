@@ -38,7 +38,7 @@ class LoginController extends Controller
         $request_data = $request->except(['image', 'password_confirmation','device_type','fcm_token','city']);
         $request_data['mobile_code'] = random_int(1111, 9999);
         $request_data['type'] = 'user';
-        
+
         if ($request->image) {
             $image_name = time(). $attributes['image']->getClientOriginalName();
             $attributes['image']->move(storage_path('app/public/uploads/users/'),$image_name);
@@ -51,7 +51,7 @@ class LoginController extends Controller
        if ($request->long) {
            $request_data['long']  = $request->long;
        }
-       $request_data['address'] = $request->address; 
+       $request_data['address'] = $request->address;
 
         $user = User::create($request_data);
 
@@ -117,7 +117,6 @@ class LoginController extends Controller
                 $this->data['message'] = trans('auth.failed');
                 return response()->json($this->data, 401);
             }
-            $user->mobile_code = '';
             $user->active = '1';
             $user->save();
             $this->data = new UserResource($user);
@@ -154,7 +153,7 @@ class LoginController extends Controller
             return response()->json(['data'=>$this->data, 'message'=>$this->successMessage,'status'=>$this->successCode]);
         }catch (Exception $e){
             return response()->json(['data'=>$this->data, 'message'=>$this->failMessage . $e,'status'=>$this->serverErrorCode]);
-        }   
+        }
     }
 
     public function updatePassword(UpdatePasswordRequest $request){
@@ -169,7 +168,7 @@ class LoginController extends Controller
             return response()->json(['data'=>$this->data, 'message'=>$this->successMessage,'status'=>$this->successCode]);
         }catch (Exception $e){
             return response()->json(['data'=>$this->data, 'message'=>$this->failMessage . $e,'status'=>$this->serverErrorCode]);
-        }   
+        }
     }
 
     public function Logout()

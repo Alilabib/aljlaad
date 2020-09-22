@@ -72,7 +72,7 @@ class LoginController extends Controller
 
     public function login(LoginRequest $request)
     {
-        $perms['phone'] = $request->mobile;
+        $perms['name'] = $request->name;
         $perms['password'] = $request->password;
         $perms['type']  = 'user';
         if (!$token = JWTAuth::attempt($perms)) {

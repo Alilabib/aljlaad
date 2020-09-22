@@ -24,16 +24,16 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'mobile'=>'Required|exists:users,phone',
+            'name'=>'Required|exists:users,name',
             'password'=>'Required'
         ];
     }
 
-    public function messages()
-    {
-      return  [
-            'mobile.required'=>'Please Enter Your Phone Number or Email',
-            'password.required'=>'Please Enter Your passwrod'
-        ];
-    }
+    // public function messages()
+    // {
+    //   return  [
+    //         'mobile.required'=>'Please Enter Your user Number or Email',
+    //         'password.required'=>'Please Enter Your passwrod'
+    //     ];
+    // }
 }

@@ -344,7 +344,6 @@
             let reason = $(this).data('reason');
             let type = $(this).data('type');
             let name = $(this).data('name');
-            alert(name);
             $('#cancel-reason').html(reason);
             $('#cancel-type-name').html(name);
             if(type == 'user'){

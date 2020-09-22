@@ -8,4 +8,8 @@ class Coupon extends Model
 {
     //
     protected $guarded = ['id'];
+
+
+    protected $dates = ['date'];
+
 }

@@ -9,5 +9,6 @@ return [
     'product-in-cart'=>'This Product Already in cart',
     'can-not-add-product-to-diffrent-deliver'=>'Can not Add Product to different Delivery',
     'must-mini-company'=>'Must Be At Least company Minimum',
-
+    'this-coupon-not-available'=>'This Coupon is not available ',
+    'this-coupon-used'=>'This Coupon Used Before',
 ];

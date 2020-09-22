@@ -221,7 +221,7 @@ class OrderController extends Controller
             }
 
             if($request->coupoun){
-             $coupoun = Coupon::where('name',$request->coupoun)->first();
+             $coupoun = Coupon::where('name',$request->coupoun)->whereDate('date' , '>=', \Carbon\Carbon::now())->first();
                if($coupoun){
                     if($coupoun->value != null && $coupoun->value != '' && $coupoun->used != '1'){
                         $order->total  -=  $coupoun->value;
@@ -229,10 +229,10 @@ class OrderController extends Controller
                         $coupoun->used = '1';
                         $coupoun->save();
                     }else{
-                        return response()->json(['data'=>$this->data, 'message'=>'هذا الكوبون مستخدم من قبل ','status'=>$this->successCode]);
+                        return response()->json(['data'=>$this->data, 'message'=>trans('api.this-coupon-used') ,'status'=>$this->successCode]);
                     }
                }else{
-                return response()->json(['data'=>$this->data, 'message'=>'هذا الكوبون  غير متوفر ','status'=>$this->successCode]);
+                return response()->json(['data'=>$this->data, 'message'=>trans('api.this-coupon-not-available'),'status'=>$this->successCode]);
                }  
              
             }
@@ -286,6 +286,23 @@ class OrderController extends Controller
         }
     }
 
+    public function applyCoupon( Request $request)
+    {
+        if($request->coupoun){
+            $coupoun = Coupon::where('name',$request->coupoun)->whereDate('date' , '>=', \Carbon\Carbon::now())->first();
+            
+              if($coupoun){
+                   if($coupoun->value != null && $coupoun->value != '' && $coupoun->used != '1'){
+                       $this->data = $coupoun->value;
+                       return response()->json(['data'=>$this->data, 'message'=>$this->successMessage,'status'=>$this->successCode]);
+                   }else{
+                       return response()->json(['data'=>$this->data, 'message'=>trans('api.this-coupon-used'),'status'=>$this->successCode]);
+                   }
+              }else{
+               return response()->json(['data'=>$this->data, 'message'=>trans('api.this-coupon-not-available'),'status'=>$this->successCode]);
+              }  
+        }
+    }
     
 
     public function pendingOrders()

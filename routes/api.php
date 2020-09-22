@@ -69,6 +69,7 @@ Route::group(['namespace' => 'Api'], function () {
             Route::get('goals','OfferController@Goals');
             Route::get('goal','OfferController@Goal');
             Route::post('order/rate','ProfileController@Rate');
+            Route::get('apply/coupoun','OrderController@applyCoupon');
         });
     });
     

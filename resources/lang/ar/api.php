@@ -9,5 +9,7 @@ return [
     'product-in-cart'=>'المنتج موجود في السلة بالفعل',
     'can-not-add-product-to-diffrent-deliver'=>'لايمكن اضافة المنتج مع منتجات السلة في حالة توصيل مختلفة',
     'must-mini-company'=>'يجب الآلتزام بالحد الأدني للشركة',
+    'this-coupon-not-available'=>'هذا الكوبون  غير متوفر ',
+    'this-coupon-used'=>'هذا الكوبون مستخدم من قبل',
 
 ];

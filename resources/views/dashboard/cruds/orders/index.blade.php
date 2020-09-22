@@ -126,6 +126,16 @@
                     </td>
                     <td class="text-center">
                         <div class="btn-group">
+                            @if ($item->status =='cancelled' || $item->status == 'problem')
+                                <a href="javascript" class="btn btn-sm btn-warning cancel-link"   data-reason="{{$item->cancel_status}}" data-type="{{$item->cancel_type}}" @if ($item->cancel_type)
+                                    data-name={{$item->user->name}}
+                                @else
+                                data-name={{$item->driver->name}}
+                                @endif data-toggle="modal" data-target="#modal2-block-normal" title="عرض سبب الإلغاء ">
+                                    <i class="fa fa-fw fa-location-arrow"></i>
+                                </a>
+                            @endif
+
                             @if ($item->driver_id == null && $item->status !='cancelled' && $item->status != 'problem')
                             <a href="javascript" class="btn btn-sm btn-success accept-link"   data-route="{{route('orders.accept')}}" data-id="{{$item->id}}" data-toggle="modal" data-target="#modal1-block-normal" title="موافقة علي الطلب وتحديد مندوب">
                                 <i class="fa fa-fw fa-location-arrow"></i>
@@ -239,6 +249,37 @@
             </div>
         </div>
         <!-- END Normal Block Modal -->
+
+
+                <!-- Normal Block Modal -->
+                <div class="modal" id="modal2-block-normal" tabindex="-1" role="dialog" aria-labelledby="modal2-block-normal" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="block block-themed block-transparent mb-0">
+                                <div class="block-header bg-warning">
+                                    <h3 class="block-title"> طلب تم إلغائه </h3>
+                                    <div class="block-options">
+                                        <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                                            <i class="fa fa-fw fa-times"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="block-content font-size-m">
+                                    <h3 id="cancel-type"> إختر </h3>
+                            
+                                    <label for="val-skill" id="cancel-type-name"> المندوب </label>
+        
+                                    <h3 > سبب الإلغاء </h3>
+                                    <p id="cancel-reason"> </p>
+                                </div>
+                                <div class="block-content block-content-full text-right border-top">
+                                    <button type="button" class="btn btn-sm btn-light" data-dismiss="modal">إغلاق</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END Normal Block Modal -->
 @endsection
 @section('css')
 <link rel="stylesheet" href="{{asset('/')}}js/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css">
@@ -301,6 +342,18 @@
             //alert(route);
             $('.accept-form').attr('action',route);
             $('#order_id_accept').val(id);
+        });
+        $('.cancel-link').on('click',function(){
+            let reason = $(this).data('reason');
+            let type = $(this).data('type');
+            let name = $(this).data('name');
+            $('#cancel-reason').html(reason);
+            $('#cancel-type-name').html(name);
+            if(type == 'user'){
+                $('#cancel-type').html('إسم العميل ')
+            }else{
+                $('#cancel-type').html(' إسم السائق ')
+            }
         });
     });
 </script>

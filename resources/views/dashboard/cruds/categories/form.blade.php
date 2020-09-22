@@ -11,7 +11,7 @@
 @endif
     <div class="block">
         <div class="block-header">
-            <h3 class="block-title">الآقسام</h3>
+            <h3 class="block-title">المجالات</h3>
         </div>
         <div class="block-content block-content-full">
             <!-- Regular -->
@@ -19,7 +19,7 @@
             <div class="row items-push">
                 <div class="col-lg-4">
                     <p class="font-size-sm text-muted">
-                        
+
                     </p>
                 </div>
                 <div class="col-lg-8 col-xl-5">
@@ -38,13 +38,13 @@
 
                     <div class="form-group">
                         <label for="val-suggestions">الوصف <span class="text-danger">*</span></label>
-                        <textarea class="form-control" id="val-suggestions" name="desc_ar" rows="5" placeholder="وصف القسم">@isset($data)
+                        <textarea class="form-control" id="val-suggestions" name="desc_ar" rows="5" placeholder="وصف المجال">@isset($data)
                             {{$data->desc_ar}}
                                 @endisset</textarea>
                     </div>
                     <div class="form-group">
                         <label for="val-suggestions"> الوصف بالإنجليزية <span class="text-danger">*</span></label>
-                        <textarea class="form-control" id="val-suggestions" name="desc_en" rows="5" placeholder="وصف القسم بالإنجليزية">@isset($data)
+                        <textarea class="form-control" id="val-suggestions" name="desc_en" rows="5" placeholder="وصف المجال بالإنجليزية">@isset($data)
                             {{$data->desc_en}}
                                 @endisset</textarea>
                     </div>

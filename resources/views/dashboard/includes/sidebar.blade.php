@@ -92,30 +92,11 @@
                 </ul>
             </li>
 
-            <li class="nav-main-item">
-                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                    <i class="nav-main-link-icon si si-energy"></i>
-                    <span class="nav-main-link-name">مندوبين التوصيل</span>
-                </a>
-                <ul class="nav-main-submenu">
-                    <li class="nav-main-item">
-                        <a class="nav-main-link" href="{{route('providers.index')}}">
-                            <span class="nav-main-link-name">عرض الكل</span>
-                        </a>
-                    </li>
-                    <li class="nav-main-item">
-                        <a class="nav-main-link" href="{{route('providers.create')}}">
-                            <span class="nav-main-link-name">إضافة جديد</span>
-                        </a>
-                    </li>
 
-                </ul>
-            </li>
-            
             <li class="nav-main-item">
                 <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                     <i class="nav-main-link-icon si si-energy"></i>
-                    <span class="nav-main-link-name">الأقسام </span>
+                    <span class="nav-main-link-name">   المجالات </span>
                 </a>
                 <ul class="nav-main-submenu">
                     <li class="nav-main-item">
@@ -135,7 +116,7 @@
             <li class="nav-main-item">
                 <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                     <i class="nav-main-link-icon si si-energy"></i>
-                    <span class="nav-main-link-name"> الشركات</span>
+                    <span class="nav-main-link-name">  أسئلة النقاشات</span>
                 </a>
                 <ul class="nav-main-submenu">
                     <li class="nav-main-item">
@@ -171,7 +152,7 @@
                 </ul>
             </li> --}}
 
-            <li class="nav-main-item">
+            {{--  <li class="nav-main-item">
                 <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                     <i class="nav-main-link-icon si si-energy"></i>
                     <span class="nav-main-link-name">المنتجات</span>
@@ -209,8 +190,8 @@
                     </li>
 
                 </ul>
-            </li>
-       
+            </li>  --}}
+
             <li class="nav-main-item">
                 <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                     <i class="nav-main-link-icon si si-energy"></i>
@@ -231,7 +212,7 @@
                 </ul>
             </li>
 
-            <li class="nav-main-item">
+            {{--  <li class="nav-main-item">
                 <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                     <i class="nav-main-link-icon si si-energy"></i>
                     <span class="nav-main-link-name">العروض</span>
@@ -249,7 +230,7 @@
                     </li>
 
                 </ul>
-            </li>
+            </li>  --}}
 
             <li class="nav-main-item">
                 <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
@@ -271,7 +252,7 @@
                 </ul>
             </li>
 
-            <li class="nav-main-item">
+            {{--  <li class="nav-main-item">
                 <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                     <i class="nav-main-link-icon si si-energy"></i>
                     <span class="nav-main-link-name"> أهداف العملاء</span>
@@ -289,9 +270,9 @@
                     </li>
 
                 </ul>
-            </li>
+            </li>  --}}
 
-           
+
             <li class="nav-main-item">
                 <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                     <i class="nav-main-link-icon si si-energy"></i>
@@ -319,7 +300,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-main-item">
+            {{--  <li class="nav-main-item">
                 <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                     <i class="nav-main-link-icon si si-energy"></i>
                     <span class="nav-main-link-name"> التقارير</span>
@@ -331,7 +312,7 @@
                         </a>
                     </li>
                 </ul>
-            </li>
+            </li>  --}}
         </ul>
     </div>
     <!-- END Side Navigation -->

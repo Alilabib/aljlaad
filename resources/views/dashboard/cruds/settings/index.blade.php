@@ -9,7 +9,7 @@
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-    
+
     @endforeach
     @endif
     @if(session('message'))
@@ -32,7 +32,7 @@
                 <div class="row items-push">
                     <div class="col-lg-4">
                         <p class="font-size-sm text-muted">
-                            
+
                         </p>
                     </div>
                     <div class="col-lg-10 col-xl-7">
@@ -43,8 +43,8 @@
                                 <input type="text" value="{{ SETTING_VALUE('APP_NAME_AR') }}" name="APP_NAME_AR" class="form-control" required="required" placeholder="اسم التطبيق بالعربي">
                             </div>
                         </div>
-        
-        
+
+
                         <div class="form-group">
                             <label class="control-label "> اسم التطبيق بالانجليزيه<span class="text-danger">*</span></label>
                             <div class="">
@@ -53,79 +53,61 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label ">   الضريبة<span class="text-danger">*</span></label>
-                            <div class="">
-                                <input type="number" min="1" value="{{ SETTING_VALUE('tax') }}" name="tax" class="form-control" required="required" placeholder="الضريبة ">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label ">   قيمة التوصيل <span class="text-danger">*</span></label>
-                            <div class="">
-                                <input type="number" min="1" value="{{ SETTING_VALUE('deleviery') }}" name="deleviery" class="form-control" required="required" placeholder=" قيمة التوصيل">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label "> قيمة التوصيل السريع <span class="text-danger">*</span></label>
-                            <div class="">
-                                <input type="number" min="1" value="{{ SETTING_VALUE('fast_deleviery') }}" name="fast_deleviery" class="form-control" required="required" placeholder=" قيمة التوصيل السريع">
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <label class="control-label "> وصف التطبيق الاسم باللغة العربية <span class="text-danger">*</span></label>
                             <div class="">
                                 <textarea rows="5" cols="5" name="APP_DESC_AR" class="form-control" required="required" placeholder="وصف التطبيق الاسم باللغة العربية"> {{ SETTING_VALUE('APP_DESC_AR') }} </textarea>
                             </div>
                         </div>
-        
+
                         <div class="form-group">
                             <label class="control-label "> وصف التطبيق الاسم باللغه الانجليزيه <span class="text-danger">*</span></label>
                             <div class="">
                                 <textarea rows="5" cols="5" name="APP_DESC_EN" class="form-control" required="required" placeholder="وصف التطبيق الاسم باللغه الانجليزيه"> {{ SETTING_VALUE('APP_DESC_EN') }} </textarea>
                             </div>
                         </div>
-                        
+
                         <div class="form-group">
                             <label class="control-label "> عن الطبيق بالعربيه <span class="text-danger">*</span></label>
                             <div class="">
                                 <textarea rows="5" cols="5" name="ABOUT_AR" class="form-control" required="required"> {{ SETTING_VALUE('ABOUT_AR') }} </textarea>
                             </div>
                         </div>
-        
+
                         <div class="form-group">
                             <label class="control-label "> عن الطبيق بالانجليزيه <span class="text-danger">*</span></label>
                             <div class="">
                                 <textarea rows="5" cols="5" name="ABOUT_EN" class="form-control" required="required" placeholder="{{ trans('dash.app_desc_en') }}"> {{ SETTING_VALUE('ABOUT_EN') }} </textarea>
                             </div>
                         </div>
-        
+
                         <div class="form-group">
                             <label class="control-label "> الشروط والاحكام بالعربيه <span class="text-danger">*</span></label>
                             <div class="">
                                 <textarea rows="5" cols="5" name="PRIVACY_POLICY_AR" class="form-control" required="required"> {{ SETTING_VALUE('PRIVACY_POLICY_AR') }} </textarea>
                             </div>
                         </div>
-        
+
                         <div class="form-group">
                             <label class="control-label "> الشروط والاحكام بالانجليزيه <span class="text-danger">*</span></label>
                             <div class="">
                                 <textarea rows="5" cols="5" name="PRIVACY_POLICY_EN" class="form-control" required="required"> {{ SETTING_VALUE('PRIVACY_POLICY_EN') }} </textarea>
                             </div>
                         </div>
-        
+
                         <div class="form-group">
                             <label class="control-label ">  الإيميل <span class="text-danger">*</span></label>
                             <div class="">
-                                <input type="email" name="FORMAL_EMAIL" class="form-control" required="required" value="{{ SETTING_VALUE('FORMAL_EMAIL') }}">  
+                                <input type="email" name="FORMAL_EMAIL" class="form-control" required="required" value="{{ SETTING_VALUE('FORMAL_EMAIL') }}">
                             </div>
                         </div>
-        
+
                         <div class="form-group">
                             <label class="control-label ">  الموبيل <span class="text-danger">*</span></label>
                             <div class="">
-                                <input type="text" name="MOBILE" class="form-control" required="required" value="{{ SETTING_VALUE('MOBILE') }} "> 
+                                <input type="text" name="MOBILE" class="form-control" required="required" value="{{ SETTING_VALUE('MOBILE') }} ">
                             </div>
                         </div>
-        
+
                         <div class="form-group">
                             <label class="control-label "> رقم WhatsApp  </label>
                             <div class="">
@@ -139,33 +121,33 @@
                                 <input type="text" value="{{ SETTING_VALUE('FACEBOOK_URL') }}" name="FACEBOOK_URL" class="form-control" placeholder="رابط facebook">
                             </div>
                         </div>
-        
-        
+
+
                         <div class="form-group">
                             <label class="control-label"> رابط Twitter  </label>
                             <div class="">
                                 <input type="text" value="{{ SETTING_VALUE('TWITTER_URL') }}" name="TWITTER_URL" class="form-control" placeholder="رابط Twitter ">
                             </div>
                         </div>
-        
-        
+
+
                         <div class="form-group">
                             <label class="control-label "> رابط Instagram  </label>
                             <div class="">
                                 <input type="text" value="{{ SETTING_VALUE('INSTAGRAM_URL') }}" name="INSTAGRAM_URL" class="form-control" placeholder="رابط Instagram">
                             </div>
                         </div>
-        
-        
+
+
                         <div class="form-group">
                             <label class="control-label "> رابط Snapchat  </label>
                             <div class="">
                                 <input type="text" value="{{ SETTING_VALUE('SNAPCHAT_URL') }}" name="SNAPCHAT_URL" class="form-control" placeholder="رابط Snapchat">
                             </div>
                         </div>
-        
 
-        
+
+
 
 
 
@@ -200,7 +182,7 @@
                     </div>
                 </div>
 
-        
+
                 <div class="form-group">
                     <label class="control-label "> الجوال  </label>
                     <div class="">
@@ -225,8 +207,8 @@
                     </div>
                 </div>
                 <!-- END Regular -->
-    
-    
+
+
                 <!-- Submit -->
                 <div class="row items-push">
                     <div class="col-lg-7 offset-lg-4">
@@ -236,7 +218,7 @@
                 <!-- END Submit -->
             </div>
         </div>
-    
+
 </form>
 @endsection
 

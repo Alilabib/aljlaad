@@ -3,7 +3,7 @@
 <a class="font-w600 text-dual" href="{{route('admin.index')}}">
         <i class="fa fa-circle-notch text-primary"></i>
         <span class="smini-hide">
-            <span class="font-w700 font-size-h5">A</span>
+            <span class="font-w700 font-size-h5">ALJLLAD</span>
         </span>
     </a>
     <!-- END Logo -->

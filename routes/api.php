@@ -33,6 +33,8 @@ Route::group(['namespace' => 'Api'], function () {
         Route::post('reset/password' ,'Auth\LoginController@updatePassword');
         Route::post('send/code'      ,'Auth\LoginController@sendCode' );
         Route::get('home'            ,'HomeController@index');
+        Route::get('categories'      ,'CategoryController@getAll');
+        Route::get('questions'       ,'CategoryController@questions');
         Route::get('companies'       ,'HomeController@companies');
         Route::post('products'       ,'HomeController@products');
         Route::post('product'        ,'HomeController@product');
@@ -45,7 +47,6 @@ Route::group(['namespace' => 'Api'], function () {
         Route::group(['middleware' => 'auth.jwt'], function () {
             Route::post('logout'            , 'ApiController@logout');
             Route::post('update/password'   ,'ProfileController@updatePassword');
-            Route::get('categories'         ,'CategoryController@getAll');
             Route::post('add/to/cart'       ,'CartController@add');
             Route::get('cart/products/count','CartController@cartproudctsCount');
             Route::get('get/cart'           ,'CartController@viewCart');
@@ -72,7 +73,7 @@ Route::group(['namespace' => 'Api'], function () {
             Route::get('apply/coupoun','OrderController@applyCoupon');
         });
     });
-    
+
     Route::group(['namespace' => 'provider','prefix'=>'driver'], function() {
         Route::post('login'          , 'Auth\LoginController@login');
         Route::post('register'       , 'Auth\LoginController@register');

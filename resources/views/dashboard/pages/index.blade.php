@@ -5,11 +5,11 @@
                         <div class="col-6 col-lg-3">
                             <a class="block block-link-shadow text-center" href="be_pages_ecom_orders.html">
                                 <div class="block-content block-content-full">
-                                    <div class="font-size-h2 text-primary">{{ \App\Models\Order::where('status','pending')->count() }}</div>
+                                    <div class="font-size-h2 text-primary">{{ \App\Models\User::where('active','0')->count() }}</div>
                                 </div>
                                 <div class="block-content py-2 bg-body-light">
                                     <p class="font-w600 font-size-sm text-muted mb-0">
-                                        طلبات قيد الانتظار
+                                        مستخدمين قيد الانتظار
                                     </p>
                                 </div>
                             </a>
@@ -17,11 +17,11 @@
                         <div class="col-6 col-lg-3">
                             <a class="block block-link-shadow text-center" href="javascript:void(0)">
                                 <div class="block-content block-content-full">
-                                    <div class="font-size-h2 text-dark">{{ \App\Models\Order::where('status','inprogress')->orWhere('status','inway')->count()  }}</div>
+                                    <div class="font-size-h2 text-dark">{{ \App\Models\User::where('active','1')->count()  }}</div>
                                 </div>
                                 <div class="block-content py-2 bg-body-light">
                                     <p class="font-w600 font-size-sm text-muted mb-0">
-                                        طلبات قيد التنفيذ
+                                     مستخدمين مفعلين
                                     </p>
                                 </div>
                             </a>
@@ -34,7 +34,7 @@
                                 </div>
                                 <div class="block-content py-2 bg-body-light">
                                     <p class="font-w600 font-size-sm text-muted mb-0">
-                                        طلبات منتهيه
+                                        مناقشات قيد التشغيل
                                     </p>
                                 </div>
                             </a>
@@ -47,7 +47,7 @@
                                 </div>
                                 <div class="block-content py-2 bg-body-light">
                                     <p class="font-w600 font-size-sm text-muted mb-0">
-                                        إجمالي التحصيل من الطلبات  
+                                           مناقشات منتهيه
                                     </p>
                                 </div>
                             </a>
@@ -58,7 +58,7 @@
                     <!-- Orders Overview -->
                     <div class="block">
                         <div class="block-header block-header-default">
-                            <h3 class="block-title">تقرير الطلبات</h3>
+                            <h3 class="block-title">تقرير المناقشات</h3>
                             <div class="block-options">
                                 <button type="button" class="btn-block-option" data-toggle="block-option" data-action="state_toggle" data-action-mode="demo">
                                     <i class="si si-refresh"></i>
@@ -74,7 +74,7 @@
                     <!-- END Orders Overview -->
 
                     <!-- Top Products and Latest Orders -->
-                    <div class="row">
+                    {{--  <div class="row">
                         <div class="col-xl-6">
                             <!-- Top Products -->
                             <div class="block">
@@ -108,7 +108,7 @@
                                                 @endphp
                                                 <td class="font-w600 text-right">{{$date }}</td>
                                             </tr>
- 
+
                                             @empty
                                                 <td colspan="4" class="alert alert-info"> لايوجد طلبات قيد الانتظار  الان </td>
                                             @endforelse
@@ -151,18 +151,18 @@
                                                 @endphp
                                                 <td class="font-w600 text-right">{{$date }}</td>
                                             </tr>
- 
+
                                             @empty
                                                 <td colspan="4" class="alert alert-info"> لايوجد طلبات منتهيه حتي الان </td>
                                             @endforelse
- 
+
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                             <!-- END Latest Orders -->
                         </div>
-                    </div>
+                    </div>  --}}
                     <!-- END Top Products and Latest Orders -->
 @endsection
 
@@ -216,7 +216,7 @@
                             }]
                             }
                         }
-                    
+
                 });
              }
         });

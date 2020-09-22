@@ -13,7 +13,7 @@
  @endif
  <div class="block">
     <div class="block-header">
-        <h3 class="block-title">  الشركات <small></small></h3>
+        <h3 class="block-title">  أسئلة النقاشات <small></small></h3>
     </div>
     <div class="block-content block-content-full">
         <!-- DataTables init on table by adding .js-dataTable-buttons class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _es6/pages/be_tables_datatables.js -->
@@ -24,9 +24,6 @@
                     <th>الإسم</th>
                     <th class="d-none d-sm-table-cell" style="width: 30%;"> الوصف</th>
                     <th class="d-none d-sm-table-cell" style="width: 30%;"> القسم الرئيسي</th>
-                    <th class="d-none d-sm-table-cell" style="width: 30%;">  المدينة</th>
-                    <th class="d-none d-sm-table-cell" style="width: 30%;">  التوصيل السريع</th>
-
                     <th style="width: 15%;"> تاريخ التسجيل </th>
                     <th style="width: 15%;">   </th>
                 </tr>
@@ -44,23 +41,13 @@
                     <td class="d-none d-sm-table-cell font-size-sm">
                         {{$item->maincategory->name_ar}}
                     </td>
-                    <td class="d-none d-sm-table-cell font-size-sm">
-                        {{$item->city->name_ar}}
-                    </td>
-                    <td class="d-none d-sm-table-cell font-size-sm">
-                        @if ($item->express_delivery == 0)
-                            لايدعم 
-                        @else
-                            يدعم
-                        @endif
-                    </td>
 
                     <td>
                         <em class="text-muted font-size-sm">{{$item->created_at->diffForHumans()}}</em>
                     </td>
                     <td class="text-center">
                         <div class="btn-group">
-                            
+
                             <a href="{{route('subcategories.edit',$item->id)}}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Edit">
                                 <i class="fa fa-fw fa-pencil-alt"></i>
                             </a>
@@ -80,7 +67,7 @@
                 </tr>
 
                 @empty
-                    
+
                 @endforelse
 
             </tbody>

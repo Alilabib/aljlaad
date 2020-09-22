@@ -17,7 +17,7 @@
 
         <!-- Apps Modal -->
         <!-- Opens the Apps modal found at the bottom of the page, after footer’s markup -->
-        <button type="button" class="btn btn-sm btn-dual mr-2" data-toggle="modal" data-target="#one-modal-apps">
+        <button type="button" class="btn btn-sm btn-dual mr-2" >
             <i class="si si-grid"></i>
         </button>
         <!-- END Apps Modal -->
@@ -32,7 +32,7 @@
         <!-- Search Form (visible on larger screens) -->
         <form class="d-none d-sm-inline-block" action="be_pages_generic_search.html" method="POST">
             <div class="input-group input-group-sm">
-                <input type="text" class="form-control form-control-alt" placeholder="Search.." id="page-header-search-input2" name="page-header-search-input2">
+                <input type="text" class="form-control form-control-alt" placeholder="البحث" id="page-header-search-input2" name="page-header-search-input2">
                 <div class="input-group-append">
                     <span class="input-group-text bg-body border-0">
                         <i class="si si-magnifier"></i>

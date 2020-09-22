@@ -127,7 +127,7 @@
                     <td class="text-center">
                         <div class="btn-group">
                             @if ($item->status =='cancelled' || $item->status == 'problem')
-                                <a href="javascript:;" class="btn btn-sm btn-warning cancel-link"   data-reason="{{$item->cancel_status}}" data-type="{{$item->cancel_type}}" 
+                                <a href="#" class="btn btn-sm btn-warning cancel-link"   data-reason="{{$item->cancel_status}}" data-type="{{$item->cancel_type}}" 
                                 @if ($item->cancel_type)
                                     data-name="{{optional($item->user)->name}}"
                                 @else

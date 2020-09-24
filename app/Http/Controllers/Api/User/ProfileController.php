@@ -66,7 +66,7 @@ class ProfileController extends Controller
         if($request->phone){
             $user->phone = $request->phone;
         }
-        
+
         if($request->password){
             $user->password = $request->password;
         }
@@ -84,7 +84,12 @@ class ProfileController extends Controller
             $request->image->move(storage_path('app/public/uploads/users/'),$image_name);
             $user->img = $image_name;
         }
-
+        if($request->dob){
+            $user->active_code = $request->dob;
+        }
+        if($request->gender){
+            $user->type = $request->gender;
+        }
         $user->save();
         $this->data = new UserResource($user);
         return response()->json(['data'=>$this->data, 'message'=>$this->successMessage,'status'=>$this->successCode]);
@@ -101,13 +106,13 @@ class ProfileController extends Controller
                 $this->data = new UserResource($authUser);
                 return response()->json(['data'=>$this->data, 'message'=>$this->successMessage,'status'=>$this->successCode]);
             }
-          
+
             $this->data['data'] = "";
             $this->data['status'] = "ok";
             $this->data['message'] = trans('api.please-check-last-password');
             return response()->json($this->data, 401);
-        
-  
+
+
         }catch (Exception $e){
             return response()->json(['data'=>$this->data, 'message'=>$this->failMessage . $e,'status'=>$this->serverErrorCode]);
         }
@@ -122,8 +127,8 @@ class ProfileController extends Controller
             $this->data =  Notification::whereIn('order_id',$userOrders)->where('type','user')->get();
             $this->data = NotificationResource::collection($this->data);
             return response()->json(['data'=>$this->data, 'message'=>$this->successMessage,'status'=>$this->successCode]);
-        
-  
+
+
         }catch (Exception $e){
             return response()->json(['data'=>$this->data, 'message'=>$this->failMessage . $e,'status'=>$this->serverErrorCode]);
         }
@@ -137,14 +142,14 @@ class ProfileController extends Controller
        $review->user_id      = $user->id;
        $review->order_id     = $request->order_id;
        $review->product_rate	 = $request->product_rate;
-       $review->product	     = $request->product;       
+       $review->product	     = $request->product;
        $review->driver_rate	 = $request->driver_rate;
        $review->driver	     = $request->driver;
        $review->date_rate	 = $request->date_rate;
        $review->date	     = $request->date;
-       
-     
-       
+
+
+
         if($review->save()){
             return response()->json(['data'=>$this->data, 'message'=>$this->successMessage,'status'=>$this->successCode]);
 

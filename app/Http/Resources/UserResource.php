@@ -24,8 +24,8 @@ class UserResource extends JsonResource
             'city_id'=>$this->city_id,
             'city_name'=>$this->city_id ? $request->header('lang') =='en' ? $this->city->name_en  : $this->city->name_ar : $this->city_id,
             'address'=>$this->address,
-            'type'=>$this->type
-
+            'dob'=>$this->active_code,
+            'gender'=>$this->type
         ];
     }
 }
